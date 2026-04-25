@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BD Empire 🔥 | Official Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #FF0000;
+            --bg-dark: #0a0a0a;
+            --bg-card: #161616;
+            --text-main: #ffffff;
+            --text-dim: #b3b3b3;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Navbar --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* --- Hero Section --- */
+        #home {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #1a0505 0%, #0a0a0a 100%);
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .hero-content span {
+            color: var(--primary);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: var(--transition);
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--glass-border);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: var(--glass-border);
+        }
+
+        /* --- Sections General --- */
+        section {
+            padding: 100px 5%;
+        }
+
+        h2.section-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        h2.section-title span { color: var(--primary); }
+
+        /* --- YouTube Feed --- */
+        #video-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .video-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .video-card iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: none;
+        }
+
+        .video-info {
+            padding: 20px;
+        }
+
+        .video-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* --- About Section --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .stat-box {
+            background: var(--glass);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+        }
+
+        .stat-box i { font-size: 2rem; color: var(--primary); margin-bottom: 10px; }
+        .stat-box h4 { font-size: 1.5rem; }
+
+        /* --- Contact Form --- */
+        .contact-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .form-group { margin-bottom: 20px; }
+
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            background: var(--bg-dark);
+            border: 1px solid var(--glass-border);
+            color: white;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        input:focus, textarea:focus { border-color: var(--primary); }
+
+        /* --- Footer --- */
+        footer {
+            padding: 50px 5%;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            background: #050505;
+        }
+
+        .social-links {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover { color: var(--primary); transform: translateY(-3px); }
+
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                right: -100%;
+                top: 80px;
+                flex-direction: column;
+                background: var(--bg-dark);
+                width: 100%;
+                text-align: center;
+                padding: 40px 0;
+                transition: 0.4s;
+                border-bottom: 1px solid var(--glass-border);
+            }
+
+            .nav-links.active { right: 0; }
+            .hamburger { display: block; }
+            .about-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">BD EMPIRE 🔥</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#videos">Videos</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <section id="home">
+        <div class="hero-content">
+            <h1>BD <span>EMPIRE</span></h1>
+            <p>Gaming • Tech • Tutorials • Empire Building</p>
+            <div class="hero-btns">
+                <a href="https://www.youtube.com/channel/UCJrQsw7B1IiWtHypX6jEs9Q" target="_blank" class="btn btn-primary">Subscribe Now</a>
+                <a href="#videos" class="btn btn-outline">Latest Content</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="videos">
+        <h2 class="section-title">Latest <span>Uploads</span></h2>
+        <div id="video-container">
+            <p style="text-align: center; grid-column: 1/-1;">Loading the empire's latest transmissions...</p>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="about-grid">
+            <div class="about-text">
+                <h2 style="text-align: left; margin-bottom: 20px;">Welcome to the <span>Empire</span></h2>
+                <p style="color: var(--text-dim); margin-bottom: 20px;">
+                    BD Empire is more than just a channel; it's a community dedicated to high-level gameplay, tech insights, and creative content. Join thousands of subscribers as we explore the digital frontier.
+                </p>
+                <p style="color: var(--text-dim);">
+                    From deep-dives into the latest software to epic gaming marathons, this is the home for quality production and authentic engagement.
+                </p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <i class="fab fa-youtube"></i>
+                    <h4 id="sub-count">10K+</h4>
+                    <p>Subscribers</p>
+                </div>
+                <div class="stat-box">
+                    <i class="fas fa-play"></i>
+                    <h4 id="view-count">500K+</h4>
+                    <p>Total Views</p>
+                </div>
+                <div class="stat-box">
+                    <i class="fas fa-video"></i>
+                    <h4>200+</h4>
+                    <p>Uploads</p>
+                </div>
+                <div class="stat-box">
+                    <i class="fas fa-users"></i>
+                    <h4>100%</h4>
+                    <p>Engagement</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Get In <span>Touch</span></h2>
+        <div class="contact-container">
+            <form id="contact-form">
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea rows="5" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; border: none; cursor: pointer;">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/channel/UCJrQsw7B1IiWtHypX6jEs9Q" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-discord"></i></a>
+        </div>
+        <p>&copy; 2024 BD Empire. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Hamburger Menu Toggle
+        function toggleMenu() {
+            const links = document.querySelector('.nav-links');
+            links.classList.toggle('active');
+        }
+
+        // Close menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // Fetch YouTube Videos via RSS2JSON
+        async function fetchVideos() {
+            const channelId = 'UCJrQsw7B1IiWtHypX6jEs9Q';
+            const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+            const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                const container = document.getElementById('video-container');
+                container.innerHTML = ''; // Clear loading text
+
+                // Get latest 3 videos
+                const items = data.items.slice(0, 3);
+
+                items.forEach(video => {
+                    // Extract Video ID from guid (yt:video:VIDEO_ID)
+                    const videoId = video.guid.split(':')[2];
+                    
+                    const card = document.createElement('div');
+                    card.className = 'video-card';
+                    card.innerHTML = `
+                        <iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>
+                        <div class="video-info">
+                            <h3>${video.title}</h3>
+                            <a href="${video.link}" target="_blank" style="color: var(--primary); text-decoration: none; font-size: 0.9rem; font-weight: bold;">Watch on YouTube →</a>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Error fetching videos:', error);
+                document.getElementById('video-container').innerHTML = '<p>Unable to load videos. Please check your channel ID or try again later.</p>';
+            }
+        }
+
+        // Simple Form Submission Alert
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Message received! The Empire will respond soon.');
+            e.target.reset();
+        });
+
+        // Initialize
+        window.onload = fetchVideos;
+    </script>
+</body>
+</html>
