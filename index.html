@@ -8,10 +8,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Supabase Core Cloud Database Engine Library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
-        /* --- CORE CONFIGURATION & RESET --- */
+        /* --- STABLE CYBERPUNK CSS CONFIGURATION --- */
         :root {
             --bg-black: #050505;
             --bg-dark: #0a0a0a;
@@ -32,7 +33,7 @@
         body { background-color: var(--bg-black); color: var(--text-main); font-family: var(--font-body); overflow-x: hidden; }
         body.loading { overflow: hidden; }
 
-        /* --- SCROLLBAR --- */
+        /* Scrollbar styles */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-black); }
         ::-webkit-scrollbar-thumb { background: var(--primary-dim); border-radius: 4px; }
@@ -55,8 +56,8 @@
         .btn-secondary { background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255, 255, 255, 0.1); }
         .btn-secondary:hover { background: rgba(255, 0, 60, 0.1); border-color: var(--primary); }
 
-        /* BuiltByBit Marketplace Style Grid Cards */
-        .bbb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-top: 40px; }
+        /* Premium Marketplace Grid Structure */
+        .bbb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; margin-top: 40px; }
         .bbb-card { border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; min-height: 460px; background: rgba(10,10,15,0.8); border: 1px solid var(--border-glass); }
         .bbb-card:hover { border-color: var(--primary); box-shadow: 0 12px 30px rgba(255, 0, 60, 0.15); transform: translateY(-4px); }
         .bbb-thumb { height: 180px; width: 100%; background-size: cover; background-position: center; border-bottom: 1px solid var(--border-glass); position: relative; }
@@ -70,7 +71,7 @@
         .nav-btn { width: 100%; text-align: left; padding: 12px 16px; font-family: var(--font-sub); font-size: 1.1rem; color: var(--text-muted); border: 1px solid transparent; background: transparent; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 12px; transition: var(--transition); margin-bottom: 5px; }
         .nav-btn:hover, .nav-btn.active { background: rgba(255, 0, 60, 0.05); border-color: var(--border-glass); color: #fff; text-shadow: 0 0 5px var(--primary-glow); }
 
-        /* Loader styling */
+        /* Stable Loader Overlays */
         #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-black); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; }
         .progress-container { width: 220px; height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; margin-top: 15px; }
         .progress-bar { width: 0%; height: 100%; background: var(--primary); box-shadow: 0 0 10px var(--primary); transition: width 0.3s ease; }
@@ -89,42 +90,47 @@
 </head>
 <body class="loading">
 
+    <!-- UNIVERSAL PRELOADER NODES FRAME -->
     <div id="loader">
         <div class="glitch-text" style="font-size: 2.5rem; font-weight:900; letter-spacing: 5px;">DARK<span style="color: var(--primary);">LEAKER</span></div>
         <div class="progress-container"><div class="progress-bar" id="progress-bar"></div></div>
     </div>
 
+    <!-- ================= DISPLAY OPTION A: MARKETPLACE LANDING AND DIRECTORY ================= -->
     <div id="landingPageScreen">
-        <nav style="position: fixed; top: 0; left: 0; width: 100%; padding: 20px 40px; z-index: 1000; border-bottom: 1px solid var(--border-glass); backdrop-filter: blur(15px); background: rgba(5,5,5,0.6);">
+        <!-- Floating BuiltByBit Header Navigation Panel bar -->
+        <nav style="position: fixed; top: 0; width: 100%; padding: 20px 40px; z-index: 1000; border-bottom: 1px solid var(--border-glass); backdrop-filter: blur(15px); background: rgba(5,5,5,0.6);">
             <div style="max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
                 <a href="#" style="font-family: var(--font-display); font-size: 1.6rem; font-weight: 900; color: #fff; text-decoration: none; letter-spacing: 2px;">DARK<span style="color: var(--primary);">LEAKER</span></a>
                 <div id="navigationHeaderAuthBox">
-                    <button onclick="loginWithDiscord()" class="btn btn-primary" style="padding: 8px 24px; font-size: 0.85rem;"><i class="fab fa-discord mr-2"></i> Log In via Discord</button>
+                    <button onclick="loginWithDiscord()" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.95rem;"><i class="fab fa-discord"></i> Login Core</button>
                 </div>
             </div>
         </nav>
 
+        <!-- Dynamic Particles Hero Frame Section -->
         <header class="hero">
             <div id="particles-js"></div>
             <div class="container hero-content">
                 <h1 class="hero-title">DARK<span>LEAKER</span></h1>
-                <p style="font-family: var(--font-sub); font-size: 1.6rem; color: var(--text-muted); margin: 15px 0 35px 0; text-transform: uppercase; letter-spacing: 2px; font-weight: 500;">The Ultimate Cyberpunk Ecosystem For Premium Development Assets</p>
+                <p style="font-family: var(--font-sub); font-size: 1.6rem; color: var(--text-muted); margin: 15px 0 35px 0; text-transform: uppercase; letter-spacing: 2px;">The Ultimate Cyberpunk Ecosystem For Premium Development Assets</p>
                 <div style="display: flex; gap: 20px; justify-content: center;">
                     <a href="#marketplaceVaultAnchor" class="btn btn-primary"><i class="fas fa-terminal"></i> Explore Vault Directory</a>
-                    <button onclick="loginWithDiscord()" class="btn btn-secondary"><i class="fab fa-discord"></i> Sync Matrix Profile</button>
+                    <button onclick="loginWithDiscord()" class="btn btn-secondary"><i class="fab fa-discord"></i> Sync Profile</button>
                 </div>
             </div>
         </header>
 
+        <!-- Publicly Browseable Resources Grid Directory (Gatekeeper Rules active) -->
         <section id="marketplaceVaultAnchor" class="section-padding container" style="border-top: 1px solid var(--border-glass);">
             <div class="section-header">
                 <h2>Assets Directory Vault</h2>
-                <p>Filter deployment assets packs with custom thumbnails and specifications details</p>
+                <p>Filter deployment packages safely via cloud database structures</p>
             </div>
             
             <div style="display: flex; justify-content: flex-end; margin-bottom: 30px;">
                 <select id="publicFilterCategory" onchange="loadPublicMarketplaceAssets()" style="background: #0a0a0f; border: 1px solid var(--border-glass); padding: 10px 15px; border-radius: 8px; color: #fff; font-family: var(--font-sub); font-size: 1rem; outline: none;">
-                    <option value="all">📦 All Vault Assets</option>
+                    <option value="all">📦 All Resources</option>
                     <option value="Plugin">⚙️ Plugins Configurations</option>
                     <option value="Map">🗺️ Maps & Schematics</option>
                     <option value="Setup">🖥️ Server Setups Pack</option>
@@ -136,16 +142,19 @@
         </section>
     </div>
 
+    <!-- ================= DISPLAY OPTION B: LOGGED INTERFACE DASHBOARD ================= -->
     <div id="appScreen" class="app-screen-layout">
+        <!-- WORKSPACE SIDEBAR LEFT FRAME -->
         <div class="sidebar">
             <div class="sidebar-logo">DARK<span>LEAKER</span></div>
             <div style="display: flex; flex-direction: column; gap: 4px; flex: 1;">
-                <button class="nav-btn active" id="btnTabHome" onclick="switchPanelTab('home')"><i class="fas fa-house"></i> Home Station</button>
-                <button class="nav-btn" id="btnTabVault" onclick="switchPanelTab('vault')"><i class="fas fa-folder-open"></i> Assets Vault</button>
-                <button class="nav-btn hidden" id="btnTabDropper" onclick="switchPanelTab('dropper')"><i class="fas fa-cloud-arrow-up"></i> Dropper Panel</button>
-                <button class="nav-btn hidden" id="btnTabAdmin" onclick="switchPanelTab('admin')"><i class="fas fa-crown"></i> Admin Panel</button>
+                <button class="nav-btn active" id="btnTabHome" onclick="switchPanelTab('home')"><i class="fas fa-house"></i> Home Overview</button>
+                <button class="nav-btn" id="btnTabVault" onclick="switchPanelTab('vault')"><i class="fas fa-folder-open"></i> Premium Vault</button>
+                <button class="nav-btn hidden" id="btnTabDropper" onclick="switchPanelTab('dropper')"><i class="fas fa-cloud-arrow-up"></i> Upload Vendor</button>
+                <button class="nav-btn hidden" id="btnTabAdmin" onclick="switchPanelTab('admin')"><i class="fas fa-crown"></i> Control Core</button>
             </div>
 
+            <!-- PROFILE IDENTIFICATION LAYOUT FOOTER CONTAINER -->
             <div style="border-top: 1px solid var(--border-glass); padding-top: 15px; display: flex; align-items: center; justify-content: space-between;">
                 <div style="display: flex; align-items: center; gap: 12px;">
                     <div id="userMatrixAvatar" style="width: 38px; height: 38px; border-radius: 8px; background: rgba(255,0,60,0.1); border: 1px solid var(--border-glass); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; color: var(--primary);">U</div>
@@ -154,25 +163,28 @@
                         <span id="userMatrixRole" style="font-size: 0.75rem; font-family: var(--font-sub); font-weight: 700; color: var(--primary); text-transform: uppercase;">Free</span>
                     </div>
                 </div>
-                <button onclick="logoutSession()" style="background: transparent; border: none; color: var(--text-muted); cursor: pointer;"><i class="fas fa-power-off"></i></button>
+                <button onclick="logoutSession()" style="background: transparent; border: none; color: var(--text-muted); cursor: pointer;" title="Logout Session"><i class="fas fa-power-off"></i></button>
             </div>
         </div>
 
+        <!-- MAIN INTERNAL DASHBOARD SYSTEM WORKSPACE -->
         <div class="view-panel">
+            <!-- TAB 1: WORKSPACE DASHBOARD HOME OVERVIEW -->
             <div id="panelTabHome" class="panel-tab-content active space-y-6" style="max-w: 900px; margin: 0 auto;">
                 <div class="glass-card" style="padding: 40px; text-align: center; border-color: var(--primary); background: linear-gradient(180deg, rgba(255,0,60,0.03) 0%, rgba(0,0,0,0) 100%);">
-                    <span style="font-family: var(--font-sub); color: var(--primary); font-weight: 700; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase;">Cloud Database Registry Access Active</span>
+                    <span style="font-family: var(--font-sub); color: var(--primary); font-weight: 700; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase;">Secure Terminal Connection Verified</span>
                     <h2 class="glitch-text" style="font-size: 2.2rem; margin: 10px 0 15px 0;">Welcome, Authorized Operator</h2>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; max-w: 600px; margin: 0 auto 25px auto;">Your operational profile is securely synchronized. You can now download custom configurations setups and maps direct data outputs without login boundary constraints.</p>
-                    <button onclick="switchPanelTab('vault')" class="btn btn-primary text-xs">Enter Directory Vault</button>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; max-w: 600px; margin: 0 auto 25px auto;">Your profile is completely verified by cloud authorization nodes. Access premium server setups, configuration matrices, and custom asset models with active download boundaries.</p>
+                    <button onclick="switchPanelTab('vault')" class="btn btn-primary text-xs">Browse Asset Inventory</button>
                 </div>
             </div>
 
+            <!-- TAB 2: ACTIVE PREMIUM WORKSPACE RESOURCES VIEW -->
             <div id="panelTabVault" class="panel-tab-content space-y-6">
                 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-glass); padding-bottom: 20px; margin-bottom: 30px;">
                     <div>
                         <h2 style="font-family: var(--font-display); font-size: 1.8rem; text-transform: uppercase;">Premium Vault Assets</h2>
-                        <p id="labelDownloadQuota" style="font-family: var(--font-sub); font-size: 1rem; color: var(--text-muted); text-transform: uppercase; margin-top: 2px;">Daily Downloads Cap Left: Syncing...</p>
+                        <p id="labelDownloadQuota" style="font-family: var(--font-sub); font-size: 1rem; color: var(--text-muted); text-transform: uppercase; margin-top: 2px;">Daily Downloads Cap Left: Calculating...</p>
                     </div>
                     <div>
                         <select id="selectSortingCategory" onchange="fetchMarketplaceAssets()" style="background: #0a0a0f; border: 1px solid var(--border-glass); padding: 10px 15px; border-radius: 8px; color: #fff; font-family: var(--font-sub); font-size: 1rem; outline: none;">
@@ -184,9 +196,11 @@
                         </select>
                     </div>
                 </div>
+
                 <div id="boxAssetsMatrixContainer" class="bbb-grid"></div>
             </div>
 
+            <!-- TAB 3: DROPPER STATION UPLOAD FORM -->
             <div id="panelTabDropper" class="panel-tab-content space-y-6">
                 <h2 style="font-family: var(--font-display); font-size: 1.8rem; text-transform: uppercase; margin-bottom: 20px;">💎 Dropper Asset Submission</h2>
                 <div class="glass-card" style="padding: 30px; max-w: 700px;">
@@ -194,7 +208,7 @@
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                             <div>
                                 <label style="display: block; color: var(--text-muted); margin-bottom: 5px;">ASSET TITLE</label>
-                                <input type="text" id="formAssetTitle" placeholder="e.g. Optimized Phoenix Crates Setup" style="width: 100%; background: #050505; border: 1px solid var(--border-glass); padding: 10px; border-radius: 6px; color: #fff;" required>
+                                <input type="text" id="formAssetTitle" placeholder="e.g. Phoenix Crates Config" style="width: 100%; background: #050505; border: 1px solid var(--border-glass); padding: 10px; border-radius: 6px; color: #fff;" required>
                             </div>
                             <div>
                                 <label style="display: block; color: var(--text-muted); margin-bottom: 5px;">CLASSIFICATION</label>
@@ -208,45 +222,48 @@
                         </div>
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                             <div>
-                                <label style="display: block; color: var(--text-muted); margin-bottom: 5px;">CLEARANCE PERMISSION RANK</label>
+                                <label style="display: block; color: var(--text-muted); margin-bottom: 5px;">CLEARANCE RANK REQUIRED</label>
                                 <select id="formAssetPerm" style="width: 100%; background: #050505; border: 1px solid var(--border-glass); padding: 10px; border-radius: 6px; color: #fff;">
-                                    <option value="dropper">Dropper Perm (Free Users Access)</option>
+                                    <option value="dropper">Dropper Perm (Free Users)</option>
                                     <option value="paid">Paid Perm (Cyber Elite Only)</option>
                                 </select>
                             </div>
                             <div>
-                                <label style="display: block; color: var(--text-muted); margin-bottom: 5px;">MEDIAFIRE DATA TARGET URL LINK</label>
+                                <label style="display: block; color: var(--text-muted); margin-bottom: 5px;">MEDIAFIRE DATA TARGET URL</label>
                                 <input type="url" id="formAssetDownloadLink" placeholder="https://www.mediafire.com/file..." style="width: 100%; background: #050505; border: 1px solid var(--border-glass); padding: 10px; border-radius: 6px; color: #fff;" required>
                             </div>
                         </div>
                         <div>
-                            <label style="display: block; color: var(--text-muted); margin-bottom: 5px;">SHOWCASE THUMBNAIL COVER IMAGE URL LINK</label>
+                            <label style="display: block; color: var(--text-muted); margin-bottom: 5px;">SHOWCASE THUMBNAIL COVER IMAGE LINK</label>
                             <input type="url" id="formAssetImgUrl" placeholder="https://i.imgur.com/showcase.png" style="width: 100%; background: #050505; border: 1px solid var(--border-glass); padding: 10px; border-radius: 6px; color: #fff;" required>
                         </div>
                         <div>
-                            <label style="display: block; color: var(--text-muted); margin-bottom: 5px;">PRODUCT SPECIFICATION DETAILS</label>
-                            <textarea id="formAssetDesc" rows="4" placeholder="Mention features dependencies configuration files logs here description details..." style="width: 100%; background: #050505; border: 1px solid var(--border-glass); padding: 10px; border-radius: 6px; color: #fff; font-family: var(--font-body); font-size: 0.9rem; resize: none;" required></textarea>
+                            <label style="display: block; color: var(--text-muted); margin-bottom: 5px;">ASSET LOG SPECIFICATIONS</label>
+                            <textarea id="formAssetDesc" rows="4" placeholder="Write specifications, plugin dependencies and server details..." style="width: 100%; background: #050505; border: 1px solid var(--border-glass); padding: 10px; border-radius: 6px; color: #fff; font-family: var(--font-body); font-size: 0.9rem; resize: none;" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary" style="width:100%; padding: 12px 0; font-size: 0.95rem;">Publish Listing Matrix Package</button>
+                        <button type="submit" class="btn btn-primary" style="margin-top: 10px; padding: 12px 0; font-size: 0.95rem;">Publish Listing Assets Package</button>
                     </form>
                 </div>
             </div>
 
+            <!-- TAB 4: ROOT CONTROL DECK COMMAND OPERATORS MANAGEMENT -->
             <div id="panelTabAdmin" class="panel-tab-content space-y-6">
-                <h2 style="font-family: var(--font-display); font-size: 1.8rem; text-transform: uppercase; color: var(--primary);">👑 Admin Operations Core Control</h2>
+                <h2 style="font-family: var(--font-display); font-size: 1.8rem; text-transform: uppercase; color: var(--primary);">👑 Operations Control Command Matrix</h2>
                 <div class="glass-card" style="border-radius: 12px; overflow: hidden;">
-                    <table style="width: 100%; border-collapse: collapse; font-family: var(--font-sub); font-size: 1rem; min-width: 650px;">
-                        <thead style="background: rgba(0,0,0,0.4); text-align: left; color: var(--text-muted);">
-                            <tr>
-                                <th style="padding: 14px 20px;">Operator Profile</th>
-                                <th style="padding: 14px 20px;">Permission Rank</th>
-                                <th style="padding: 14px 20px;">Usage Quota Count</th>
-                                <th style="padding: 14px 20px;">IP Address Log</th>
-                                <th style="padding: 14px 20px; text-align: center;">Execute Alterations</th>
-                            </tr>
-                        </thead>
-                        <tbody id="boxAdminTableRowsContainer" style="color: #fff;"></tbody>
-                    </table>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; font-family: var(--font-sub); font-size: 1rem; min-width: 650px;">
+                            <thead style="background: rgba(0,0,0,0.4); text-align: left; color: var(--text-muted);">
+                                <tr>
+                                    <th style="padding: 14px 20px;">Operator Name</th>
+                                    <th style="padding: 14px 20px;">Permission Tier</th>
+                                    <th style="padding: 14px 20px;">Usage Quota Tracker</th>
+                                    <th style="padding: 14px 20px;">Terminal IP Log</th>
+                                    <th style="padding: 14px 20px; text-align: center;">Execute Boundaries</th>
+                                </tr>
+                            </thead>
+                            <tbody id="boxAdminTableRowsContainer" style="color: #fff;"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -254,6 +271,7 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
+        // --- SUPABASE ENGINE DATABASE CORE SETUP ---
         const SUPABASE_URL = "https://mgtbeiqqehvnrudlebio.supabase.co"; 
         const SUPABASE_ANON_KEY = "sb_publishable_5I5otxiF4C5rA195oSxNqA_jft4qlZf";
         const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -261,7 +279,7 @@
         let activeUserIdentitySession = null;
         let globalUserProfileData = null;
 
-        // Fallback pre-loader engine that never freezes locally
+        // Progressive Non-Blocking Pre-Loader Script Logic
         window.addEventListener('DOMContentLoaded', () => {
             const progressBar = document.getElementById('progress-bar');
             const loader = document.getElementById('loader');
@@ -280,15 +298,15 @@
                             await executeProfileSynchronization();
                             return;
                         }
-                    } catch(e) { console.log("Offline local environment handled smoothly."); }
+                    } catch(e) { console.log("Offline local network fallback sequence."); }
 
-                    // Local standalone fallback bypass
+                    // Skip freeze block rules parameters on local file triggers
                     document.body.classList.remove('loading');
                     loader.style.opacity = '0'; loader.style.visibility = 'hidden';
                     loadPublicMarketplaceAssets();
                 }
                 progressBar.style.width = `${progress}%`;
-            }, 30);
+            }, 40);
         });
 
         async function loginWithDiscord() {
@@ -306,9 +324,10 @@
                 let userTerminalIP = 'unknown';
                 try { const res = await fetch('https://api.ipify.org?format=json'); const parsed = await res.json(); userTerminalIP = parsed.ip; } catch(e){}
 
-                const { data: ipCheck } = await supabase.from('profiles').select('id').eq('last_ip', userTerminalIP).not('id', 'eq', dUser.id);
-                if (ipCheck && ipCheck.length > 0) {
-                    alert("🚨 Firewall Invalidation Block: Multi-profile session session mapping collision found on terminal IP!");
+                // Fixed: Clear assignment logic inside JSON mapping block bounds
+                const { data: duplicateIPTrace } = await supabase.from('profiles').select('id').eq('last_ip', userTerminalIP).not('id', 'eq', dUser.id);
+                if (duplicateIPTrace && duplicateIPTrace.length > 0) {
+                    alert("🚨 Firewall Block: Anti-Alt rules active! Multiple accounts on single IP are rejected.");
                     await logoutSession();
                     return;
                 }
@@ -318,7 +337,7 @@
 
                 const { data: insertedProf } = await supabase.from('profiles').insert([{
                     id: dUser.id,
-                    username: dUser.user_metadata.full_name || dUser.user_metadata.name || 'Clearance Profile',
+                    username: dUser.user_metadata.full_name || dUser.user_metadata.name || 'Vendor Operator',
                     role: automaticDesignatedRole,
                     downloads_today: 0,
                     last_ip: userTerminalIP,
@@ -328,7 +347,7 @@
             }
 
             if (profile.blocked) {
-                alert("🚫 Clearance Exception: Operational profile has been banished from the storage database.");
+                alert("🚫 Ban Active: Your network hash identity signature has been banned by an Administrator.");
                 await logoutSession();
                 return;
             }
@@ -361,7 +380,7 @@
             fetchMarketplaceAssets();
         }
 
-        // Render Public Visitor Catalog View Grid
+        // Render Public Catalog Items (For users before authenticating)
         async function loadPublicMarketplaceAssets() {
             const catFilter = document.getElementById('publicFilterCategory').value;
             let items = [];
@@ -376,7 +395,7 @@
             publicGrid.innerHTML = "";
 
             if (!items || items.length === 0) {
-                publicGrid.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--text-muted); font-family:var(--font-sub); text-transform:uppercase; padding:40px 0; border:1px dashed var(--border-glass); border-radius:12px;">No active product configurations listings found inside database storage.</p>`;
+                publicGrid.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--text-muted); font-family:var(--font-sub); text-transform:uppercase; padding:30px 0; border:1px dashed var(--border-glass); border-radius:12px;">No asset records listings added under this specific segment.</p>`;
                 return;
             }
 
@@ -399,7 +418,7 @@
                             <span style="color: var(--text-muted);"><i class="fas fa-user-tag text-blue-500"></i> ${item.uploaded_by || 'Vendor'}</span>
                         </div>
                         <h3 style="font-family: var(--font-display); font-size: 1.15rem; font-weight:700; color:#fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-bottom: 6px;">${item.name}</h3>
-                        <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5; margin-bottom: 15px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; background: rgba(0,0,0,0.2); padding: 8px; border: 1px solid rgba(255,255,255,0.02); border-radius:8px;">${item.description || 'No descriptive structural layout specifications details log available.'}</p>
+                        <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5; margin-bottom: 15px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; background: rgba(0,0,0,0.2); padding: 8px; border: 1px solid rgba(255,255,255,0.02); border-radius:8px;">${item.description || 'No supplementary data metadata payload logs specified.'}</p>
                         <button onclick="interceptUnauthenticatedAction()" class="btn btn-primary" style="width:100%; padding: 10px 0; font-size: 0.85rem;"><i class="fas fa-lock"></i> Login to Decode Pack</button>
                     </div>
                 `;
@@ -408,11 +427,11 @@
         }
 
         function interceptUnauthenticatedAction() {
-            alert("🔒 Gatekeeper Alert: Please use the floating navbar Login Core option with Discord OAuth2 credentials link to decode file binaries packages mirrors!");
+            alert("🔒 Access Security Blocked: Please log in using your Discord account profile link to decode vault matrices files!");
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Render Logged Panel User Grid Space Assets
+        // Render Private Authenticated User Dashboard Catalog Grid
         async function fetchMarketplaceAssets() {
             const activeFilter = document.getElementById('selectSortingCategory').value;
             let marketplaceItems = [];
@@ -427,7 +446,7 @@
             targetWrapper.innerHTML = "";
 
             if (!marketplaceItems || marketplaceItems.length === 0) {
-                targetWrapper.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--text-muted); font-family:var(--font-sub); text-transform:uppercase; padding:40px 0; border:1px dashed var(--border-glass); border-radius:12px;">No active data parameters found active inside registry clusters nodes.</p>`;
+                targetWrapper.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--text-muted); font-family:var(--font-sub); text-transform:uppercase; padding:40px 0; border:1px dashed var(--border-glass); border-radius:12px;">No matrix content bundles loaded in this repository node configuration loop.</p>`;
                 return;
             }
 
@@ -450,7 +469,7 @@
                             <span style="color: var(--text-muted);"><i class="fas fa-user-tag text-blue-500"></i> ${item.uploaded_by || 'Operator'}</span>
                         </div>
                         <h3 style="font-family: var(--font-display); font-size: 1.15rem; font-weight:700; color:#fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-bottom: 6px;">${item.name}</h3>
-                        <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5; margin-bottom: 15px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; background: rgba(0,0,0,0.2); padding: 8px; border: 1px solid rgba(255,255,255,0.02); border-radius:8px;">${item.description || 'No supplementary data logs features lists provided.'}</p>
+                        <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5; margin-bottom: 15px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; background: rgba(0,0,0,0.2); padding: 8px; border: 1px solid rgba(255,255,255,0.02); border-radius:8px;">${item.description || 'No descriptive structural payload variables log provided.'}</p>
                         <button onclick="executeSecureDownloadSequence('${item.id}', '${item.download_url}', '${item.required_perm}')" class="btn btn-primary" style="width:100%; padding: 10px 0; font-size: 0.85rem;"><i class="fas fa-circle-down"></i> Decode from Mediafire</button>
                     </div>
                 `;
@@ -461,11 +480,11 @@
         async function executeSecureDownloadSequence(id, downloadUrl, requiredPerm) {
             if (globalUserProfileData.role !== 'admin') {
                 if (requiredPerm === 'paid' && globalUserProfileData.role !== 'paid') {
-                    alert("❌ Clearance Failure: Upgraded profile signature required to download Cyber Elite resources tier pack!");
+                    alert("❌ Clearance Error: This file requires CYBER ELITE premium role group permissions tier clearance!");
                     return;
                 }
                 if (globalUserProfileData.downloads_today >= 3) {
-                    alert("🚨 Quota Saturated: Maximum daily downloads ceiling threshold cap reached (3/3 actions today)!");
+                    alert("🚨 Allocation Ceiling Triggered: Daily downloads quantum limit cap (3/3 files today) reached!");
                     return;
                 }
             }
@@ -495,12 +514,12 @@
             }]);
 
             if (!error) {
-                alert("🎉 Success: Asset product pack entry generated inside cloud cluster framework!");
+                alert("🎉 Success: Resource item package saved securely to the database central registry matrices!");
                 document.getElementById('formAssetTitle').value = ""; document.getElementById('formAssetDownloadLink').value = "";
                 document.getElementById('formAssetImgUrl').value = ""; document.getElementById('formAssetDesc').value = "";
                 switchPanelTab('vault');
             } else {
-                alert("Supabase SQL Registry Failure: " + error.message);
+                alert("Database Exception Halt: " + error.message);
             }
         }
 
