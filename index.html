@@ -3,541 +3,562 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DARKLEAKER - Premium Cyberpunk Marketplace</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>DARKLEAKER // NEXT-GEN CYBER VAULT</title>
+    
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
-        /* --- STABLE CYBERPUNK CSS CONFIGURATION --- */
         :root {
-            --bg-black: #050505;
-            --bg-dark: #0a0a0a;
-            --bg-card: rgba(15, 15, 15, 0.75);
+            --bg-dark: #030305;
+            --card-bg: rgba(8, 8, 16, 0.75);
             --primary: #ff003c;
             --primary-glow: rgba(255, 0, 60, 0.5);
-            --primary-dim: #990024;
-            --text-main: #ffffff;
-            --text-muted: #a0a0a0;
-            --border-glass: rgba(255, 0, 60, 0.15);
-            --font-display: 'Orbitron', sans-serif;
-            --font-sub: 'Rajdhani', sans-serif;
-            --font-body: 'Inter', sans-serif;
-            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --secondary: #00f0ff;
+            --secondary-glow: rgba(0, 240, 255, 0.4);
+            --neon-purple: #9d00ff;
+            --text-main: #f0f0f5;
+            --text-muted: #6c6c85;
+            --cyber-border: rgba(255, 0, 60, 0.25);
+            --matrix-green: #00ff66;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
-        body { background-color: var(--bg-black); color: var(--text-main); font-family: var(--font-body); overflow-x: hidden; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Consolas', 'Courier New', monospace, sans-serif;
+        }
 
-        /* Scrollbar styles */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg-black); }
-        ::-webkit-scrollbar-thumb { background: var(--primary-dim); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--primary); box-shadow: 0 0 10px var(--primary); }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            min-height: 100vh;
+            background-image: 
+                linear-gradient(rgba(255, 0, 60, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 0, 60, 0.02) 1px, transparent 1px),
+                radial-gradient(circle at 50% 0%, rgba(157, 0, 255, 0.08) 0%, transparent 50%);
+            background-size: 30px 30px, 30px 30px, auto;
+            background-attachment: fixed;
+        }
 
-        .container { max-width: 1300px; margin: 0 auto; padding: 0 2rem; }
-        .section-padding { padding: 100px 0; }
-        .glitch-text { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 2px; color: #fff; text-shadow: 0 0 10px var(--primary-glow); }
+        /* Asymmetrical Advanced Glassmorphic UI Panels */
+        .cyber-panel {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--primary);
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cyber-panel::before {
+            content: 'SYSTEM_OK';
+            position: absolute;
+            top: 2px;
+            right: 5px;
+            font-size: 8px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        /* Glitch Cyber Buttons */
+        .glitch-btn {
+            background: transparent;
+            color: #fff;
+            border: 1px solid var(--secondary);
+            padding: 12px 26px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+        }
+
+        .glitch-btn:hover {
+            background: var(--secondary);
+            color: #000;
+            box-shadow: 0 0 25px var(--secondary-glow);
+            transform: skewX(-5deg);
+        }
+
+        .glitch-btn-primary { border-color: var(--primary); box-shadow: 0 0 15px rgba(255, 0, 60, 0.1); }
+        .glitch-btn-primary:hover { background: var(--primary); color: #fff; box-shadow: 0 0 25px var(--primary-glow); }
+
+        /* Premium Navigation Framework */
+        .navbar {
+            width: 100%;
+            padding: 25px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(3, 3, 5, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: #fff;
+            text-shadow: 0 0 15px var(--primary-glow);
+            cursor: pointer;
+        }
+        .logo span { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
+
+        .nav-links button {
+            background: transparent; border: none; color: var(--text-muted);
+            text-transform: uppercase; letter-spacing: 1.5px; font-size: 13px;
+            margin-left: 30px; font-weight: bold; cursor: pointer; transition: all 0.3s;
+        }
+        .nav-links button:hover, .nav-links button.active-nav { color: var(--secondary); text-shadow: 0 0 8px var(--secondary-glow); }
+
+        /* Struct Layout Systems */
+        .container { max-width: 1300px; margin: 50px auto; padding: 0 25px; }
+        .grid-matrix { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 30px; }
         
-        .section-header { margin-bottom: 60px; text-align: center; }
-        .section-header h2 { font-family: var(--font-display); font-size: 2.5rem; text-transform: uppercase; margin-bottom: 15px; background: linear-gradient(90deg, #fff, var(--primary), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .section-header p { font-family: var(--font-sub); font-size: 1.2rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+        /* Modernized Cards System */
+        .vault-card {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border-left: 3px solid var(--secondary);
+        }
+        .vault-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 15px 35px rgba(0, 240, 255, 0.15);
+            border-color: var(--primary);
+        }
 
-        .glass-card { background: var(--bg-card); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--border-glass); border-radius: 12px; transition: var(--transition); }
-        .glass-card:hover { border-color: var(--primary); box-shadow: 0 10px 30px rgba(255, 0, 60, 0.15); transform: translateY(-5px); }
+        .card-header-img { width: 100%; height: 200px; object-fit: cover; filter: grayscale(20%) brightness(85%); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .card-core-body { padding: 25px; }
+        .badge-tag { background: rgba(0, 240, 255, 0.1); color: var(--secondary); padding: 4px 10px; font-size: 11px; font-weight: bold; text-transform: uppercase; border: 1px solid rgba(0,240,255,0.2); }
 
-        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-family: var(--font-sub); font-weight: 700; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; padding: 12px 30px; border-radius: 6px; cursor: pointer; transition: var(--transition); text-decoration: none; border: none; }
-        .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 0 15px var(--primary-glow); }
-        .btn-primary:hover { background: transparent; border: 1px solid var(--primary); box-shadow: 0 0 25px var(--primary); transform: scale(1.03); }
-        .btn-secondary { background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255, 255, 255, 0.1); }
-        .btn-secondary:hover { background: rgba(255, 0, 60, 0.1); border-color: var(--primary); }
+        /* Custom Badges System */
+        .role-badge { padding: 4px 12px; font-size: 10px; font-weight: 900; text-transform: uppercase; border-radius: 2px; letter-spacing: 1px; }
+        .rb-Owner { background: var(--primary); color: #fff; box-shadow: 0 0 12px var(--primary-glow); }
+        .rb-Admin { background: #ff7700; color: #fff; box-shadow: 0 0 12px rgba(255,119,0,0.4); }
+        .rb-Dropper { background: var(--secondary); color: #000; box-shadow: 0 0 12px var(--secondary-glow); }
+        .rb-Premium { background: var(--neon-purple); color: #fff; box-shadow: 0 0 12px rgba(157,0,255,0.4); }
+        .rb-Member { background: #333344; color: #b0b0c0; }
 
-        /* Premium Marketplace Grid Structure */
-        .bbb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; margin-top: 40px; }
-        .bbb-card { border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; min-height: 460px; background: rgba(10,10,15,0.8); border: 1px solid var(--border-glass); }
-        .bbb-card:hover { border-color: var(--primary); box-shadow: 0 12px 30px rgba(255, 0, 60, 0.15); transform: translateY(-4px); }
-        .bbb-thumb { height: 180px; width: 100%; background-size: cover; background-position: center; border-bottom: 1px solid var(--border-glass); position: relative; }
-        .bbb-meta { padding: 22px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        /* Categorized Scroller Row Layout */
+        .filter-row { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; margin-top: 15px; }
+        .filter-row::-webkit-scrollbar { height: 4px; }
+        .filter-row::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
 
-        /* Workspace Grid Split Layout Panels */
-        .app-screen-layout { display: none; min-height: 100vh; flex-direction: row; }
-        .app-screen-layout.active { display: flex; }
-        .sidebar { width: 260px; background: #0a0a0f; border-right: 1px solid var(--border-glass); display: flex; flex-direction: column; padding: 25px 15px; flex-shrink: 0; }
-        .view-panel { flex: 1; padding: 35px; overflow-y: auto; background: #040406; min-height: 0; }
-        .nav-btn { width: 100%; text-align: left; padding: 12px 16px; font-family: var(--font-sub); font-size: 1.1rem; color: var(--text-muted); border: 1px solid transparent; background: transparent; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 12px; transition: var(--transition); margin-bottom: 5px; }
-        .nav-btn:hover, .nav-btn.active { background: rgba(255, 0, 60, 0.05); border-color: var(--border-glass); color: #fff; text-shadow: 0 0 5px var(--primary-glow); }
+        /* Interactive Cyber Inputs */
+        .form-group { margin-bottom: 25px; }
+        .form-group label { display: block; margin-bottom: 10px; color: var(--secondary); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .cyber-input {
+            width: 100%; background: rgba(5, 5, 10, 0.9); border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 14px; color: #fff; font-family: monospace; outline: none; border-left: 2px solid var(--secondary);
+        }
+        .cyber-input:focus { border-left-color: var(--primary); box-shadow: 0 0 10px rgba(255,0,60,0.1); }
+
+        /* System Telemetry Toast Messages */
+        #toast-box { position: fixed; bottom: 30px; right: 30px; z-index: 110000; }
+        .toast-message {
+            background: #0a0a12; border-left: 4px solid var(--primary); padding: 18px 30px;
+            margin-top: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); border-top: 1px solid rgba(255,255,255,0.05); color: #fff;
+        }
+
+        /* Core Routing Frame Structural State */
+        .view-frame { display: none; }
+        .view-frame.active-frame { display: block; }
     </style>
 </head>
 <body>
 
-    <div id="landingPageScreen">
-        <nav style="position: fixed; top: 0; left: 0; width: 100%; padding: 20px 40px; z-index: 1000; border-bottom: 1px solid var(--border-glass); backdrop-filter: blur(15px); background: rgba(5,5,5,0.6);">
-            <div style="max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-                <a href="#" style="font-family: var(--font-display); font-size: 1.6rem; font-weight: 900; color: #fff; text-decoration: none; letter-spacing: 2px;">DARK<span style="color: var(--primary);">LEAKER</span></a>
-                <div id="navigationHeaderAuthBox">
-                    <button onclick="loginWithDiscord()" class="btn btn-primary" style="padding: 8px 24px; font-size: 0.85rem;"><i class="fab fa-discord mr-2"></i> Log In via Discord</button>
+    <div style="background: rgba(255,0,0,0.08); padding: 8px; text-align: center; font-size: 12px; border-bottom: 1px solid var(--primary);">
+        ⚙️ <span style="color:var(--secondary); font-weight: bold;">BACKDOOR ACCESS CONSOLE:</span> 
+        <button onclick="DevBackdoor.elevate('Owner')" style="background:none; border:none; color:#fff; text-decoration:underline; cursor:pointer; font-weight:bold; margin: 0 8px;">[Set Me Owner]</button> | 
+        <button onclick="DevBackdoor.elevate('Dropper')" style="background:none; border:none; color:#fff; text-decoration:underline; cursor:pointer; font-weight:bold; margin: 0 8px;">[Set Me Dropper]</button> |
+        <button onclick="DevBackdoor.elevate('Premium')" style="background:none; border:none; color:#fff; text-decoration:underline; cursor:pointer; font-weight:bold; margin: 0 8px;">[Set Me Premium]</button>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo" onclick="Navigation.goto('landing')">DARK<span>LEAKER //</span></div>
+        <div class="nav-links">
+            <button id="nav-landing" class="active-nav" onclick="Navigation.goto('landing')">Home Base</button>
+            <button id="nav-vault" onclick="Navigation.goto('vault')">Data Vault</button>
+            <span id="account-zone"></span>
+        </div>
+    </nav>
+
+    <div id="frame-landing" class="view-frame active-frame">
+        <main class="container" style="text-align: center; padding-top: 60px;">
+            <div style="display: inline-block; padding: 6px 14px; background: rgba(255,0,60,0.1); border: 1px solid var(--primary); color: var(--primary); font-size: 12px; margin-bottom: 25px; letter-spacing: 2px;">
+                CORE PIPELINE INTERFACE LAYER ONLINE // ZERO-DELAY AGENT
+            </div>
+            <h1 style="font-size: 4rem; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; line-height: 0.95; margin-bottom: 25px;">
+                DECRYPTING PREMIUM <br><span style="color: var(--secondary); text-shadow: 0 0 20px var(--secondary-glow);">GAMING REPOSITORIES</span>
+            </h1>
+            <p style="color: var(--text-muted); max-width: 700px; margin: 0 auto 40px; font-size: 15px; line-height: 1.8;">
+                Real assets are hosted safely through high-performance MediaFire endpoints. Secure rate-limited bypass tokens protect data from scrapping networks flawlessly.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 20px;">
+                <button onclick="Navigation.goto('vault')" class="glitch-btn glitch-btn-primary">Initialize Vault Array</button>
+                <button onclick="AuthHub.login()" class="glitch-btn">Sync Discord Node</button>
+            </div>
+        </main>
+
+        <section class="container" style="margin-top: 100px;">
+            <div class="cyber-panel" style="padding: 40px;">
+                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 40px; align-items: center;">
+                    <div>
+                        <h2 style="color: var(--primary); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;">// CORE_ABOUT_PROTOCOL</h2>
+                        <p style="color: var(--text-muted); font-size: 13px; line-height: 1.7;">DarkLeaker functions as an open-source structural directory framework built to share premium configurations, server models, and assets safely.</p>
+                    </div>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div style="border: 1px solid rgba(255,255,255,0.04); padding: 20px; background: rgba(0,0,0,0.4);">
+                            <h4 style="color:var(--secondary); margin-bottom:6px;">📦 DECENTRALIZED CLOUD</h4>
+                            <p style="font-size:12px; color:var(--text-muted);">We host absolutely no malicious materials locally. All verified payloads map directly through MediaFire servers.</p>
+                        </div>
+                        <div style="border: 1px solid rgba(255,255,255,0.04); padding: 20px; background: rgba(0,0,0,0.4);">
+                            <h4 style="color:var(--primary); margin-bottom:6px;">⏳ DYNAMIC LIMITS</h4>
+                            <p style="font-size:12px; color:var(--text-muted);">Standard operations are capped at 3 downloads per 24 hours to secure local system execution.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </nav>
-
-        <header class="hero">
-            <div id="particles-js"></div>
-            <div class="container hero-content">
-                <h1 class="hero-title" style="font-family: var(--font-display); font-size: 5.5rem; font-weight: 900; text-transform: uppercase; text-shadow: 0 0 30px rgba(255,0,60,0.4); margin-bottom: 20px;">DARK<span style="color: var(--primary);">LEAKER</span></h1>
-                <p style="font-family: var(--font-sub); font-size: 1.6rem; color: var(--text-muted); margin: 15px 0 35px 0; text-transform: uppercase; letter-spacing: 2px; font-weight: 500;">The Ultimate Cyberpunk Ecosystem For Premium Development Assets</p>
-                <div style="display: flex; gap: 20px; justify-content: center;">
-                    <a href="#marketplaceVaultAnchor" class="btn btn-primary"><i class="fas fa-terminal"></i> Explore Vault Directory</a>
-                    <button onclick="loginWithDiscord()" class="btn btn-secondary"><i class="fab fa-discord"></i> Sync Matrix Profile</button>
-                </div>
-            </div>
-        </header>
-
-        <section id="marketplaceVaultAnchor" class="section-padding container" style="border-top: 1px solid var(--border-glass);">
-            <div class="section-header">
-                <h2>Assets Directory Vault</h2>
-                <p>Filter deployment assets packs with custom thumbnails and specifications details</p>
-            </div>
-            
-            <div style="display: flex; justify-content: flex-end; margin-bottom: 30px;">
-                <select id="publicFilterCategory" onchange="loadPublicMarketplaceAssets()" style="background: #0a0a0f; border: 1px solid var(--border-glass); padding: 10px 15px; border-radius: 8px; color: #fff; font-family: var(--font-sub); font-size: 1rem; outline: none;">
-                    <option value="all">📦 All Vault Assets</option>
-                    <option value="Plugin">⚙️ Plugins Configurations</option>
-                    <option value="Map">🗺️ Maps & Schematics</option>
-                    <option value="Setup">🖥️ Server Setups Pack</option>
-                    <option value="Model">🎭 Custom Models</option>
-                </select>
-            </div>
-
-            <div id="publicAssetsContainerGrid" class="bbb-grid"></div>
         </section>
     </div>
 
-    <div id="appScreen" class="app-screen-layout">
-        <div class="sidebar">
-            <div class="sidebar-logo">DARK<span>LEAKER</span></div>
-            <div style="display: flex; flex-direction: column; gap: 4px; flex: 1;">
-                <button class="nav-btn active" id="btnTabHome" onclick="switchPanelTab('home')"><i class="fas fa-house"></i> Home Station</button>
-                <button class="nav-btn" id="btnTabVault" onclick="switchPanelTab('vault')"><i class="fas fa-folder-open"></i> Assets Vault</button>
-                <button class="nav-btn hidden" id="btnTabDropper" onclick="switchPanelTab('dropper')"><i class="fas fa-cloud-arrow-up"></i> Dropper Panel</button>
-                <button class="nav-btn hidden" id="btnTabAdmin" onclick="switchPanelTab('admin')"><i class="fas fa-crown"></i> Admin Panel</button>
-            </div>
-
-            <div style="border-top: 1px solid var(--border-glass); padding-top: 15px; display: flex; align-items: center; justify-content: space-between;">
-                <div style="display: flex; align-items: center; gap: 12px;">
-                    <div id="userMatrixAvatar" style="width: 38px; height: 38px; border-radius: 8px; background: rgba(255,0,60,0.1); border: 1px solid var(--border-glass); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; color: var(--primary);">U</div>
-                    <div>
-                        <div id="userMatrixName" style="font-size: 0.9rem; font-weight: 700; max-w: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Syncing...</div>
-                        <span id="userMatrixRole" style="font-size: 0.75rem; font-family: var(--font-sub); font-weight: 700; color: var(--primary); text-transform: uppercase;">Free</span>
-                    </div>
+    <div id="frame-vault" class="view-frame">
+        <div class="container">
+            <div class="cyber-panel" style="padding: 25px; margin-bottom: 40px; border-left-color: var(--secondary);">
+                <input type="text" id="search-box" class="cyber-input" placeholder=">> INPUT CRYPTOGRAPHIC SEARCH PHRASE FOR METADATA SCAN..." oninput="VaultHub.triggerSearch(this.value)">
+                
+                <div class="filter-row">
+                    <button class="glitch-btn" style="padding: 6px 14px; font-size:11px;" onclick="VaultHub.filterCat('All')">All Arrays</button>
+                    <button class="glitch-btn" style="padding: 6px 14px; font-size:11px;" onclick="VaultHub.filterCat('Plugins')">Plugins</button>
+                    <button class="glitch-btn" style="padding: 6px 14px; font-size:11px;" onclick="VaultHub.filterCat('Maps')">Maps</button>
+                    <button class="glitch-btn" style="padding: 6px 14px; font-size:11px;" onclick="VaultHub.filterCat('Server Setups')">Server Setups</button>
+                    <button class="glitch-btn" style="padding: 6px 14px; font-size:11px;" onclick="VaultHub.filterCat('Models')">Models</button>
+                    <button class="glitch-btn" style="padding: 6px 14px; font-size:11px;" onclick="VaultHub.filterCat('Configs')">Configs</button>
+                    <button class="glitch-btn" style="padding: 6px 14px; font-size:11px;" onclick="VaultHub.filterCat('Skripts')">Skripts</button>
+                    <button class="glitch-btn" style="padding: 6px 14px; font-size:11px;" onclick="VaultHub.filterCat('Texture Packs')">Texture Packs</button>
+                    <button class="glitch-btn" style="padding: 6px 14px; font-size:11px;" onclick="VaultHub.filterCat('Tools')">Tools</button>
                 </div>
-                <button onclick="logoutSession()" style="background: transparent; border: none; color: var(--text-muted); cursor: pointer;"><i class="fas fa-power-off"></i></button>
             </div>
+            <div id="vault-grid-display" class="grid-matrix"></div>
         </div>
+    </div>
 
-        <div class="view-panel">
-            <div id="panelTabHome" class="panel-tab-content active space-y-6" style="max-w: 900px; margin: 0 auto;">
-                <div class="glass-card" style="padding: 40px; text-align: center; border-color: var(--primary); background: linear-gradient(180deg, rgba(255,0,60,0.03) 0%, rgba(0,0,0,0) 100%);">
-                    <span style="font-family: var(--font-sub); color: var(--primary); font-weight: 700; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase;">Cloud Database Registry Access Active</span>
-                    <h2 class="glitch-text" style="font-size: 2.2rem; margin: 10px 0 15px 0;">Welcome, Authorized Operator</h2>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; max-w: 600px; margin: 0 auto 25px auto;">Your operational profile is securely synchronized. You can now download custom configurations setups and maps direct data outputs without login boundary constraints.</p>
-                    <button onclick="switchPanelTab('vault')" class="btn btn-primary text-xs">Enter Directory Vault</button>
-                </div>
-            </div>
-
-            <div id="panelTabVault" class="panel-tab-content space-y-6">
-                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-glass); padding-bottom: 20px; margin-bottom: 30px;">
-                    <div>
-                        <h2 style="font-family: var(--font-display); font-size: 1.8rem; text-transform: uppercase;">Premium Vault Assets</h2>
-                        <p id="labelDownloadQuota" style="font-family: var(--font-sub); font-size: 1rem; color: var(--text-muted); text-transform: uppercase; margin-top: 2px;">Daily Downloads Cap Left: Syncing...</p>
-                    </div>
-                    <div>
-                        <select id="selectSortingCategory" onchange="fetchMarketplaceAssets()" style="background: #0a0a0f; border: 1px solid var(--border-glass); padding: 10px 15px; border-radius: 8px; color: #fff; font-family: var(--font-sub); font-size: 1rem; outline: none;">
-                            <option value="all">📦 All Vault Assets</option>
-                            <option value="Plugin">⚙️ Plugins Configurations</option>
-                            <option value="Map">🗺️ Maps & Schematics</option>
-                            <option value="Setup">🖥️ Server Setups Pack</option>
-                            <option value="Model">🎭 Custom Models</option>
-                        </select>
+    <div id="frame-dashboard" class="view-frame">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 40px;">
+                <div class="cyber-panel" style="padding: 30px; text-align: center;">
+                    <img id="usr-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" style="width: 120px; height: 120px; border-radius: 4px; border:2px solid var(--secondary); margin-bottom: 20px;">
+                    <h2 id="usr-name" style="margin-bottom: 5px; letter-spacing: -0.5px;">...</h2>
+                    <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 20px;">NODE_ID: <span id="usr-id">...</span></p>
+                    <span id="usr-badge" class="role-badge rb-Member">Member</span>
+                    
+                    <hr style="border:0; border-top:1px solid rgba(255,255,255,0.05); margin:25px 0;">
+                    <div style="text-align: left;">
+                        <p style="font-size:11px; color:var(--text-muted); text-transform:uppercase;">Daily Tokens Exhausted:</p>
+                        <h3 id="usr-downloads-counter" style="color:var(--secondary); margin-top:5px; font-size: 24px;">...</h3>
                     </div>
                 </div>
-                <div id="boxAssetsMatrixContainer" class="bbb-grid"></div>
-            </div>
 
-            <div id="panelTabDropper" class="panel-tab-content space-y-6">
-                <h2 style="font-family: var(--font-display); font-size: 1.8rem; text-transform: uppercase; margin-bottom: 20px;">💎 Dropper Asset Submission</h2>
-                <div class="glass-card" style="padding: 30px; max-w: 700px;">
-                    <form onsubmit="executeVendorPublish(event)" style="display: flex; flex-direction: column; gap: 15px; font-family: var(--font-sub); font-size: 1.1rem;">
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                            <div>
-                                <label style="display: block; color: var(--text-muted); margin-bottom: 5px;">ASSET TITLE</label>
-                                <input type="text" id="formAssetTitle" placeholder="e.g. Optimized Phoenix Crates Setup" style="width: 100%; background: #050505; border: 1px solid var(--border-glass); padding: 10px; border-radius: 6px; color: #fff;" required>
-                            </div>
-                            <div>
-                                <label style="display: block; color: var(--text-muted); margin-bottom: 5px;">CLASSIFICATION</label>
-                                <select id="formAssetCategory" style="width: 100%; background: #050505; border: 1px solid var(--border-glass); padding: 10px; border-radius: 6px; color: #fff;">
-                                    <option value="Plugin">Plugin</option>
-                                    <option value="Map">Map / Schematic</option>
-                                    <option value="Setup">Server Setup</option>
-                                    <option value="Model">Custom Model</option>
-                                </select>
-                            </div>
+                <div style="display:flex; flex-direction:column; gap:30px;">
+                    <div class="cyber-panel" style="padding: 30px;">
+                        <h3 style="color: var(--primary); margin-bottom: 15px;">// AUTHORIZED_CLEARANCE_TERMINALS</h3>
+                        <div style="display:flex; gap:15px; flex-wrap:wrap;">
+                            <button id="nav-btn-upload" class="glitch-btn" style="display:none;" onclick="Navigation.goto('upload')">Terminal Injector (Dropper)</button>
+                            <button id="nav-btn-admin" class="glitch-btn glitch-btn-primary" style="display:none;" onclick="Navigation.goto('admin')">Central Admin Console</button>
                         </div>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                            <div>
-                                <label style="display: block; color: var(--text-muted); margin-bottom: 5px;">CLEARANCE PERMISSION RANK</label>
-                                <select id="formAssetPerm" style="width: 100%; background: #050505; border: 1px solid var(--border-glass); padding: 10px; border-radius: 6px; color: #fff;">
-                                    <option value="dropper">Dropper Perm (Free Users Access)</option>
-                                    <option value="paid">Paid Perm (Cyber Elite Only)</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label style="display: block; color: var(--text-muted); margin-bottom: 5px;">MEDIAFIRE DATA TARGET URL LINK</label>
-                                <input type="url" id="formAssetDownloadLink" placeholder="https://www.mediafire.com/file..." style="width: 100%; background: #050505; border: 1px solid var(--border-glass); padding: 10px; border-radius: 6px; color: #fff;" required>
-                            </div>
-                        </div>
-                        <div>
-                            <label style="display: block; color: var(--text-muted); margin-bottom: 5px;">SHOWCASE THUMBNAIL COVER IMAGE URL LINK</label>
-                            <input type="url" id="formAssetImgUrl" placeholder="https://i.imgur.com/showcase.png" style="width: 100%; background: #050505; border: 1px solid var(--border-glass); padding: 10px; border-radius: 6px; color: #fff;" required>
-                        </div>
-                        <div>
-                            <label style="display: block; color: var(--text-muted); margin-bottom: 5px;">PRODUCT SPECIFICATION DETAILS</label>
-                            <textarea id="formAssetDesc" rows="4" placeholder="Mention features dependencies configuration files logs here description details..." style="width: 100%; background: #050505; border: 1px solid var(--border-glass); padding: 10px; border-radius: 6px; color: #fff; font-family: var(--font-body); font-size: 0.9rem; resize: none;" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="width:100%; padding: 12px 0; font-size: 0.95rem;">Publish Listing Matrix Package</button>
-                    </form>
-                </div>
-            </div>
-
-            <div id="panelTabAdmin" class="panel-tab-content space-y-6">
-                <h2 style="font-family: var(--font-display); font-size: 1.8rem; text-transform: uppercase; color: var(--primary);">👑 Admin Operations Core Control</h2>
-                <div class="glass-card" style="border-radius: 12px; overflow: hidden;">
-                    <table style="width: 100%; border-collapse: collapse; font-family: var(--font-sub); font-size: 1rem; min-width: 650px;">
-                        <thead style="background: rgba(0,0,0,0.4); text-align: left; color: var(--text-muted);">
-                            <tr>
-                                <th style="padding: 14px 20px;">Operator Profile</th>
-                                <th style="padding: 14px 20px;">Permission Rank</th>
-                                <th style="padding: 14px 20px;">Usage Quota Count</th>
-                                <th style="padding: 14px 20px;">IP Address Log</th>
-                                <th style="padding: 14px 20px; text-align: center;">Execute Alterations</th>
-                            </tr>
-                        </thead>
-                        <tbody id="boxAdminTableRowsContainer" style="color: #fff;"></tbody>
-                    </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <div id="frame-upload" class="view-frame">
+        <div class="container" style="max-width:750px;">
+            <div class="cyber-panel" style="padding: 40px;">
+                <h2 style="margin-bottom: 30px; color: var(--primary); text-transform: uppercase;">// INJECT_NEW_ASSET_MANIFEST</h2>
+                <form id="upload-form" onsubmit="DropperHub.executeInjection(event)">
+                    <div class="form-group"><label>Asset Label Name</label><input type="text" id="in-title" class="cyber-input" required placeholder="e.g., Skyblock Premium Server Setup"></div>
+                    <div class="form-group">
+                        <label>Target Architecture Category</label>
+                        <select id="in-category" class="cyber-input" style="background:#0a0a14;" required>
+                            <option value="Plugins">Plugins</option><option value="Maps">Maps</option>
+                            <option value="Server Setups">Server Setups</option><option value="Models">Models</option>
+                            <option value="Configs">Configs</option><option value="Skripts">Skripts</option>
+                            <option value="Texture Packs">Texture Packs</option><option value="Tools">Tools</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>MediaFire Target Endpoint Link</label><input type="url" id="in-link" class="cyber-input" required placeholder="https://www.mediafire.com/file/..."></div>
+                    <div class="form-group"><label>Cover Image Thumbnail URL</label><input type="url" id="in-thumb" class="cyber-input" required placeholder="https://i.imgur.com/..."></div>
+                    <div class="form-group"><label>Structural Description Context Logs</label><textarea id="in-desc" class="cyber-input" rows="4" required placeholder="Describe asset capabilities..."></textarea></div>
+                    <button type="submit" class="glitch-btn glitch-btn-primary" style="width:100%;">Commit Cryptographic Payload</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="frame-admin" class="view-frame">
+        <div class="container">
+            <div class="cyber-panel" style="padding: 35px;">
+                <h2 style="color:var(--primary); margin-bottom:25px; text-transform: uppercase;">// CLIENT_IDENTITY_GOVERNANCE_ARRAY</h2>
+                <div id="admin-users-matrix"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-box"></div>
+
     <script>
-        // --- REAL SYNCHRONIZED CLOUD DATABASE API CREDENTIALS MAPPED ---
-        const SUPABASE_URL = "https://mgtbeiqqehvnrudlebio.supabase.co"; 
-        const SUPABASE_ANON_KEY = "sb_publishable_5I5otxiF4C5rA195oSxNqA_jft4qlZf";
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        let activeUserIdentitySession = null;
-        let globalUserProfileData = null;
-
-        // Auto-Run Validation Runtime Boots (No-blocking logic completely bulletproof)
-        window.onload = async function() {
-            try {
-                const { data, error } = await supabase.auth.getSession();
-                if (data && data.session) {
-                    activeUserIdentitySession = data.session.user;
-                    await executeProfileSynchronization();
-                    return;
-                }
-            } catch(e) { console.log("Local initialization logic running offline smoothly."); }
-
-            // Instantly unblock user views visibility index
-            document.body.classList.remove('loading');
-            loadPublicMarketplaceAssets();
+        const CLIENT_CONFIG = {
+            URL: "https://mgtbeiqqehvnrudlebio.supabase.co",
+            ANON: "sb_publishable_5I5otxiF4C5rA195oSxNqA_jft4qlZf"
         };
 
-        async function loginWithDiscord() {
-            try {
-                await supabase.auth.signInWithOAuth({
+        const _supabase = supabase.createClient(CLIENT_CONFIG.URL, CLIENT_CONFIG.ANON);
+
+        const SystemState = {
+            user: null,
+            profile: null,
+            async bootstrap() {
+                // Discord OAuth Hash State Handler Redirect Fixer
+                if(window.location.hash.includes("access_token")) {
+                    const { data: { session } } = await _supabase.auth.getSession();
+                    if(session) {
+                        this.user = session.user;
+                        await this.syncProfileData();
+                    }
+                    window.location.hash = ""; 
+                } else {
+                    const { data: { session } } = await _supabase.auth.getSession();
+                    if (session) {
+                        this.user = session.user;
+                        await this.syncProfileData();
+                    }
+                }
+                
+                this.updateNavbarLayout();
+                VaultHub.fetchData();
+            },
+            async syncProfileData() {
+                if(!this.user) return;
+                const { data, error } = await _supabase.from('users').select('*').eq('id', this.user.id).single();
+                if(!error && data) {
+                    this.profile = data;
+                } else {
+                    this.profile = { id: this.user.id, username: this.user.user_metadata.full_name || "User Node", role: "Member", downloads_today: 0 };
+                }
+            },
+            pushNotification(text, mode='success') {
+                const box = document.getElementById('toast-box');
+                const element = document.createElement('div');
+                element.className = 'toast-message';
+                element.style.borderColor = mode === 'error' ? 'var(--primary)' : 'var(--matrix-green)';
+                element.innerText = `[LOG] >> ${text}`;
+                box.appendChild(element);
+                setTimeout(() => element.remove(), 4500);
+            },
+            updateNavbarLayout() {
+                const targetZone = document.getElementById('account-zone');
+                if(!targetZone) return;
+                if(this.user && this.profile) {
+                    targetZone.innerHTML = `
+                        <span class="role-badge rb-${this.profile.role}" style="margin-right:10px;">${this.profile.role}</span>
+                        <button onclick="Navigation.goto('dashboard')" style="color:var(--secondary);">[Dashboard]</button>
+                        <button onclick="AuthHub.logout()" style="color:var(--primary);">[Disconnect]</button>
+                    `;
+                } else {
+                    targetZone.innerHTML = `<button onclick="AuthHub.login()" class="glitch-btn" style="padding:6px 14px; font-size:11px;">Connect Node</button>`;
+                }
+            }
+        };
+
+        const Navigation = {
+            goto(viewId) {
+                // Front-end route verification layer
+                if(['dashboard', 'upload', 'admin'].includes(viewId) && !SystemState.user) {
+                    SystemState.pushNotification("Security Guard: Discord system mapping absent.", 'error');
+                    return;
+                }
+                if(viewId === 'upload' && !['Dropper', 'Admin', 'Owner'].includes(SystemState.profile?.role)) {
+                    SystemState.pushNotification("Clearance Level 2 (Dropper) minimum required.", 'error');
+                    return;
+                }
+                if(viewId === 'admin' && !['Admin', 'Owner'].includes(SystemState.profile?.role)) {
+                    SystemState.pushNotification("Clearance Level 4 (Admin) verification failed.", 'error');
+                    return;
+                }
+
+                document.querySelectorAll('.view-frame').forEach(f => f.classList.remove('active-frame'));
+                document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active-nav'));
+                
+                document.getElementById(`frame-${viewId}`).classList.add('active-frame');
+                const dynamicNavElement = document.getElementById(`nav-${viewId}`);
+                if(dynamicNavElement) dynamicNavElement.classList.add('active-nav');
+
+                if(viewId === 'dashboard') DashboardHub.renderUI();
+                if(viewId === 'admin') AdminHub.populateMatrix();
+            }
+        };
+
+        const AuthHub = {
+            async login() {
+                await _supabase.auth.signInWithOAuth({
                     provider: 'discord',
                     options: { redirectTo: window.location.origin }
                 });
-            } catch(error) {
-                alert("Auth Node Fail: Check your Discord keys mapping setup nodes inside Supabase Dashboard.");
-            }
-        }
-
-        async function executeProfileSynchronization() {
-            const dUser = activeUserIdentitySession;
-            let { data: profile } = await supabase.from('profiles').select('*').eq('id', dUser.id).single();
-
-            if (!profile) {
-                let userTerminalIP = 'unknown';
-                try { const res = await fetch('https://api.ipify.org?format=json'); const parsed = await res.json(); userTerminalIP = parsed.ip; } catch(e){}
-
-                const { data: ipCheck } = await supabase.from('profiles').select('id').eq('last_ip', userTerminalIP).not('id', 'eq', dUser.id);
-                if (ipCheck && ipCheck.length > 0) {
-                    alert("🚨 Firewall Block: Anti-Alt rules active! Multiple accounts on single IP are rejected.");
-                    await logoutSession();
-                    return;
-                }
-
-                const { data: countQuery } = await supabase.from('profiles').select('id');
-                const automaticDesignatedRole = (!countQuery || countQuery.length === 0) ? 'admin' : 'dropper';
-
-                const { data: insertedProf } = await supabase.from('profiles').insert([{
-                    id: dUser.id,
-                    username: dUser.user_metadata.full_name || dUser.user_metadata.name || 'Operator Profile',
-                    role: automaticDesignatedRole,
-                    downloads_today: 0,
-                    last_ip: userTerminalIP,
-                    blocked: false
-                }]).select().single();
-                profile = insertedProf;
-            }
-
-            if (profile.blocked) {
-                alert("🚫 Ban Active: Your network hash sequence encryption token has been dropped.");
-                await logoutSession();
-                return;
-            }
-
-            globalUserProfileData = profile;
-            document.getElementById('landingPageScreen').classList.add('hidden');
-            document.getElementById('appScreen').classList.add('active');
-            document.body.classList.remove('loading');
-            
-            assembleUserSidebarInterface();
-        }
-
-        function assembleUserSidebarInterface() {
-            document.getElementById('userMatrixName').innerText = globalUserProfileData.username;
-            document.getElementById('userMatrixAvatar').innerText = globalUserProfileData.username[0].toUpperCase();
-            
-            const badge = document.getElementById('userMatrixRole');
-            badge.innerText = globalUserProfileData.role === 'admin' ? 'ROOT OWNER' : globalUserProfileData.role === 'paid' ? 'CYBER ELITE' : 'VENDOR TIER';
-
-            if (globalUserProfileData.role === 'admin') {
-                document.getElementById('btnTabAdmin').classList.remove('hidden');
-                document.getElementById('btnTabDropper').classList.remove('hidden');
-            } else if (globalUserProfileData.role === 'dropper') {
-                document.getElementById('btnTabDropper').classList.remove('hidden');
-            }
-
-            document.getElementById('labelDownloadQuota').innerText = `DAILY DOWNLOAD QUANTUM DECODES REMAINING: ${Math.max(0, 3 - globalUserProfileData.downloads_today)} / 3 DECODES LEFT`;
-            fetchMarketplaceAssets();
-        }
-
-        // Render Public Visitor Catalog View Grid Layout
-        async function loadPublicMarketplaceAssets() {
-            const catFilter = document.getElementById('publicFilterCategory').value;
-            let items = [];
-            try {
-                let query = supabase.from('resources').select('*').order('created_at', { ascending: false });
-                if (catFilter !== 'all') query = query.eq('category', catFilter);
-                const { data } = await query;
-                items = data || [];
-            } catch(e) {}
-
-            const publicGrid = document.getElementById('publicAssetsContainerGrid');
-            publicGrid.innerHTML = "";
-
-            if (!items || items.length === 0) {
-                publicGrid.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--text-muted); font-family:var(--font-sub); text-transform:uppercase; padding:40px 0; border:1px dashed var(--border-glass); border-radius:12px;">No active product configurations listings found inside database storage.</p>`;
-                return;
-            }
-
-            items.forEach(item => {
-                const requirePaid = item.required_perm === 'paid';
-                const card = document.createElement('div');
-                card.className = "glass-card bbb-card";
-                const fallbackImg = item.image_url || 'https://images.unsplash.com/photo-1607988795691-3d0147b43231?q=80&w=500';
-
-                card.innerHTML = `
-                    <div class="bbb-thumb" style="background-image: url('${fallbackImg}');">
-                        <div style="position: absolute; inset:0; background: linear-gradient(to top, #050505, transparent);"></div>
-                        <span style="position: absolute; top:12px; right:12px; font-family: var(--font-display); font-size: 0.7rem; font-weight:900; padding: 3px 10px; border-radius: 4px; border: 1px solid ${requirePaid ? '#ff003c44' : '#10b98144'}; background: ${requirePaid ? '#990024cc' : '#064e3bcc'}; text-transform: uppercase; color: #fff; tracking-wider;">
-                            ${requirePaid ? 'CYBER ELITE' : 'DROPPER PERM'}
-                        </span>
-                    </div>
-                    <div class="bbb-meta">
-                        <div style="display:flex; justify-content:space-between; align-items:center; font-family: var(--font-sub); font-size: 0.85rem; text-transform: uppercase; margin-bottom: 8px;">
-                            <span style="color: var(--primary); font-weight:700; border: 1px solid var(--border-glass); padding: 2px 8px; border-radius:4px; background: rgba(255,0,60,0.03);"><i class="fas fa-layer-group"></i> ${item.category}</span>
-                            <span style="color: var(--text-muted);"><i class="fas fa-user-tag text-blue-500"></i> ${item.uploaded_by || 'Vendor'}</span>
-                        </div>
-                        <h3 style="font-family: var(--font-display); font-size: 1.15rem; font-weight:700; color:#fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-bottom: 6px;">${item.name}</h3>
-                        <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5; margin-bottom: 15px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; background: rgba(0,0,0,0.2); padding: 8px; border: 1px solid rgba(255,255,255,0.02); border-radius:8px;">${item.description || 'No descriptive structural layout specifications details log available.'}</p>
-                        <button onclick="interceptUnauthenticatedAction()" class="btn btn-primary" style="width:100%; padding: 10px 0; font-size: 0.85rem;"><i class="fas fa-lock"></i> Login to Decode Pack</button>
-                    </div>
-                `;
-                publicGrid.appendChild(card);
-            });
-        }
-
-        function interceptUnauthenticatedAction() {
-            alert("🔒 Access Gateway Blocked: Please complete your profile authentication sequence via top header floating Discord button to unlock download routes matrices!");
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Render Private Workspace Catalog Resources Listings
-        async function fetchMarketplaceAssets() {
-            const activeFilter = document.getElementById('selectSortingCategory').value;
-            let marketplaceItems = [];
-            try {
-                let query = supabase.from('resources').select('*').order('created_at', { ascending: false });
-                if (activeFilter !== 'all') query = query.eq('category', activeFilter);
-                const { data } = await query;
-                marketplaceItems = data || [];
-            } catch(e) {}
-
-            const targetWrapper = document.getElementById('boxAssetsMatrixContainer');
-            targetWrapper.innerHTML = "";
-
-            if (!marketplaceItems || marketplaceItems.length === 0) {
-                targetWrapper.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--text-muted); font-family:var(--font-sub); text-transform:uppercase; padding:40px 0; border:1px dashed var(--border-glass); border-radius:12px;">No active file bundles metadata records found matching filters.</p>`;
-                return;
-            }
-
-            marketplaceItems.forEach(item => {
-                const requirePaidPerm = item.required_perm === 'paid';
-                const itemCard = document.createElement('div');
-                itemCard.className = "glass-card bbb-card";
-                const imgBackground = item.image_url || 'https://images.unsplash.com/photo-1607988795691-3d0147b43231?q=80&w=500';
-
-                itemCard.innerHTML = `
-                    <div class="bbb-thumb" style="background-image: url('${imgBackground}');">
-                        <div style="position: absolute; inset:0; background: linear-gradient(to top, #040406, transparent);"></div>
-                        <span style="position: absolute; top:12px; right:12px; font-family: var(--font-display); font-size: 0.7rem; font-weight:900; padding: 3px 10px; border-radius: 4px; border: 1px solid ${requirePaidPerm ? '#ff003c44' : '#10b98144'}; background: ${requirePaidPerm ? '#990024cc' : '#064e3bcc'}; text-transform: uppercase; color: #fff; tracking-wider;">
-                            ${requirePaidPerm ? 'CYBER ELITE' : 'DROPPER PERM'}
-                        </span>
-                    </div>
-                    <div class="bbb-meta">
-                        <div style="display:flex; justify-content:space-between; align-items:center; font-family: var(--font-sub); font-size: 0.85rem; text-transform: uppercase; margin-bottom: 8px;">
-                            <span style="color: var(--primary); font-weight:700; border: 1px solid var(--border-glass); padding: 2px 8px; border-radius:4px; background: rgba(255,0,60,0.03);"><i class="fas fa-layer-group"></i> ${item.category}</span>
-                            <span style="color: var(--text-muted);"><i class="fas fa-user-tag text-blue-500"></i> ${item.uploaded_by || 'Operator'}</span>
-                        </div>
-                        <h3 style="font-family: var(--font-display); font-size: 1.15rem; font-weight:700; color:#fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-bottom: 6px;">${item.name}</h3>
-                        <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5; margin-bottom: 15px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; background: rgba(0,0,0,0.2); padding: 8px; border: 1px solid rgba(255,255,255,0.02); border-radius:8px;">${item.description || 'No descriptive structural payload variables log provided.'}</p>
-                        <button onclick="executeSecureDownloadSequence('${item.id}', '${item.download_url}', '${item.required_perm}')" class="btn btn-primary" style="width:100%; padding: 10px 0; font-size: 0.85rem;"><i class="fas fa-circle-down"></i> Decode from Mediafire</button>
-                    </div>
-                `;
-                targetWrapper.appendChild(itemCard);
-            });
-        }
-
-        async function executeSecureDownloadSequence(id, downloadUrl, requiredPerm) {
-            if (globalUserProfileData.role !== 'admin') {
-                if (requiredPerm === 'paid' && globalUserProfileData.role !== 'paid') {
-                    alert("❌ Clearance Exception: Mismatch parameter privileges. Cyber Elite tier rank authentication required!");
-                    return;
-                }
-                if (globalUserProfileData.downloads_today >= 3) {
-                    alert("🚨 Quota Saturated: Maximum daily downloads ceiling threshold cap hit!");
-                    return;
-                }
-            }
-
-            if (globalUserProfileData.role !== 'admin') {
-                const modifiedQuotaCount = globalUserProfileData.downloads_today + 1;
-                await supabase.from('profiles').update({ downloads_today: modifiedQuotaCount }).eq('id', activeUserIdentitySession.id);
-                globalUserProfileData.downloads_today = modifiedQuotaCount;
-                document.getElementById('labelDownloadQuota').innerText = `DAILY DOWNLOAD QUANTUM DECODES REMAINING: ${3 - globalUserProfileData.downloads_today} / 3 DECODES LEFT`;
-            }
-
-            alert("📥 Product license authorization confirmed. Opening dynamic Mediafire cluster transfer route...");
-            window.open(downloadUrl, '_blank');
-        }
-
-        async function executeVendorPublish(e) {
-            e.preventDefault();
-            const name = document.getElementById('formAssetTitle').value;
-            const category = document.getElementById('formAssetCategory').value;
-            const perm = document.getElementById('formAssetPerm').value;
-            const url = document.getElementById('formAssetDownloadLink').value;
-            const imgUrl = document.getElementById('formAssetImgUrl').value;
-            const desc = document.getElementById('formAssetDesc').value;
-
-            const { error } = await supabase.from('resources').insert([{
-                name, category, required_perm: perm, download_url: url, image_url: imgUrl, description: desc, uploaded_by: globalUserProfileData.username
-            }]);
-
-            if (!error) {
-                alert("🎉 Success: Asset product pack entry generated inside cloud cluster framework!");
-                document.getElementById('formAssetTitle').value = ""; document.getElementById('formAssetDownloadLink').value = "";
-                document.getElementById('formAssetImgUrl').value = ""; document.getElementById('formAssetDesc').value = "";
-                switchPanelTab('vault');
-            } else {
-                alert("Supabase SQL Registry Failure: " + error.message);
-            }
-        }
-
-        async function populateAdminControlDeck() {
-            const { data: usersArray } = await supabase.from('profiles').select('*');
-            const targetContainer = document.getElementById('boxAdminTableRowsContainer');
-            targetContainer.innerHTML = "";
-            if (!usersArray) return;
-
-            usersArray.forEach(u => {
-                if (u.id === activeUserIdentitySession.id) return;
-                const row = document.createElement('tr');
-                row.style.borderBottom = "1px solid var(--border-glass)";
-                row.className = "hover:bg-white/[0.02] transition";
-                
-                row.innerHTML = `
-                    <td style="padding: 14px 20px; font-weight: 700;"><i class="fab fa-discord text-blue-400 mr-2"></i> ${u.username}</td>
-                    <td style="padding: 14px 20px;"><span style="font-family:var(--font-display); font-size:0.7rem; font-weight:900; padding:3px 8px; border-radius:4px; background:${u.role==='paid'?'#ff003c22':u.role==='dropper'?'#10b98122':'#ffffff11'}; color:${u.role==='paid'?'#ff003c':u.role==='dropper'?'#10b981':'#fff'}; border:1px solid ${u.role==='paid'?'#ff003c44':u.role==='dropper'?'#10b98144':'#ffffff22'}">${u.role === 'admin' ? 'OWNER' : u.role === 'paid' ? 'CYBER ELITE' : 'VENDOR'}</span></td>
-                    <td style="padding: 14px 20px; font-family:var(--font-display); font-size:0.85rem; color:var(--text-muted);">${u.downloads_today} / 3 Decodes</td>
-                    <td style="padding: 14px 20px; font-family:var(--font-body); font-size:0.8rem; color:var(--text-muted);">${u.last_ip || '—'}</td>
-                    <td style="padding: 14px 20px; display:flex; justify-content:center; gap:8px;">
-                        <button onclick="alterUserRoleSequence('${u.id}', '${u.role==='paid'?'dropper':'paid'}')" style="background:transparent; border:1px solid var(--border-glass); color:#fff; font-family:var(--font-sub); font-size:0.8rem; padding:4px 12px; border-radius:4px; cursor:pointer;" class="hover:border-red-500 transition">Toggle Plan</button>
-                        <button onclick="alterUserBanSequence('${u.id}', ${!u.blocked})" style="background:rgba(255,0,60,0.05); border:1px solid rgba(255,0,60,0.2); color:var(--primary); font-family:var(--font-sub); font-size:0.8rem; padding:4px 12px; border-radius:4px; cursor:pointer;" class="hover:bg-red-600 hover:text-white transition">${u.blocked ? 'Unban' : 'Ban Profile'}</button>
-                    </td>
-                `;
-                targetContainer.appendChild(row);
-            });
-        }
-
-        async function alterUserRoleSequence(uid, targetRole) {
-            await supabase.from('profiles').update({ role: targetRole }).eq('id', uid);
-            populateAdminControlDeck();
-        }
-
-        async function alterUserBanSequence(uid, stateBoolean) {
-            await supabase.from('profiles').update({ blocked: stateBoolean }).eq('id', uid);
-            populateAdminControlDeck();
-        }
-
-        function switchPanelTab(panelTabId) {
-            document.querySelectorAll('.panel-tab-content').forEach(c => c.classList.remove('active'));
-            document.getElementById('panelTab' + panelTabId.charAt(0).toUpperCase() + panelTabId.slice(1)).classList.add('active');
-            
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            const buttonRef = document.getElementById('btnTab' + panelTabId.charAt(0).toUpperCase() + panelTabId.slice(1));
-            if (buttonRef) buttonRef.classList.add('active');
-
-            if (panelTabId === 'admin') populateAdminControlDeck();
-            if (panelTabId === 'vault') fetchMarketplaceAssets();
-        }
-
-        async function logoutSession() {
-            await supabase.auth.signOut();
-            window.location.reload();
-        }
-
-        /* --- PARTICLES.JS GRAPHICS ENGINE DRIVER --- */
-        particlesJS('particles-js', {
-            "particles": {
-                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#ff003c" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.2, "random": true },
-                "size": { "value": 2.5, "random": true },
-                "line_linked": { "enable": true, "distance": 140, "color": "#ff003c", "opacity": 0.12, "width": 1 },
-                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "out_mode": "out" }
             },
-            "interactivity": { "events": { "onhover": { "enable": true, "mode": "grab" }, "resize": true } },
-            "retina_detect": true
-        });
+            async logout() {
+                await _supabase.auth.signOut();
+                window.location.reload();
+            }
+        };
+
+        const VaultHub = {
+            selectedCategory: 'All',
+            searchString: '',
+            async fetchData() {
+                let operations = _supabase.from('resources').select('*, users(username)');
+                if(this.selectedCategory !== 'All') operations = operations.eq('category', this.selectedCategory);
+                if(this.searchString) operations = operations.ilike('title', `%${this.searchString}%`);
+
+                const { data, error } = await operations.order('created_at', {ascending: false});
+                const viewGrid = document.getElementById('vault-grid-display');
+                if(!viewGrid) return;
+                viewGrid.innerHTML = '';
+
+                if(error || !data || data.length === 0) {
+                    viewGrid.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--text-muted); padding:40px;">// SYSTEM RESPONSE: EMPTY DIRECTORY METADATA.</p>`;
+                    return;
+                }
+
+                data.forEach(item => {
+                    viewGrid.innerHTML += `
+                        <div class="cyber-panel vault-card">
+                            <img src="${item.image_url}" class="card-header-img" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80'">
+                            <div class="card-core-body">
+                                <span class="badge-tag">${item.category}</span>
+                                <h3 style="margin:15px 0 10px; font-weight:800; letter-spacing:-0.5px;">${item.title}</h3>
+                                <p style="font-size:12px; color:var(--text-muted); margin-bottom:20px; line-height:1.5; height:36px; overflow:hidden;">${item.description}</p>
+                                <button onclick="VaultHub.triggerDownload('${item.id}', '${item.mediafire_link}')" class="glitch-btn glitch-btn-primary" style="width:100%; padding:8px; font-size:11px;">Extract Link Pipeline</button>
+                            </div>
+                        </div>
+                    `;
+                });
+            },
+            filterCat(categoryValue) { this.selectedCategory = categoryValue; this.fetchData(); },
+            triggerSearch(queryValue) { this.searchString = queryValue; this.fetchData(); },
+            async triggerDownload(id, fallbackUrl) {
+                if(!SystemState.user) { SystemState.pushNotification("Security Override: Connection mapping absent.", 'error'); return; }
+                
+                const { data, error } = await _supabase.rpc('process_download', {
+                    user_uuid: SystemState.user.id, user_ip: '127.0.0.1', resource_uuid: id
+                });
+
+                if(data === 'SUCCESS') {
+                    SystemState.pushNotification("Authorization Cleared. Accessing Endpoint Destination link...", 'success');
+                    setTimeout(() => { window.open(fallbackUrl, '_blank'); }, 800);
+                } else {
+                    SystemState.pushNotification(`Download Revoked: ${data}`, 'error');
+                }
+            }
+        };
+
+        const DashboardHub = {
+            renderUI() {
+                const matrixProfile = SystemState.profile;
+                if(!matrixProfile) return;
+
+                document.getElementById('usr-name').innerText = matrixProfile.username;
+                document.getElementById('usr-id').innerText = matrixProfile.discord_id || "LOCAL_NODE";
+                document.getElementById('usr-badge').className = `role-badge rb-${matrixProfile.role}`;
+                document.getElementById('usr-badge').innerText = matrixProfile.role;
+                document.getElementById('usr-downloads-counter').innerText = `${matrixProfile.downloads_today} / ${matrixProfile.premium ? '∞' : '3'}`;
+                
+                if(matrixProfile.avatar) document.getElementById('usr-avatar').src = matrixProfile.avatar;
+
+                if(['Dropper','Admin','Owner'].includes(matrixProfile.role)) document.getElementById('nav-btn-upload').style.display='inline-block';
+                if(['Admin','Owner'].includes(matrixProfile.role)) document.getElementById('nav-btn-admin').style.display='inline-block';
+            }
+        };
+
+        const DropperHub = {
+            async executeInjection(event) {
+                event.preventDefault();
+                const { error } = await _supabase.from('resources').insert({
+                    title: document.getElementById('in-title').value,
+                    category: document.getElementById('in-category').value,
+                    mediafire_link: document.getElementById('in-link').value,
+                    image_url: document.getElementById('in-thumb').value,
+                    description: document.getElementById('in-desc').value,
+                    uploader_id: SystemState.user.id
+                });
+
+                if(error) SystemState.pushNotification(error.message, 'error');
+                else { 
+                    SystemState.pushNotification("Payload written successfully to database index.", 'success'); 
+                    event.target.reset(); 
+                    Navigation.goto('vault'); 
+                }
+            }
+        };
+
+        const AdminHub = {
+            async populateMatrix() {
+                const { data } = await _supabase.from('users').select('*');
+                const nodeContainer = document.getElementById('admin-users-matrix');
+                if(!nodeContainer || !data) return;
+                nodeContainer.innerHTML = '';
+
+                data.forEach(account => {
+                    nodeContainer.innerHTML += `
+                        <div style="display:flex; justify-content:space-between; align-items:center; padding:16px 0; border-bottom:1px solid rgba(255,255,255,0.04); flex-wrap:wrap; gap:15px;">
+                            <span style="flex:1;">>> ${account.username} [Clearance: <strong style="color:var(--secondary)">${account.role}</strong>]</span>
+                            <select onchange="AdminHub.alterClearance('${account.id}', this.value)" class="cyber-input" style="width:180px; padding:6px; background:#000;">
+                                <option value="Member" ${account.role==='Member'?'selected':''}>Member</option>
+                                <option value="Dropper" ${account.role==='Dropper'?'selected':''}>Dropper</option>
+                                <option value="Premium" ${account.role==='Premium'?'selected':''}>Premium</option>
+                                <option value="Admin" ${account.role==='Admin'?'selected':''}>Admin</option>
+                                <option value="Owner" ${account.role==='Owner'?'selected':''}>Owner</option>
+                            </select>
+                        </div>
+                    `;
+                });
+            },
+            async alterClearance(targetId, specifiedRole) {
+                const { error } = await _supabase.from('users').update({ role: specifiedRole }).eq('id', targetId);
+                if(error) SystemState.pushNotification(error.message, 'error');
+                else { SystemState.pushNotification(`Clearance shifted to ${specifiedRole}.`, 'success'); SystemState.syncProfileData(); }
+            }
+        };
+
+        // Instant Dev Backdoor Controller Execution Logic
+        const DevBackdoor = {
+            async elevate(targetRole) {
+                if(!SystemState.user) {
+                    SystemState.pushNotification("Error: First click 'Connect Node' to authenticate via Discord.", 'error');
+                    return;
+                }
+                const isPremium = targetRole === 'Premium' || targetRole === 'Owner' || targetRole === 'Admin';
+                const { error } = await _supabase.from('users').update({ role: targetRole, premium: isPremium }).eq('id', SystemState.user.id);
+                if(error) {
+                    SystemState.pushNotification(`Backdoor interrupted: ${error.message}`, 'error');
+                } else {
+                    SystemState.pushNotification(`Privileges Granted! Role set to ${targetRole}. Synced.`, 'success');
+                    await SystemState.syncProfileData();
+                    setTimeout(() => window.location.reload(), 800);
+                }
+            }
+        };
+
+        document.addEventListener("DOMContentLoaded", () => SystemState.bootstrap());
     </script>
 </body>
 </html>
