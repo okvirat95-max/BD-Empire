@@ -11,14 +11,14 @@
         :root {
             --bg-dark: #040406;
             --bg-deep: #010102;
-            --card-bg: rgba(8, 8, 14, 0.9);
+            --card-bg: rgba(8, 8, 14, 0.93);
             --primary: #ff003c;
             --primary-glow: rgba(255, 0, 60, 0.6);
             --secondary: #00f0ff;
             --secondary-glow: rgba(0, 240, 255, 0.5);
             --purple: #8a2be2;
             --text-main: #f5f5fa;
-            --text-muted: #5a5a73;
+            --text-muted: #6e6e8a;
             --matrix-green: #00ff66;
         }
 
@@ -34,7 +34,7 @@
             background-image: 
                 linear-gradient(rgba(255, 0, 60, 0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 0, 60, 0.02) 1px, transparent 1px),
-                radial-gradient(circle at 50% -20%, rgba(138, 43, 226, 0.4) 0%, transparent 60%);
+                radial-gradient(circle at 50% -20%, rgba(138, 43, 226, 0.35) 0%, transparent 60%);
             background-size: 35px 35px, 35px 35px, auto;
             background-attachment: fixed;
         }
@@ -42,33 +42,31 @@
         body::before {
             content: " "; display: block; position: fixed;
             top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
             z-index: 99999; opacity: 0.3; pointer-events: none; background-size: 100% 4px;
         }
 
-        /* Secured Bypass Switchboard Top Bar Layout */
+        /* SIMULATED ROLE SWITCHBOARD TOP BAR */
         .backdoor-bar {
-            background: #080104; padding: 12px; text-align: center; font-size: 11px;
+            background: #090105; padding: 12px; text-align: center; font-size: 11px;
             border-bottom: 2px solid var(--primary); box-shadow: 0 0 15px var(--primary-glow);
-            position: relative; z-index: 10001; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;
+            position: relative; z-index: 10001; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
         }
         .backdoor-bar span { color: var(--secondary); font-weight: bold; letter-spacing: 1px; }
         .backdoor-btn {
-            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1);
-            color: #fff; cursor: pointer; font-size: 10px; font-weight: bold; padding: 3px 10px;
-            text-transform: uppercase; transition: all 0.2s;
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+            color: #fff; cursor: pointer; font-size: 10px; font-weight: bold; padding: 4px 12px;
+            text-transform: uppercase; transition: all 0.2s; border-radius: 3px;
         }
-        .backdoor-btn:hover { border-color: var(--primary); background: rgba(255, 0, 60, 0.1); color: var(--primary); }
+        .backdoor-btn:hover { border-color: var(--primary); background: rgba(255, 0, 60, 0.15); color: var(--primary); box-shadow: 0 0 8px var(--primary-glow); }
 
-        /* Premium Cyberpunk Asymmetric Layout Cards */
         .cyber-panel {
             background: var(--card-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.03); border-left: 4px solid var(--primary);
+            border: 1px solid rgba(255, 255, 255, 0.04); border-left: 4px solid var(--primary);
             border-right: 4px solid var(--secondary); border-radius: 4px;
             box-shadow: 0 15px 45px rgba(0, 0, 0, 0.8); position: relative; overflow: hidden;
         }
 
-        /* Cyberpunk Glitch Action Elements */
         .glitch-btn {
             background: transparent; color: #fff; border: 1px solid var(--secondary);
             padding: 12px 26px; cursor: pointer; font-weight: 900; text-transform: uppercase;
@@ -79,6 +77,8 @@
         .glitch-btn:hover { background: var(--secondary); color: #000; box-shadow: 0 0 25px var(--secondary-glow); transform: translateY(-2px); }
         .glitch-btn-primary { border-color: var(--primary); box-shadow: 0 0 15px rgba(255, 0, 60, 0.2); }
         .glitch-btn-primary:hover { background: var(--primary); color: #fff; box-shadow: 0 0 25px var(--primary-glow); }
+        .glitch-btn-danger { border-color: #ff3333; color: #ff3333; }
+        .glitch-btn-danger:hover { background: #ff3333; color: #fff; box-shadow: 0 0 15px rgba(255,51,51,0.5); }
 
         .navbar {
             width: 100%; padding: 20px 40px; display: flex; justify-content: space-between;
@@ -87,6 +87,7 @@
         }
         .logo { font-size: 24px; font-weight: 900; letter-spacing: 3px; color: #fff; text-shadow: 0 0 15px var(--primary-glow); cursor: pointer; }
         .logo span { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
+        .nav-links { display: flex; align-items: center; }
         .nav-links button {
             background: transparent; border: none; color: var(--text-muted); text-transform: uppercase;
             letter-spacing: 2px; font-size: 12px; margin-left: 25px; font-weight: bold; cursor: pointer; transition: all 0.3s;
@@ -96,29 +97,30 @@
         .container { max-width: 1300px; margin: 40px auto; padding: 0 20px; }
         .grid-matrix { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
         
-        .vault-card { transition: all 0.3s ease; background: linear-gradient(145deg, #0c0c14 0%, #040407 100%); }
-        .vault-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0, 240, 255, 0.12); }
+        .vault-card { transition: all 0.3s ease; background: linear-gradient(145deg, #0c0c14 0%, #040407 100%); border: 1px solid rgba(255,255,255,0.03); }
+        .vault-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0, 240, 255, 0.15); border-color: rgba(0,240,255,0.3); }
         .card-header-img { width: 100%; height: 190px; object-fit: cover; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .card-core-body { padding: 22px; }
-        .badge-tag { background: rgba(0, 240, 255, 0.08); color: var(--secondary); padding: 5px 12px; font-size: 11px; font-weight: bold; text-transform: uppercase; border: 1px solid rgba(0,240,255,0.2); }
+        .badge-tag { background: rgba(0, 240, 255, 0.08); color: var(--secondary); padding: 5px 12px; font-size: 11px; font-weight: bold; text-transform: uppercase; border: 1px solid rgba(0,240,255,0.2); width: fit-content; margin-bottom: 12px; }
 
-        /* Dynamic Status Badges */
-        .role-badge { padding: 4px 12px; font-size: 10px; font-weight: 900; text-transform: uppercase; border-radius: 2px; }
+        .role-badge { padding: 4px 12px; font-size: 10px; font-weight: 900; text-transform: uppercase; border-radius: 2px; display: inline-block; }
         .rb-Owner { background: var(--primary); color: #fff; box-shadow: 0 0 12px var(--primary-glow); }
         .rb-Admin { background: #ff7700; color: #fff; }
-        .rb-Dropper { background: var(--secondary); color: #000; }
+        .rb-Dropper { background: var(--matrix-green); color: #000; }
         .rb-Premium { background: var(--purple); color: #fff; }
         .rb-Member { background: #222233; color: #b0b0c0; }
 
         .filter-row { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 12px; margin-top: 20px; }
+        .filter-row button { flex-shrink: 0; }
         .filter-row::-webkit-scrollbar { height: 4px; }
         .filter-row::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
 
         .form-group { margin-bottom: 25px; }
-        .form-group label { display: block; margin-bottom: 10px; color: var(--secondary); font-size: 12px; text-transform: uppercase; }
+        .form-group label { display: block; margin-bottom: 10px; color: var(--secondary); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
         .cyber-input {
             width: 100%; background: #07070c; border: 1px solid rgba(255, 255, 255, 0.06);
             padding: 15px; color: #fff; font-family: monospace; outline: none; border-left: 3px solid var(--secondary);
+            border-radius: 2px;
         }
         .cyber-input:focus { border-left-color: var(--primary); box-shadow: 0 0 15px rgba(255,0,60,0.15); }
 
@@ -126,26 +128,40 @@
         .toast-message {
             background: #06060a; border-left: 4px solid var(--primary); padding: 16px 25px; margin-top: 12px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.8); border-top: 1px solid rgba(255,255,255,0.05); color: #fff; font-size: 12px;
+            letter-spacing: 0.5px; line-height: 1.4;
         }
+        .toast-success { border-left-color: var(--matrix-green); }
 
         .view-frame { display: none; }
         .view-frame.active-frame { display: block; }
+
+        /* ADMIN DATA CONTROL DESIGN TABLES */
+        .admin-table { width: 100%; border-collapse: collapse; margin-top: 20px; text-align: left; }
+        .admin-table th { padding: 15px; color: var(--secondary); font-size: 12px; text-transform: uppercase; border-bottom: 2px solid rgba(255,255,255,0.1); }
+        .admin-table td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; vertical-align: middle; }
+        .admin-user-row:hover { background: rgba(255,255,255,0.02); }
+        .select-role-dropdown { background: #07070c; color: #fff; border: 1px solid rgba(255,255,255,0.1); padding: 6px; font-size: 12px; border-left: 2px solid var(--secondary); outline: none; }
 
         @media(max-width: 850px) {
             .navbar { padding: 15px 20px; flex-direction: column; gap: 15px; }
             .nav-links { width: 100%; justify-content: center; flex-wrap: wrap; gap: 10px; }
             .nav-links button { margin: 0 10px; font-size: 11px; }
+            .admin-table, .admin-table thead, .admin-table tbody, .admin-table th, .admin-table td, .admin-table tr { display: block; }
+            .admin-table tr { margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.05); padding: 10px; }
+            .admin-table td { border: none; padding: 6px; text-align: right; position: relative; }
+            .admin-table td::before { content: attr(data-label); position: absolute; left: 10px; font-weight: bold; color: var(--secondary); font-size: 11px; text-transform: uppercase; }
         }
     </style>
 </head>
 <body>
 
     <div class="backdoor-bar">
-        <span>🔒 [SECURITY SECURE INJECTOR]:</span> 
-        <button class="backdoor-btn" onclick="DevBackdoor.elevate('Owner')">Set Owner</button>
-        <button class="backdoor-btn" onclick="DevBackdoor.elevate('Admin')">Set Admin</button>
-        <button class="backdoor-btn" onclick="DevBackdoor.elevate('Dropper')">Set Dropper</button>
-        <button class="backdoor-btn" onclick="DevBackdoor.elevate('Premium')">Set Premium</button>
+        <span>🔒 [SECURITY SIMULATION CONTROLBOARD]:</span> 
+        <button class="backdoor-btn" onclick="DevBackdoor.elevate('Owner')">Set Owner Mode</button>
+        <button class="backdoor-btn" onclick="DevBackdoor.elevate('Admin')">Set Admin Mode</button>
+        <button class="backdoor-btn" onclick="DevBackdoor.elevate('Dropper')">Set Dropper Mode</button>
+        <button class="backdoor-btn" onclick="DevBackdoor.elevate('Premium')">Set Premium Mode</button>
+        <button class="backdoor-btn" onclick="DevBackdoor.elevate('Member')">Reset Member Mode</button>
     </div>
 
     <nav class="navbar">
@@ -153,24 +169,25 @@
         <div class="nav-links">
             <button id="nav-landing" class="active-nav" onclick="Navigation.goto('landing')">Home Base</button>
             <button id="nav-vault" onclick="Navigation.goto('vault')">Data Vault</button>
-            <span id="account-zone"></span>
+            <button id="nav-dashboard" onclick="Navigation.goto('dashboard')">Terminal Console</button>
+            <span id="account-zone" style="margin-left: 20px;"></span>
         </div>
     </nav>
 
     <div id="frame-landing" class="view-frame active-frame">
-        <main class="container" style="text-align: center; padding-top: 50px;">
+        <main class="container" style="text-align: center; padding-top: 70px;">
             <div style="display: inline-block; padding: 6px 14px; background: rgba(255,0,60,0.08); border: 1px solid var(--primary); color: var(--primary); font-size: 11px; margin-bottom: 25px; letter-spacing: 2px; font-weight: bold;">
-                ANTI-ALT SYSTEM ARMED // CHIP SECURITY MAPPER ACTIVE
+                ANTI-ALT SYSTEM ARMED // SYSTEM PLATFORM SECURE
             </div>
-            <h1 style="font-size: 3.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; background: linear-gradient(to right, #fff, var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            <h1 style="font-size: 3.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; background: linear-gradient(to right, #fff, var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2;">
                 DECRYPTING PREMIUM <br>GAMING REPOSITORIES
             </h1>
             <p style="color: var(--text-muted); max-width: 750px; margin: 0 auto 40px; font-size: 14px; line-height: 1.8;">
-                Real-time connection mapping. Strict device multi-accounting countermeasures online (1 IP = 1 Active Node Profile Registration).
+                Real-time synchronized data matrix. Multi-accounting protocols enforced online natively. Access plugins, verified setups, configurations and assets directly.
             </p>
-            <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+            <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;" id="auth-action-blocks">
                 <button onclick="Navigation.goto('vault')" class="glitch-btn glitch-btn-primary">Initialize Vault Array</button>
-                <button onclick="AuthHub.login()" class="glitch-btn">Sync Discord Node</button>
+                <button onclick="AuthHub.login()" class="glitch-btn" id="login-trigger-btn">Sync Discord Node</button>
             </div>
         </main>
     </div>
@@ -178,7 +195,7 @@
     <div id="frame-vault" class="view-frame">
         <div class="container">
             <div class="cyber-panel" style="padding: 25px; margin-bottom: 35px;">
-                <input type="text" id="search-box" class="cyber-input" placeholder=">> ENTER SEARCH FILTERS..." oninput="VaultHub.triggerSearch(this.value)">
+                <input type="text" id="search-box" class="cyber-input" placeholder=">> TYPE TO SCAN MANIFEST FILTERS..." oninput="VaultHub.triggerSearch(this.value)">
                 <div class="filter-row">
                     <button class="glitch-btn" style="padding: 6px 14px; font-size:11px;" onclick="VaultHub.filterCat('All')">All Arrays</button>
                     <button class="glitch-btn" style="padding: 6px 14px; font-size:11px;" onclick="VaultHub.filterCat('Plugins')">Plugins</button>
@@ -197,24 +214,25 @@
 
     <div id="frame-dashboard" class="view-frame">
         <div class="container">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 35px;">
-                <div class="cyber-panel" style="padding: 30px; text-align: center;">
-                    <img id="usr-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" style="width: 110px; height: 110px; border-radius: 4px; border:2px solid var(--secondary); margin-bottom: 20px;">
-                    <h2 id="usr-name" style="margin-bottom: 5px;">...</h2>
-                    <span id="usr-badge" class="role-badge rb-Member">Member</span>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 35px;">
+                <div class="cyber-panel" style="padding: 30px; text-align: center; height: fit-content;">
+                    <img id="usr-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" style="width: 110px; height: 110px; border-radius: 4px; border:2px solid var(--secondary); margin-bottom: 20px; object-fit: cover;">
+                    <h2 id="usr-name" style="margin-bottom: 8px; letter-spacing: 1px;">Anonymous Profile</h2>
+                    <span id="usr-badge" class="role-badge rb-Member">Member Node</span>
                     <hr style="border:0; border-top:1px solid rgba(255,255,255,0.05); margin:25px 0;">
                     <div style="text-align: left;">
-                        <p style="font-size:11px; color:var(--text-muted); text-transform:uppercase;">Daily Bandwidth Used:</p>
-                        <h3 id="usr-downloads-counter" style="color:var(--secondary); margin-top:5px; font-size: 24px;">...</h3>
+                        <p style="font-size:11px; color:var(--text-muted); text-transform:uppercase;">Daily Allocated Bandwidth Matrix:</p>
+                        <h3 id="usr-downloads-counter" style="color:var(--secondary); margin-top:5px; font-size: 22px;">0 / 3 Downloads</h3>
                     </div>
+                    <button onclick="AuthHub.logout()" class="glitch-btn glitch-btn-danger" style="width: 100%; margin-top: 25px; padding: 8px 10px; font-size: 11px;">Disconnect Session</button>
                 </div>
 
                 <div style="display:flex; flex-direction:column; gap:35px;">
                     <div class="cyber-panel" style="padding: 30px;">
-                        <h3 style="color: var(--primary); margin-bottom: 15px; font-size:15px;">// OPERATIONS CLEARANCE CHANNELS</h3>
-                        <div style="display:flex; gap:12px; flex-wrap:wrap;">
-                            <button id="nav-btn-upload" class="glitch-btn" style="display:none;" onclick="Navigation.goto('upload')">Terminal Injector</button>
-                            <button id="nav-btn-admin" class="glitch-btn glitch-btn-primary" style="display:none;" onclick="Navigation.goto('admin')">Sovereign Owner Control Deck</button>
+                        <h3 style="color: var(--primary); margin-bottom: 20px; font-size:14px; letter-spacing: 1px;">// PRIVILEGED CORE OPERATION LINKS</h3>
+                        <div style="display:flex; flex-direction:column; gap:15px;">
+                            <button id="nav-btn-upload" class="glitch-btn" style="width: 100%; text-align: center;" onclick="Navigation.goto('upload')">Open Terminal Asset Injector</button>
+                            <button id="nav-btn-admin" class="glitch-btn glitch-btn-primary" style="width: 100%; text-align: center;" onclick="Navigation.goto('admin')">Access Sovereign Control Deck</button>
                         </div>
                     </div>
                 </div>
@@ -225,22 +243,26 @@
     <div id="frame-upload" class="view-frame">
         <div class="container" style="max-width:750px;">
             <div class="cyber-panel" style="padding: 35px;">
-                <h2 style="margin-bottom: 25px; color: var(--primary); text-transform: uppercase; font-size:18px;">// INJECT_NEW_ASSET_MANIFEST</h2>
+                <h2 style="margin-bottom: 25px; color: var(--primary); text-transform: uppercase; font-size:16px; letter-spacing: 1px;">// INJECT_NEW_ASSET_MANIFEST</h2>
                 <form id="upload-form" onsubmit="DropperHub.executeInjection(event)">
-                    <div class="form-group"><label>Asset Label Title</label><input type="text" id="in-title" class="cyber-input" required></div>
+                    <div class="form-group"><label>Asset Label Title</label><input type="text" id="in-title" class="cyber-input" placeholder="e.g. Advanced Lifesteal Setup" required></div>
                     <div class="form-group">
                         <label>Architecture Category</label>
                         <select id="in-category" class="cyber-input" style="background:#07070c; color:#fff;" required>
-                            <option value="Plugins">Plugins</option><option value="Maps">Maps</option>
-                            <option value="Server Setups">Server Setups</option><option value="Models">Models</option>
-                            <option value="Configs">Configs</option><option value="Skripts">Skripts</option>
-                            <option value="Texture Packs">Texture Packs</option><option value="Tools">Tools</option>
+                            <option value="Plugins">Plugins</option>
+                            <option value="Maps">Maps</option>
+                            <option value="Server Setups">Server Setups</option>
+                            <option value="Models">Models</option>
+                            <option value="Configs">Configs</option>
+                            <option value="Skripts">Skripts</option>
+                            <option value="Texture Packs">Texture Packs</option>
+                            <option value="Tools">Tools</option>
                         </select>
                     </div>
-                    <div class="form-group"><label>MediaFire Link</label><input type="url" id="in-link" class="cyber-input" required></div>
-                    <div class="form-group"><label>Image Preview URL</label><input type="url" id="in-thumb" class="cyber-input" required></div>
-                    <div class="form-group"><label>Description Context Logs</label><textarea id="in-desc" class="cyber-input" rows="4" required></textarea></div>
-                    <button type="submit" class="glitch-btn glitch-btn-primary" style="width:100%;">Commit Payload</button>
+                    <div class="form-group"><label>MediaFire Architecture Link</label><input type="url" id="in-link" class="cyber-input" placeholder="https://www.mediafire.com/file/..." required></div>
+                    <div class="form-group"><label>Image Preview URL Vector</label><input type="url" id="in-thumb" class="cyber-input" placeholder="https://i.imgur.com/..." required></div>
+                    <div class="form-group"><label>Description Context Logs</label><textarea id="in-desc" class="cyber-input" rows="4" placeholder="Log details regarding performance benchmarks..." required></textarea></div>
+                    <button type="submit" class="glitch-btn glitch-btn-primary" style="width:100%;">Commit Payload Packet</button>
                 </form>
             </div>
         </div>
@@ -248,9 +270,37 @@
 
     <div id="frame-admin" class="view-frame">
         <div class="container">
-            <div class="cyber-panel" style="padding: 35px;">
-                <h2 style="color:var(--primary); margin-bottom:25px; text-transform: uppercase; font-size:18px;">// SOVEREIGN CORE REAL-TIME ADMINISTRATIVE GRID</h2>
-                <div id="admin-users-matrix"></div>
+            <div class="cyber-panel" style="padding: 35px; margin-bottom: 40px;">
+                <h2 style="color:var(--primary); margin-bottom:25px; text-transform: uppercase; font-size:16px; letter-spacing: 1px;">// SOVEREIGN CORE ADMINISTRATIVE SECURITY GRID</h2>
+                <div style="overflow-x: auto;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Operational Entity</th>
+                                <th>Discord ID</th>
+                                <th>Allocated Role Clearances</th>
+                                <th>Security Action Protocol</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-users-matrix"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="cyber-panel" style="padding: 35px; border-left-color: #ff3333;">
+                <h2 style="color:#ff3333; margin-bottom:25px; text-transform: uppercase; font-size:16px; letter-spacing: 1px;">// RESTRICTED BLOCK SYSTEM PERMANENT BLACKLIST</h2>
+                <div style="overflow-x: auto;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Blocked Node UUID</th>
+                                <th>Reason Log Context</th>
+                                <th>System Action Override</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-banned-matrix"></tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -258,136 +308,358 @@
     <div id="toast-box"></div>
 
     <script>
+        // CORE DATABASE INSTANTIATION PIPELINES
         const CLIENT_CONFIG = {
             URL: "https://mgtbeiqqehvnrudlebio.supabase.co",
-            ANON: "sb_publishable_5I5otxiF4C5rA195oSxNqA_jft4qlZf",
-            // ALALAG INDEPENDENT ROLE SECURITY PASSWORDS
-            KEYS: {
-                Owner: "OWNER_ROOT_PASS_2026",
-                Admin: "ADMIN_GATEWAY_SECURE",
-                Dropper: "DROPPER_INJECT_KEY",
-                Premium: "PREMIUM_ACCESS_TOKEN"
-            }
+            ANON: "sb_publishable_5I5otxiF4C5rA195oSxNqA_jft4qlZf"
         };
 
         const _supabase = supabase.createClient(CLIENT_CONFIG.URL, CLIENT_CONFIG.ANON);
 
         const SystemState = {
-            user: null, profile: null, userIp: '127.0.0.1',
+            user: null, 
+            profile: null, 
+            userIp: '127.0.0.1',
+
             async bootstrap() {
-                // Fetch user public IP safely to process single-IP multi-account device firewall lock
                 try {
                     const res = await fetch('https://api.ipify.org?format=json');
                     const parsed = await res.json();
                     this.userIp = parsed.ip;
-                } catch(e){}
+                } catch(e){ console.log("Network dynamic fallback IP generated."); }
 
                 if(window.location.hash.includes("access_token")) {
                     const { data: { session } } = await _supabase.auth.getSession();
-                    if(session) {
-                        this.user = session.user;
-                        await this.syncProfileData();
-                    }
+                    if(session) { this.user = session.user; await this.syncProfileData(); }
                     window.location.hash = ""; 
                 } else {
                     const { data: { session } } = await _supabase.auth.getSession();
-                    if (session) {
-                        this.user = session.user;
-                        await this.syncProfileData();
-                    }
+                    if (session) { this.user = session.user; await this.syncProfileData(); }
                 }
-                this.updateNavbarLayout();
+                
+                this.updateUIVisibilityEngine();
                 VaultHub.fetchData();
             },
+
             async syncProfileData() {
                 if(!this.user) return;
                 
-                // ANTI-ALT FIREWALL: Validate if this IP already has another mapped account registered
-                const { data: ipCheck } = await _supabase.from('downloads').select('user_id').eq('ip_address', this.userIp).limit(1);
-                if(ipCheck && ipCheck.length > 0 && ipCheck[0].user_id !== this.user.id) {
-                    this.pushNotification("ANTI-ALT DETECTED: This device IP is locked to another account node.", 'error');
+                // Realtime interception for banned state profiles
+                const { data: banState } = await _supabase.from('banned_users').select('*').eq('id', this.user.id).single();
+                if(banState) {
+                    SystemState.pushNotification("ACCESS CRITICAL FAILURE: Account Node is Blacklisted.", 'error');
                     await _supabase.auth.signOut();
-                    this.user = null;
+                    this.user = null; this.profile = null;
                     return;
                 }
 
                 const { data, error } = await _supabase.from('users').select('*').eq('id', this.user.id).single();
                 if(!error && data) {
-                    // Force ban logic interceptor check
-                    const { data: banState } = await _supabase.from('banned_users').select('*').eq('id', this.user.id).single();
-                    if(banState) {
-                        this.pushNotification("TERMINATED: Your account is banned under code level restriction.", 'error');
-                        await _supabase.auth.signOut();
-                        this.user = null;
-                        this.profile = null;
-                        return;
-                    }
                     this.profile = data;
                 } else {
-                    const fallbackName = this.user.user_metadata?.full_name || "User Node";
+                    const fallbackName = this.user.user_metadata?.full_name || this.user.user_metadata?.name || "User Node";
                     const fallbackAvatar = this.user.user_metadata?.avatar_url || "https://cdn.discordapp.com/embed/avatars/0.png";
                     const fallbackDiscordId = this.user.user_metadata?.provider_id || this.user.id.substr(0, 12);
-                    this.profile = { id: this.user.id, discord_id: fallbackDiscordId, username: fallbackName, avatar: fallbackAvatar, role: "Member", downloads_today: 0 };
+                    
+                    const newProfile = {
+                        id: this.user.id,
+                        discord_id: fallbackDiscordId,
+                        username: fallbackName,
+                        avatar: fallbackAvatar,
+                        role: 'Member',
+                        premium: false
+                    };
+
+                    await _supabase.from('users').insert(newProfile);
+                    this.profile = newProfile;
                 }
             },
-            pushNotification(text, mode='success') {
-                const box = document.getElementById('toast-box');
-                const element = document.createElement('div');
-                element.className = 'toast-message';
-                element.style.borderColor = mode === 'error' ? 'var(--primary)' : 'var(--matrix-green)';
-                element.innerText = `[SECURE_LOG] >> ${text}`;
-                box.appendChild(element);
-                setTimeout(() => element.remove(), 4500);
-            },
-            updateNavbarLayout() {
-                const targetZone = document.getElementById('account-zone');
-                if(!targetZone) return;
+
+            updateUIVisibilityEngine() {
+                const zone = document.getElementById('account-zone');
+                const loginTrigger = document.getElementById('login-trigger-btn');
+                
                 if(this.user && this.profile) {
-                    targetZone.innerHTML = `
-                        <span class="role-badge rb-${this.profile.role}">${this.profile.role}</span>
-                        <button onclick="Navigation.goto('dashboard')">[Dashboard]</button>
-                        <button onclick="AuthHub.logout()" style="color:var(--primary);">[Exit]</button>
-                    `;
+                    zone.innerHTML = `<span style="color:var(--matrix-green); font-size:11px;">[ONLINE] ${this.profile.username}</span>`;
+                    if(loginTrigger) loginTrigger.style.display = 'none';
+                    
+                    document.getElementById('usr-name').innerText = this.profile.username;
+                    document.getElementById('usr-avatar').src = this.profile.avatar;
+                    document.getElementById('usr-badge').className = `role-badge rb-${this.profile.role}`;
+                    document.getElementById('usr-badge').innerText = this.profile.role;
+                    
+                    const capLimit = (this.profile.role === 'Owner' || this.profile.role === 'Admin' || this.profile.premium) ? '⚡ Unlimited Clearances' : `${this.profile.downloads_today} / 3 Reset Iterations`;
+                    document.getElementById('usr-downloads-counter').innerText = capLimit;
+
+                    const isStaff = ['Owner', 'Admin', 'Dropper'].includes(this.profile.role);
+                    const isSovereign = ['Owner', 'Admin'].includes(this.profile.role);
+                    
+                    document.getElementById('nav-btn-upload').style.display = isStaff ? 'block' : 'none';
+                    document.getElementById('nav-btn-admin').style.display = isSovereign ? 'block' : 'none';
+                    
+                    if(isSovereign) { AdminGridPanel.loadAdminData(); }
                 } else {
-                    targetZone.innerHTML = `<button onclick="AuthHub.login()" class="glitch-btn" style="padding:6px 14px; font-size:11px;">Connect Node</button>`;
+                    zone.innerHTML = `<span style="color:var(--primary); font-size:11px;">[DISCONNECTED MATRIX]</span>`;
+                    if(loginTrigger) loginTrigger.style.display = 'inline-block';
+                    document.getElementById('nav-btn-upload').style.display = 'none';
+                    document.getElementById('nav-btn-admin').style.display = 'none';
                 }
+            },
+
+            pushNotification(msg, status = 'success') {
+                const container = document.getElementById('toast-box');
+                const toast = document.createElement('div');
+                toast.className = `toast-message ${status === 'success' ? 'toast-success' : ''}`;
+                toast.innerText = `>> ${msg}`;
+                container.appendChild(toast);
+                setTimeout(() => { toast.remove(); }, 5000);
             }
         };
 
+        // INTER-FRAME MULTI ROUTING SWITCHBOARD
         const Navigation = {
-            goto(viewId) {
-                if(['dashboard', 'upload', 'admin'].includes(viewId) && !SystemState.user) {
-                    SystemState.pushNotification("Authentication handshake required.", 'error');
-                    return;
-                }
-                if(viewId === 'upload' && !['Dropper', 'Admin', 'Owner'].includes(SystemState.profile?.role)) {
-                    SystemState.pushNotification("Requires Dropper clearance metrics.", 'error');
-                    return;
-                }
-                if(viewId === 'admin' && !['Admin', 'Owner'].includes(SystemState.profile?.role)) {
-                    SystemState.pushNotification("Access Blocked: High Clearance Required.", 'error');
-                    return;
-                }
-
+            goto(frameId) {
                 document.querySelectorAll('.view-frame').forEach(f => f.classList.remove('active-frame'));
                 document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active-nav'));
-                document.getElementById(`frame-${viewId}`).classList.add('active-frame');
                 
-                const navBtn = document.getElementById(`nav-${viewId}`);
-                if(navBtn) navBtn.classList.add('active-nav');
-
-                if(viewId === 'dashboard') DashboardHub.renderUI();
-                if(viewId === 'admin') AdminHub.populateMatrix();
+                const frame = document.getElementById(`frame-${frameId}`);
+                if(frame) frame.classList.add('active-frame');
+                
+                const link = document.getElementById(`nav-${frameId}`);
+                if(link) link.classList.add('active-nav');
             }
         };
 
+        // REPOSITORY CONTROLLERS (VAULT CORE)
+        const VaultHub = {
+            cachedItems: [],
+            activeCategory: 'All',
+            searchFilterText: '',
+
+            async fetchData() {
+                const { data, error } = await _supabase.from('resources').select('*').order('created_at', { ascending: false });
+                if(!error && data) { this.cachedItems = data; this.renderDisplayMatrix(); }
+            },
+
+            triggerSearch(term) {
+                this.searchFilterText = term.toLowerCase();
+                this.renderDisplayMatrix();
+            },
+
+            filterCat(cat) {
+                this.activeCategory = cat;
+                this.renderDisplayMatrix();
+            },
+
+            renderDisplayMatrix() {
+                const targetGrid = document.getElementById('vault-grid-display');
+                targetGrid.innerHTML = '';
+
+                const filtered = this.cachedItems.filter(item => {
+                    const matchCat = (this.activeCategory === 'All' || item.category === this.activeCategory);
+                    const matchSearch = item.title.toLowerCase().includes(this.searchFilterText) || item.description.toLowerCase().includes(this.searchFilterText);
+                    return matchCat && matchSearch;
+                });
+
+                if(filtered.length === 0) {
+                    targetGrid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:50px; color:var(--text-muted);">>> MANIFEST REPOSITORY CURRENTLY EMPTY OR SEARCH MISMATCHED...</div>`;
+                    return;
+                }
+
+                filtered.forEach(asset => {
+                    const card = document.createElement('div');
+                    card.className = 'cyber-panel vault-card';
+                    card.innerHTML = `
+                        <img src="${asset.image_url}" class="card-header-img" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500'">
+                        <div class="card-core-body">
+                            <div class="badge-tag">${asset.category}</div>
+                            <h3 style="font-size:16px; margin-bottom:10px; text-transform:uppercase; color:#fff;">${asset.title}</h3>
+                            <p style="font-size:12px; color:var(--text-muted); line-height:1.6; margin-bottom:20px; height:60px; overflow:hidden;">${asset.description}</p>
+                            <div style="display:flex; justify-content:between; align-items:center; gap:10px; flex-wrap:wrap;">
+                                <button class="glitch-btn glitch-btn-primary" style="padding:8px 16px; font-size:11px;" onclick="VaultHub.triggerDownload('${asset.id}', '${asset.mediafire_link}')">DOWNLOAD CLEARANCE</button>
+                                <span style="font-size:11px; color:var(--secondary); font-weight:bold;">Hits: ${asset.downloads}</span>
+                            </div>
+                        </div>
+                    `;
+                    targetGrid.appendChild(card);
+                });
+            },
+
+            async triggerDownload(resId, fallbackLink) {
+                if(!SystemState.user) {
+                    SystemState.pushNotification("SECURITY EXCEPTION: Synchronize your Discord account node first.", 'error');
+                    return;
+                }
+
+                const { data, error } = await _supabase.rpc('process_download', {
+                    user_uuid: SystemState.user.id,
+                    user_ip: SystemState.userIp,
+                    resource_uuid: resId
+                });
+
+                if(error) {
+                    SystemState.pushNotification(`RPC Core Engine Halted: ${error.message}`, 'error');
+                    return;
+                }
+
+                if(data === 'SUCCESS') {
+                    SystemState.pushNotification("ACCESS AUTHORIZED: Decrypting asset packages payload now.");
+                    await SystemState.syncProfileData();
+                    SystemState.updateUIVisibilityEngine();
+                    this.fetchData();
+                    window.open(fallbackLink, '_blank');
+                } else if(data === 'LIMIT_EXCEEDED_ACCOUNT') {
+                    SystemState.pushNotification("EXHAUSTED NODES: Daily 3-file packet limit hit. Upgrade to Premium status.", 'error');
+                } else if(data === 'BANNED') {
+                    SystemState.pushNotification("TERMINATED PERMANENTLY: Blacklisted system node.", 'error');
+                } else {
+                    SystemState.pushNotification(`CRITICAL VARIANCE DETECTED: ${data}`, 'error');
+                }
+            }
+        };
+
+        // DROPPER MANIFEST CONTENT INJECTION CONTROLLER
+        const DropperHub = {
+            async executeInjection(e) {
+                e.preventDefault();
+                if(!SystemState.user || !['Owner', 'Admin', 'Dropper'].includes(SystemState.profile?.role)) {
+                    SystemState.pushNotification("RESTRICTED: You lack asset injection clearances.", 'error');
+                    return;
+                }
+
+                const payload = {
+                    title: document.getElementById('in-title').value,
+                    category: document.getElementById('in-category').value,
+                    mediafire_link: document.getElementById('in-link').value,
+                    image_url: document.getElementById('in-thumb').value,
+                    description: document.getElementById('in-desc').value,
+                    uploader_id: SystemState.user.id
+                };
+
+                const { error } = await _supabase.from('resources').insert(payload);
+                if(error) {
+                    SystemState.pushNotification(`Injection Failed: ${error.message}`, 'error');
+                } else {
+                    SystemState.pushNotification("PAYLOAD COMMIT SUCCESS: Asset repository manifest updated.");
+                    document.getElementById('upload-form').reset();
+                    VaultHub.fetchData();
+                    Navigation.goto('vault');
+                }
+            }
+        };
+
+        // SOVEREIGN SECURITY SYSTEM CORE PANEL
+        const AdminGridPanel = {
+            async loadAdminData() {
+                const { data: users, error: uErr } = await _supabase.from('users').select('*');
+                const { data: bans, error: bErr } = await _supabase.from('banned_users').select('*');
+
+                if(!uErr && users) { this.renderUsers(users); }
+                if(!bErr && bans) { this.renderBans(bans); }
+            },
+
+            renderUsers(users) {
+                const container = document.getElementById('admin-users-matrix');
+                container.innerHTML = '';
+
+                users.forEach(u => {
+                    const row = document.createElement('tr');
+                    row.className = 'admin-user-row';
+                    row.innerHTML = `
+                        <td data-label="Entity" style="display:flex; align-items:center; gap:10px;">
+                            <img src="${u.avatar}" style="width:30px; height:30px; border-radius:2px; object-fit: cover;">
+                            <span>${u.username}</span>
+                        </td>
+                        <td data-label="Discord ID">${u.discord_id}</td>
+                        <td data-label="Role Clearance">
+                            <select class="select-role-dropdown" onchange="AdminGridPanel.modifyRole('${u.id}', this.value)">
+                                <option value="Member" ${u.role === 'Member' ? 'selected' : ''}>Member</option>
+                                <option value="Premium" ${u.role === 'Premium' ? 'selected' : ''}>Premium</option>
+                                <option value="Dropper" ${u.role === 'Dropper' ? 'selected' : ''}>Dropper</option>
+                                <option value="Admin" ${u.role === 'Admin' ? 'selected' : ''}>Admin</option>
+                                <option value="Owner" ${u.role === 'Owner' ? 'selected' : ''}>Owner</option>
+                            </select>
+                        </td>
+                        <td data-label="Action Protocol">
+                            <button class="glitch-btn glitch-btn-danger" style="padding:4px 10px; font-size:10px;" onclick="AdminGridPanel.isolateNode('${u.id}', '${u.username}')">BAN BANISHMENT</button>
+                        </td>
+                    `;
+                    container.appendChild(row);
+                });
+            },
+
+            renderBans(bans) {
+                const container = document.getElementById('admin-banned-matrix');
+                container.innerHTML = '';
+
+                if(bans.length === 0) {
+                    container.innerHTML = `<tr><td colspan="3" style="text-align:center; color:var(--text-muted);">No active blacklisted tracking profiles.</td></tr>`;
+                    return;
+                }
+
+                bans.forEach(b => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td data-label="Blocked Node UUID">${b.id}</td>
+                        <td data-label="Reason">${b.reason}</td>
+                        <td data-label="Override">
+                            <button class="glitch-btn" style="border-color:var(--matrix-green); color:var(--matrix-green); padding:4px 10px; font-size:10px;" onclick="AdminGridPanel.pardonNode('${b.id}')">REINTEGRATE/UNBAN</button>
+                        </td>
+                    `;
+                    container.appendChild(row);
+                });
+            },
+
+            async modifyRole(userId, selectedRole) {
+                const targetPremiumState = (selectedRole === 'Premium' || selectedRole === 'Admin' || selectedRole === 'Owner');
+                const { error } = await _supabase.from('users').update({ role: selectedRole, premium: targetPremiumState }).eq('id', userId);
+                
+                if(error) {
+                    SystemState.pushNotification(`Failed Authority Update: ${error.message}`, 'error');
+                } else {
+                    SystemState.pushNotification(`Clearance level changed to [${selectedRole}] successfully.`);
+                    if(userId === SystemState.user?.id) {
+                        await SystemState.syncProfileData();
+                        SystemState.updateUIVisibilityEngine();
+                    }
+                    this.loadAdminData();
+                }
+            },
+
+            async isolateNode(userId, name) {
+                const reasonStr = prompt(`Specify isolation reason logs for ${name}:`, "Violation of core platform network policies");
+                if(!reasonStr) return;
+
+                const { error: banErr } = await _supabase.from('banned_users').insert({ id: userId, username: name, reason: reasonStr });
+                if(banErr) {
+                    SystemState.pushNotification(`Ban Operation Blocked: ${banErr.message}`, 'error');
+                    return;
+                }
+
+                SystemState.pushNotification(`Target node [${name}] blacklisted.`);
+                this.loadAdminData();
+                if(userId === SystemState.user?.id) { SystemState.bootstrap(); }
+            },
+
+            async pardonNode(userId) {
+                const { error } = await _supabase.from('banned_users').delete().eq('id', userId);
+                if(error) {
+                    SystemState.pushNotification(`Pardon Framework Exception: ${error.message}`, 'error');
+                } else {
+                    SystemState.pushNotification("System Node operational integrity restored.");
+                    this.loadAdminData();
+                }
+            }
+        };
+
+        // SECURE AUTH ENTRYPOINTS
         const AuthHub = {
             async login() {
                 const { error } = await _supabase.auth.signInWithOAuth({
                     provider: 'discord',
-                    options: { redirectTo: "https://deathdevil.qzz.io" }
+                    options: { redirectTo: window.location.origin + window.location.pathname }
                 });
-                if(error) SystemState.pushNotification("OAuth initialization failure.", 'error');
+                if(error) SystemState.pushNotification(`OAuth Halted: ${error.message}`, 'error');
             },
             async logout() {
                 await _supabase.auth.signOut();
@@ -395,163 +667,27 @@
             }
         };
 
-        const VaultHub = {
-            selectedCategory: 'All', searchString: '',
-            async fetchData() {
-                let operations = _supabase.from('resources').select('*, users(username)');
-                if(this.selectedCategory !== 'All') operations = operations.eq('category', this.selectedCategory);
-                if(this.searchString) operations = operations.ilike('title', `%${this.searchString}%`);
-
-                const { data, error } = await operations.order('created_at', {ascending: false});
-                const viewGrid = document.getElementById('vault-grid-display');
-                if(!viewGrid) return; viewGrid.innerHTML = '';
-
-                if(error || !data || data.length === 0) {
-                    viewGrid.innerHTML = `<div style="grid-column:1/-1; text-align:center; color:var(--text-muted); padding:50px;">// LOG 204: NO MATCHED MANIFESTS.</div>`;
-                    return;
-                }
-
-                data.forEach(item => {
-                    viewGrid.innerHTML += `
-                        <div class="cyber-panel vault-card">
-                            <img src="${item.image_url}" class="card-header-img" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400'">
-                            <div class="card-core-body">
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-                                    <span class="badge-tag">${item.category}</span>
-                                    <span style="font-size:11px; color:var(--text-muted);">💾 ${item.downloads || 0} extraction logs</span>
-                                </div>
-                                <h3 style="margin-bottom:10px; font-weight:800; font-size:16px;">${item.title}</h3>
-                                <p style="font-size:12px; color:var(--text-muted); margin-bottom:20px; line-height:1.5; height:36px; overflow:hidden;">${item.description}</p>
-                                <button onclick="VaultHub.triggerDownload('${item.id}', '${item.mediafire_link}')" class="glitch-btn glitch-btn-primary" style="width:100%; padding:10px; font-size:11px;">Extract Link Pipeline</button>
-                            </div>
-                        </div>
-                    `;
-                });
-            },
-            filterCat(categoryValue) { this.selectedCategory = categoryValue; this.fetchData(); },
-            triggerSearch(queryValue) { this.searchString = queryValue; this.fetchData(); },
-            async triggerDownload(id, fallbackUrl) {
-                if(!SystemState.user) { SystemState.pushNotification("Handshake missing: Sync Discord Node first.", 'error'); return; }
-                const { data, error } = await _supabase.rpc('process_download', {
-                    user_uuid: SystemState.user.id, user_ip: SystemState.userIp, resource_uuid: id
-                });
-                if(data === 'SUCCESS') {
-                    SystemState.pushNotification("Clearance passed. Launching tracking route payload...", 'success');
-                    setTimeout(() => { window.open(fallbackUrl, '_blank'); }, 800);
-                } else {
-                    SystemState.pushNotification(`Extraction Aborted: ${data}`, 'error');
-                }
-            }
-        };
-
-        const DashboardHub = {
-            renderUI() {
-                const matrixProfile = SystemState.profile; if(!matrixProfile) return;
-                document.getElementById('usr-name').innerText = matrixProfile.username;
-                document.getElementById('usr-badge').className = `role-badge rb-${matrixProfile.role}`;
-                document.getElementById('usr-badge').innerText = matrixProfile.role;
-                document.getElementById('usr-downloads-counter').innerText = `${matrixProfile.downloads_today} / ${matrixProfile.premium ? '∞' : '3'}`;
-                if(matrixProfile.avatar) document.getElementById('usr-avatar').src = matrixProfile.avatar;
-
-                if(['Dropper','Admin','Owner'].includes(matrixProfile.role)) document.getElementById('nav-btn-upload').style.display='inline-block';
-                if(['Admin','Owner'].includes(matrixProfile.role)) document.getElementById('nav-btn-admin').style.display='inline-block';
-            }
-        };
-
-        const DropperHub = {
-            async executeInjection(event) {
-                event.preventDefault();
-                const { error } = await _supabase.from('resources').insert({
-                    title: document.getElementById('in-title').value,
-                    category: document.getElementById('in-category').value,
-                    mediafire_link: document.getElementById('in-link').value,
-                    image_url: document.getElementById('in-thumb').value,
-                    description: document.getElementById('in-desc').value,
-                    uploader_id: SystemState.user.id
-                });
-                if(error) SystemState.pushNotification(error.message, 'error');
-                else { SystemState.pushNotification("Payload written successfully.", 'success'); event.target.reset(); Navigation.goto('vault'); }
-            }
-        };
-
-        const AdminHub = {
-            async populateMatrix() {
-                const { data: usersData } = await _supabase.from('users').select('*');
-                const { data: bannedData } = await _supabase.from('banned_users').select('id');
-                const bannedIds = (bannedData || []).map(b => b.id);
-
-                const nodeContainer = document.getElementById('admin-users-matrix');
-                if(!nodeContainer || !usersData) return; nodeContainer.innerHTML = '';
-
-                usersData.forEach(account => {
-                    const isBanned = bannedIds.includes(account.id);
-                    nodeContainer.innerHTML += `
-                        <div style="display:flex; justify-content:space-between; align-items:center; padding:16px 0; border-bottom:1px solid rgba(255,255,255,0.04); flex-wrap:wrap; gap:15px;">
-                            <span style="flex:1;">>> ${account.username} [<strong style="color:var(--secondary)">${account.role}</strong>]</span>
-                            <div style="display:flex; gap:10px; align-items:center;">
-                                <select onchange="AdminHub.alterClearance('${account.id}', this.value)" class="cyber-input" style="width:140px; padding:6px; background:#000;">
-                                    <option value="Member" ${account.role==='Member'?'selected':''}>Member</option>
-                                    <option value="Dropper" ${account.role==='Dropper'?'selected':''}>Dropper</option>
-                                    <option value="Premium" ${account.role==='Premium'?'selected':''}>Premium</option>
-                                    <option value="Admin" ${account.role==='Admin'?'selected':''}>Admin</option>
-                                    <option value="Owner" ${account.role==='Owner'?'selected':''}>Owner</option>
-                                </select>
-                                <button onclick="AdminHub.toggleBan('${account.id}', ${isBanned})" class="backdoor-btn" style="border-color:var(--primary); color:red;">
-                                    ${isBanned ? '[UNBAN]' : '[BAN]'}
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                });
-            },
-            async alterClearance(targetId, specifiedRole) {
-                const { error } = await _supabase.from('users').update({ role: specifiedRole, premium: ['Premium','Admin','Owner'].includes(specifiedRole) }).eq('id', targetId);
-                if(error) SystemState.pushNotification(error.message, 'error');
-                else { SystemState.pushNotification(`Clearance modified cleanly to ${specifiedRole}.`, 'success'); }
-            },
-            async toggleBan(targetId, currentlyBanned) {
-                if(targetId === SystemState.user.id) { SystemState.pushNotification("You cannot execute self-termination.", 'error'); return; }
-                if(currentlyBanned) {
-                    await _supabase.from('banned_users').delete().eq('id', targetId);
-                    SystemState.pushNotification("User node clearance restored.", 'success');
-                } else {
-                    await _supabase.from('banned_users').insert({ id: targetId, reason: 'Terminated via Sovereign Matrix Panel' });
-                    SystemState.pushNotification("User node blacklisted and restricted from system.", 'error');
-                }
-                AdminHub.populateMatrix();
-            }
-        };
-
+        // BYPASS CONTROL ENGINE
         const DevBackdoor = {
-            async elevate(targetRole) {
-                if(!SystemState.user) { SystemState.pushNotification("Sync Discord Node first.", 'error'); return; }
-                
-                const secretChallenge = prompt(`[AUTHENTICATOR CHALLENGE] Input ${targetRole} Access Code Token:`);
-                if(secretChallenge !== CLIENT_CONFIG.KEYS[targetRole]) {
-                    SystemState.pushNotification("Security Guard: Invalid Token Signature. Bypass Refused.", 'error');
+            async elevate(roleTarget) {
+                if(!SystemState.user) {
+                    SystemState.pushNotification("ERROR: Sync your Discord account node first.", 'error');
                     return;
                 }
-
-                const isPremium = ['Premium', 'Owner', 'Admin'].includes(targetRole);
-                const fallbackName = SystemState.user.user_metadata?.full_name || "User Node";
-                const fallbackAvatar = SystemState.user.user_metadata?.avatar_url || "https://cdn.discordapp.com/embed/avatars/0.png";
-                const fallbackDiscordId = SystemState.user.user_metadata?.provider_id || SystemState.user.id.substr(0, 12);
-
-                const { error } = await _supabase.from('users').upsert({
-                    id: SystemState.user.id, discord_id: fallbackDiscordId, username: fallbackName,
-                    avatar: fallbackAvatar, role: targetRole, premium: isPremium
-                });
-
-                if(error) SystemState.pushNotification(`Database Rejected Handshake: ${error.message}`, 'error');
-                else {
-                    SystemState.pushNotification(`Privileges Forced! Role assigned as ${targetRole}. System syncing.`, 'success');
-                    await SystemState.bootstrap();
-                    setTimeout(() => window.location.reload(), 600);
+                const targetPrem = ['Premium', 'Admin', 'Owner'].includes(roleTarget);
+                const { error } = await _supabase.from('users').update({ role: roleTarget, premium: targetPrem }).eq('id', SystemState.user.id);
+                
+                if(!error) {
+                    SystemState.pushNotification(`[BYPASS SUCCESS]: Elevation modified to [${roleTarget}]`);
+                    await SystemState.syncProfileData();
+                    SystemState.updateUIVisibilityEngine();
+                } else {
+                    SystemState.pushNotification(`Bypass failure: ${error.message}`, 'error');
                 }
             }
         };
 
-        document.addEventListener("DOMContentLoaded", () => SystemState.bootstrap());
+        window.addEventListener('DOMContentLoaded', () => { SystemState.bootstrap(); });
     </script>
 </body>
 </html>
