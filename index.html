@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
-        /* --- STABLE PREMIUM CYBERPUNK CONFIGURATION --- */
+        /* --- STABLE CYBERPUNK CSS CONFIGURATION --- */
         :root {
             --bg-black: #050505;
             --bg-dark: #0a0a0a;
@@ -31,7 +31,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
         body { background-color: var(--bg-black); color: var(--text-main); font-family: var(--font-body); overflow-x: hidden; }
 
-        /* Scrollbar styling */
+        /* Scrollbar styles */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-black); }
         ::-webkit-scrollbar-thumb { background: var(--primary-dim); border-radius: 4px; }
@@ -54,31 +54,20 @@
         .btn-secondary { background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255, 255, 255, 0.1); }
         .btn-secondary:hover { background: rgba(255, 0, 60, 0.1); border-color: var(--primary); }
 
-        /* BuiltByBit Marketplace Style Grid Cards */
-        .bbb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-top: 40px; }
+        /* Premium Marketplace Grid Structure */
+        .bbb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; margin-top: 40px; }
         .bbb-card { border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; min-height: 460px; background: rgba(10,10,15,0.8); border: 1px solid var(--border-glass); }
         .bbb-card:hover { border-color: var(--primary); box-shadow: 0 12px 30px rgba(255, 0, 60, 0.15); transform: translateY(-4px); }
         .bbb-thumb { height: 180px; width: 100%; background-size: cover; background-position: center; border-bottom: 1px solid var(--border-glass); position: relative; }
         .bbb-meta { padding: 22px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
 
-        /* Workspace Panels Splitting Sidebar Layout */
+        /* Workspace Grid Split Layout Panels */
         .app-screen-layout { display: none; min-height: 100vh; flex-direction: row; }
         .app-screen-layout.active { display: flex; }
         .sidebar { width: 260px; background: #0a0a0f; border-right: 1px solid var(--border-glass); display: flex; flex-direction: column; padding: 25px 15px; flex-shrink: 0; }
         .view-panel { flex: 1; padding: 35px; overflow-y: auto; background: #040406; min-height: 0; }
         .nav-btn { width: 100%; text-align: left; padding: 12px 16px; font-family: var(--font-sub); font-size: 1.1rem; color: var(--text-muted); border: 1px solid transparent; background: transparent; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 12px; transition: var(--transition); margin-bottom: 5px; }
         .nav-btn:hover, .nav-btn.active { background: rgba(255, 0, 60, 0.05); border-color: var(--border-glass); color: #fff; text-shadow: 0 0 5px var(--primary-glow); }
-
-        #landingPageScreen { display: block; }
-        #landingPageScreen.hidden { display: none; }
-        .hero { position: relative; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        #particles-js { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
-        .hero-content { position: relative; z-index: 3; max-width: 900px; text-align: center; }
-        .hero-title { font-family: var(--font-display); font-size: 5.5rem; font-weight: 900; text-transform: uppercase; color: #fff; text-shadow: 0 0 30px rgba(255, 0, 60, 0.4); }
-        .hero-title span { color: var(--primary); }
-
-        .panel-tab-content { display: none; }
-        .panel-tab-content.active { display: block; }
     </style>
 </head>
 <body>
@@ -96,7 +85,7 @@
         <header class="hero">
             <div id="particles-js"></div>
             <div class="container hero-content">
-                <h1 class="hero-title">DARK<span>LEAKER</span></h1>
+                <h1 class="hero-title" style="font-family: var(--font-display); font-size: 5.5rem; font-weight: 900; text-transform: uppercase; text-shadow: 0 0 30px rgba(255,0,60,0.4); margin-bottom: 20px;">DARK<span style="color: var(--primary);">LEAKER</span></h1>
                 <p style="font-family: var(--font-sub); font-size: 1.6rem; color: var(--text-muted); margin: 15px 0 35px 0; text-transform: uppercase; letter-spacing: 2px; font-weight: 500;">The Ultimate Cyberpunk Ecosystem For Premium Development Assets</p>
                 <div style="display: flex; gap: 20px; justify-content: center;">
                     <a href="#marketplaceVaultAnchor" class="btn btn-primary"><i class="fas fa-terminal"></i> Explore Vault Directory</a>
@@ -243,7 +232,7 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // --- CENTRAL SUPABASE CLIENT DATA SETUPS ---
+        // --- REAL SYNCHRONIZED CLOUD DATABASE API CREDENTIALS MAPPED ---
         const SUPABASE_URL = "https://mgtbeiqqehvnrudlebio.supabase.co"; 
         const SUPABASE_ANON_KEY = "sb_publishable_5I5otxiF4C5rA195oSxNqA_jft4qlZf";
         const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -251,30 +240,31 @@
         let activeUserIdentitySession = null;
         let globalUserProfileData = null;
 
-        // Auto Bootstrapper initialization loop nodes (No-blocking loader)
+        // Auto-Run Validation Runtime Boots (No-blocking logic completely bulletproof)
         window.onload = async function() {
-            const loader = document.getElementById('loader');
-            
             try {
-                const { data } = await supabase.auth.getSession();
+                const { data, error } = await supabase.auth.getSession();
                 if (data && data.session) {
                     activeUserIdentitySession = data.session.user;
                     await executeProfileSynchronization();
                     return;
                 }
-            } catch(e) { console.log("Offline bypass runtime mode engaged."); }
+            } catch(e) { console.log("Local initialization logic running offline smoothly."); }
 
-            // Automatic bypass preloader freeze block layers instantly
-            if(loader) loader.style.display = 'none';
+            // Instantly unblock user views visibility index
             document.body.classList.remove('loading');
             loadPublicMarketplaceAssets();
         };
 
         async function loginWithDiscord() {
-            await supabase.auth.signInWithOAuth({
-                provider: 'discord',
-                options: { redirectTo: window.location.origin }
-            });
+            try {
+                await supabase.auth.signInWithOAuth({
+                    provider: 'discord',
+                    options: { redirectTo: window.location.origin }
+                });
+            } catch(error) {
+                alert("Auth Node Fail: Check your Discord keys mapping setup nodes inside Supabase Dashboard.");
+            }
         }
 
         async function executeProfileSynchronization() {
@@ -287,7 +277,7 @@
 
                 const { data: ipCheck } = await supabase.from('profiles').select('id').eq('last_ip', userTerminalIP).not('id', 'eq', dUser.id);
                 if (ipCheck && ipCheck.length > 0) {
-                    alert("🚨 Firewall Block: Multi-profile account mapping collision detected on IP sequence!");
+                    alert("🚨 Firewall Block: Anti-Alt rules active! Multiple accounts on single IP are rejected.");
                     await logoutSession();
                     return;
                 }
@@ -316,7 +306,6 @@
             document.getElementById('landingPageScreen').classList.add('hidden');
             document.getElementById('appScreen').classList.add('active');
             document.body.classList.remove('loading');
-            if(document.getElementById('loader')) document.getElementById('loader').style.display = 'none';
             
             assembleUserSidebarInterface();
         }
@@ -339,7 +328,7 @@
             fetchMarketplaceAssets();
         }
 
-        // Public Catalog Render Blocks (Gatekeeper Active)
+        // Render Public Visitor Catalog View Grid Layout
         async function loadPublicMarketplaceAssets() {
             const catFilter = document.getElementById('publicFilterCategory').value;
             let items = [];
@@ -390,7 +379,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Render Private Workspace Asset Catalog Grid
+        // Render Private Workspace Catalog Resources Listings
         async function fetchMarketplaceAssets() {
             const activeFilter = document.getElementById('selectSortingCategory').value;
             let marketplaceItems = [];
@@ -405,7 +394,7 @@
             targetWrapper.innerHTML = "";
 
             if (!marketplaceItems || marketplaceItems.length === 0) {
-                targetWrapper.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--text-muted); font-family:var(--font-sub); text-transform:uppercase; padding:40px 0; border:1px dashed var(--border-glass); border-radius:12px;">No active file bundles metadata records found matching active segment structures filters.</p>`;
+                targetWrapper.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--text-muted); font-family:var(--font-sub); text-transform:uppercase; padding:40px 0; border:1px dashed var(--border-glass); border-radius:12px;">No active file bundles metadata records found matching filters.</p>`;
                 return;
             }
 
@@ -439,11 +428,11 @@
         async function executeSecureDownloadSequence(id, downloadUrl, requiredPerm) {
             if (globalUserProfileData.role !== 'admin') {
                 if (requiredPerm === 'paid' && globalUserProfileData.role !== 'paid') {
-                    alert("❌ Clearance Exception: Operational privilege rank failure! Cyber Elite access token required.");
+                    alert("❌ Clearance Exception: Mismatch parameter privileges. Cyber Elite tier rank authentication required!");
                     return;
                 }
                 if (globalUserProfileData.downloads_today >= 3) {
-                    alert("🚨 Allocation Ceiling Triggered: Daily downloads quantum limit cap reached!");
+                    alert("🚨 Quota Saturated: Maximum daily downloads ceiling threshold cap hit!");
                     return;
                 }
             }
@@ -455,7 +444,7 @@
                 document.getElementById('labelDownloadQuota').innerText = `DAILY DOWNLOAD QUANTUM DECODES REMAINING: ${3 - globalUserProfileData.downloads_today} / 3 DECODES LEFT`;
             }
 
-            alert("📥 Token credentials matched. Connecting proxy transfer pipeline node to Mediafire host...");
+            alert("📥 Product license authorization confirmed. Opening dynamic Mediafire cluster transfer route...");
             window.open(downloadUrl, '_blank');
         }
 
@@ -473,12 +462,12 @@
             }]);
 
             if (!error) {
-                alert("🎉 Success: Asset metadata listing package registered securely inside database central loops repository registry blocks!");
+                alert("🎉 Success: Asset product pack entry generated inside cloud cluster framework!");
                 document.getElementById('formAssetTitle').value = ""; document.getElementById('formAssetDownloadLink').value = "";
                 document.getElementById('formAssetImgUrl').value = ""; document.getElementById('formAssetDesc').value = "";
                 switchPanelTab('vault');
             } else {
-                alert("Database Exception Halt Error: " + error.message);
+                alert("Supabase SQL Registry Failure: " + error.message);
             }
         }
 
@@ -535,7 +524,7 @@
             window.location.reload();
         }
 
-        /* --- PARTICLES.JS FRAME ENGINE DRIVER --- */
+        /* --- PARTICLES.JS GRAPHICS ENGINE DRIVER --- */
         particlesJS('particles-js', {
             "particles": {
                 "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
