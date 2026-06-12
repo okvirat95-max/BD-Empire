@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKLEAKER - Premium Cyberpunk Marketplace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        /* --- CORE CONFIGURATION & RESET --- */
+        :root {
+            --bg-black: #050505;
+            --bg-dark: #0a0a0a;
+            --bg-card: rgba(15, 15, 15, 0.75);
+            --primary: #ff003c;
+            --primary-glow: rgba(255, 0, 60, 0.5);
+            --primary-dim: #990024;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --border-glass: rgba(255, 0, 60, 0.15);
+            --font-display: 'Orbitron', sans-serif;
+            --font-sub: 'Rajdhani', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+        body { background-color: var(--bg-black); color: var(--text-main); font-family: var(--font-body); overflow-x: hidden; }
+        body.loading { overflow: hidden; }
+
+        /* --- SCROLLBAR --- */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-black); }
+        ::-webkit-scrollbar-thumb { background: var(--primary-dim); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); box-shadow: 0 0 10px var(--primary); }
+
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 2rem; }
+        .section-padding { padding: 100px 0; }
+        .glitch-text { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 2px; color: #fff; text-shadow: 0 0 10px var(--primary-glow); }
+        
+        .section-header { margin-bottom: 60px; text-align: center; }
+        .section-header h2 { font-family: var(--font-display); font-size: 2.5rem; text-transform: uppercase; margin-bottom: 15px; background: linear-gradient(90deg, #fff, var(--primary), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .section-header p { font-family: var(--font-sub); font-size: 1.2rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+        .glass-card { background: var(--bg-card); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--border-glass); border-radius: 12px; transition: var(--transition); }
+        .glass-card:hover { border-color: var(--primary); box-shadow: 0 10px 30px rgba(255, 0, 60, 0.15); transform: translateY(-5px); }
+
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-family: var(--font-sub); font-weight: 700; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; padding: 12px 30px; border-radius: 6px; cursor: pointer; transition: var(--transition); text-decoration: none; border: none; }
+        .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 0 15px var(--primary-glow); }
+        .btn-primary:hover { background: transparent; border: 1px solid var(--primary); box-shadow: 0 0 25px var(--primary); transform: scale(1.03); }
+        .btn-secondary { background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .btn-secondary:hover { background: rgba(255, 0, 60, 0.1); border-color: var(--primary); }
+
+        /* BuiltByBit Marketplace Style Grid Cards */
+        .bbb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-top: 40px; }
+        .bbb-card { border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; min-height: 460px; background: rgba(10,10,15,0.8); border: 1px solid var(--border-glass); }
+        .bbb-card:hover { border-color: var(--primary); box-shadow: 0 12px 30px rgba(255, 0, 60, 0.15); transform: translateY(-4px); }
+        .bbb-thumb { height: 180px; width: 100%; background-size: cover; background-position: center; border-bottom: 1px solid var(--border-glass); position: relative; }
+        .bbb-meta { padding: 22px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+
+        /* Workspace Grid Split Layout Panels */
+        .app-screen-layout { display: none; min-height: 100vh; flex-direction: row; }
+        .app-screen-layout.active { display: flex; }
+        .sidebar { width: 260px; background: #0a0a0f; border-right: 1px solid var(--border-glass); display: flex; flex-direction: column; padding: 25px 15px; flex-shrink: 0; }
+        .view-panel { flex: 1; padding: 35px; overflow-y: auto; background: #040406; min-height: 0; }
+        .nav-btn { width: 100%; text-align: left; padding: 12px 16px; font-family: var(--font-sub); font-size: 1.1rem; color: var(--text-muted); border: 1px solid transparent; background: transparent; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 12px; transition: var(--transition); margin-bottom: 5px; }
+        .nav-btn:hover, .nav-btn.active { background: rgba(255, 0, 60, 0.05); border-color: var(--border-glass); color: #fff; text-shadow: 0 0 5px var(--primary-glow); }
+
+        /* Loader styling */
+        #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-black); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .progress-container { width: 220px; height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; margin-top: 15px; }
+        .progress-bar { width: 0%; height: 100%; background: var(--primary); box-shadow: 0 0 10px var(--primary); transition: width 0.3s ease; }
+
+        #landingPageScreen { display: block; }
+        #landingPageScreen.hidden { display: none; }
+        .hero { position: relative; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        #particles-js { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .hero-content { position: relative; z-index: 3; max-width: 900px; text-align: center; }
+        .hero-title { font-family: var(--font-display); font-size: 5.5rem; font-weight: 900; text-transform: uppercase; color: #fff; text-shadow: 0 0 30px rgba(255, 0, 60, 0.4); }
+        .hero-title span { color: var(--primary); }
+
+        .panel-tab-content { display: none; }
+        .panel-tab-content.active { display: block; }
+    </style>
+</head>
+<body class="loading">
+
+    <div id="loader">
+        <div class="glitch-text" style="font-size: 2.5rem; font-weight:900; letter-spacing: 5px;">DARK<span style="color: var(--primary);">LEAKER</span></div>
+        <div class="progress-container"><div class="progress-bar" id="progress-bar"></div></div>
+    </div>
+
+    <div id="landingPageScreen">
+        <nav style="position: fixed; top: 0; left: 0; width: 100%; padding: 20px 40px; z-index: 1000; border-bottom: 1px solid var(--border-glass); backdrop-filter: blur(15px); background: rgba(5,5,5,0.6);">
+            <div style="max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+                <a href="#" style="font-family: var(--font-display); font-size: 1.6rem; font-weight: 900; color: #fff; text-decoration: none; letter-spacing: 2px;">DARK<span style="color: var(--primary);">LEAKER</span></a>
+                <div id="navigationHeaderAuthBox">
+                    <button onclick="loginWithDiscord()" class="btn btn-primary" style="padding: 8px 24px; font-size: 0.85rem;"><i class="fab fa-discord mr-2"></i> Log In via Discord</button>
+                </div>
+            </div>
+        </nav>
+
+        <header class="hero">
+            <div id="particles-js"></div>
+            <div class="container hero-content">
+                <h1 class="hero-title">DARK<span>LEAKER</span></h1>
+                <p style="font-family: var(--font-sub); font-size: 1.6rem; color: var(--text-muted); margin: 15px 0 35px 0; text-transform: uppercase; letter-spacing: 2px; font-weight: 500;">The Ultimate Cyberpunk Ecosystem For Premium Development Assets</p>
+                <div style="display: flex; gap: 20px; justify-content: center;">
+                    <a href="#marketplaceVaultAnchor" class="btn btn-primary"><i class="fas fa-terminal"></i> Explore Vault Directory</a>
+                    <button onclick="loginWithDiscord()" class="btn btn-secondary"><i class="fab fa-discord"></i> Sync Matrix Profile</button>
+                </div>
+            </div>
+        </header>
+
+        <section id="marketplaceVaultAnchor" class="section-padding container" style="border-top: 1px solid var(--border-glass);">
+            <div class="section-header">
+                <h2>Assets Directory Vault</h2>
+                <p>Filter deployment assets packs with custom thumbnails and specifications details</p>
+            </div>
+            
+            <div style="display: flex; justify-content: flex-end; margin-bottom: 30px;">
+                <select id="publicFilterCategory" onchange="loadPublicMarketplaceAssets()" style="background: #0a0a0f; border: 1px solid var(--border-glass); padding: 10px 15px; border-radius: 8px; color: #fff; font-family: var(--font-sub); font-size: 1rem; outline: none;">
+                    <option value="all">📦 All Vault Assets</option>
+                    <option value="Plugin">⚙️ Plugins Configurations</option>
+                    <option value="Map">🗺️ Maps & Schematics</option>
+                    <option value="Setup">🖥️ Server Setups Pack</option>
+                    <option value="Model">🎭 Custom Models</option>
+                </select>
+            </div>
+
+            <div id="publicAssetsContainerGrid" class="bbb-grid"></div>
+        </section>
+    </div>
+
+    <div id="appScreen" class="app-screen-layout">
+        <div class="sidebar">
+            <div class="sidebar-logo">DARK<span>LEAKER</span></div>
+            <div style="display: flex; flex-direction: column; gap: 4px; flex: 1;">
+                <button class="nav-btn active" id="btnTabHome" onclick="switchPanelTab('home')"><i class="fas fa-house"></i> Home Station</button>
+                <button class="nav-btn" id="btnTabVault" onclick="switchPanelTab('vault')"><i class="fas fa-folder-open"></i> Assets Vault</button>
+                <button class="nav-btn hidden" id="btnTabDropper" onclick="switchPanelTab('dropper')"><i class="fas fa-cloud-arrow-up"></i> Dropper Panel</button>
+                <button class="nav-btn hidden" id="btnTabAdmin" onclick="switchPanelTab('admin')"><i class="fas fa-crown"></i> Admin Panel</button>
+            </div>
+
+            <div style="border-top: 1px solid var(--border-glass); padding-top: 15px; display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div id="userMatrixAvatar" style="width: 38px; height: 38px; border-radius: 8px; background: rgba(255,0,60,0.1); border: 1px solid var(--border-glass); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; color: var(--primary);">U</div>
+                    <div>
+                        <div id="userMatrixName" style="font-size: 0.9rem; font-weight: 700; max-w: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Syncing...</div>
+                        <span id="userMatrixRole" style="font-size: 0.75rem; font-family: var(--font-sub); font-weight: 700; color: var(--primary); text-transform: uppercase;">Free</span>
+                    </div>
+                </div>
+                <button onclick="logoutSession()" style="background: transparent; border: none; color: var(--text-muted); cursor: pointer;"><i class="fas fa-power-off"></i></button>
+            </div>
+        </div>
+
+        <div class="view-panel">
+            <div id="panelTabHome" class="panel-tab-content active space-y-6" style="max-w: 900px; margin: 0 auto;">
+                <div class="glass-card" style="padding: 40px; text-align: center; border-color: var(--primary); background: linear-gradient(180deg, rgba(255,0,60,0.03) 0%, rgba(0,0,0,0) 100%);">
+                    <span style="font-family: var(--font-sub); color: var(--primary); font-weight: 700; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase;">Cloud Database Registry Access Active</span>
+                    <h2 class="glitch-text" style="font-size: 2.2rem; margin: 10px 0 15px 0;">Welcome, Authorized Operator</h2>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; max-w: 600px; margin: 0 auto 25px auto;">Your operational profile is securely synchronized. You can now download custom configurations setups and maps direct data outputs without login boundary constraints.</p>
+                    <button onclick="switchPanelTab('vault')" class="btn btn-primary text-xs">Enter Directory Vault</button>
+                </div>
+            </div>
+
+            <div id="panelTabVault" class="panel-tab-content space-y-6">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-glass); padding-bottom: 20px; margin-bottom: 30px;">
+                    <div>
+                        <h2 style="font-family: var(--font-display); font-size: 1.8rem; text-transform: uppercase;">Premium Vault Assets</h2>
+                        <p id="labelDownloadQuota" style="font-family: var(--font-sub); font-size: 1rem; color: var(--text-muted); text-transform: uppercase; margin-top: 2px;">Daily Downloads Cap Left: Syncing...</p>
+                    </div>
+                    <div>
+                        <select id="selectSortingCategory" onchange="fetchMarketplaceAssets()" style="background: #0a0a0f; border: 1px solid var(--border-glass); padding: 10px 15px; border-radius: 8px; color: #fff; font-family: var(--font-sub); font-size: 1rem; outline: none;">
+                            <option value="all">📦 All Vault Assets</option>
+                            <option value="Plugin">⚙️ Plugins Configurations</option>
+                            <option value="Map">🗺️ Maps & Schematics</option>
+                            <option value="Setup">🖥️ Server Setups Pack</option>
+                            <option value="Model">🎭 Custom Models</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="boxAssetsMatrixContainer" class="bbb-grid"></div>
+            </div>
+
+            <div id="panelTabDropper" class="panel-tab-content space-y-6">
+                <h2 style="font-family: var(--font-display); font-size: 1.8rem; text-transform: uppercase; margin-bottom: 20px;">💎 Dropper Asset Submission</h2>
+                <div class="glass-card" style="padding: 30px; max-w: 700px;">
+                    <form onsubmit="executeVendorPublish(event)" style="display: flex; flex-direction: column; gap: 15px; font-family: var(--font-sub); font-size: 1.1rem;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div>
+                                <label style="display: block; color: var(--text-muted); margin-bottom: 5px;">ASSET TITLE</label>
+                                <input type="text" id="formAssetTitle" placeholder="e.g. Optimized Phoenix Crates Setup" style="width: 100%; background: #050505; border: 1px solid var(--border-glass); padding: 10px; border-radius: 6px; color: #fff;" required>
+                            </div>
+                            <div>
+                                <label style="display: block; color: var(--text-muted); margin-bottom: 5px;">CLASSIFICATION</label>
+                                <select id="formAssetCategory" style="width: 100%; background: #050505; border: 1px solid var(--border-glass); padding: 10px; border-radius: 6px; color: #fff;">
+                                    <option value="Plugin">Plugin</option>
+                                    <option value="Map">Map / Schematic</option>
+                                    <option value="Setup">Server Setup</option>
+                                    <option value="Model">Custom Model</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div>
+                                <label style="display: block; color: var(--text-muted); margin-bottom: 5px;">CLEARANCE PERMISSION RANK</label>
+                                <select id="formAssetPerm" style="width: 100%; background: #050505; border: 1px solid var(--border-glass); padding: 10px; border-radius: 6px; color: #fff;">
+                                    <option value="dropper">Dropper Perm (Free Users Access)</option>
+                                    <option value="paid">Paid Perm (Cyber Elite Only)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label style="display: block; color: var(--text-muted); margin-bottom: 5px;">MEDIAFIRE DATA TARGET URL LINK</label>
+                                <input type="url" id="formAssetDownloadLink" placeholder="https://www.mediafire.com/file..." style="width: 100%; background: #050505; border: 1px solid var(--border-glass); padding: 10px; border-radius: 6px; color: #fff;" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label style="display: block; color: var(--text-muted); margin-bottom: 5px;">SHOWCASE THUMBNAIL COVER IMAGE URL LINK</label>
+                            <input type="url" id="formAssetImgUrl" placeholder="https://i.imgur.com/showcase.png" style="width: 100%; background: #050505; border: 1px solid var(--border-glass); padding: 10px; border-radius: 6px; color: #fff;" required>
+                        </div>
+                        <div>
+                            <label style="display: block; color: var(--text-muted); margin-bottom: 5px;">PRODUCT SPECIFICATION DETAILS</label>
+                            <textarea id="formAssetDesc" rows="4" placeholder="Mention features dependencies configuration files logs here description details..." style="width: 100%; background: #050505; border: 1px solid var(--border-glass); padding: 10px; border-radius: 6px; color: #fff; font-family: var(--font-body); font-size: 0.9rem; resize: none;" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width:100%; padding: 12px 0; font-size: 0.95rem;">Publish Listing Matrix Package</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="panelTabAdmin" class="panel-tab-content space-y-6">
+                <h2 style="font-family: var(--font-display); font-size: 1.8rem; text-transform: uppercase; color: var(--primary);">👑 Admin Operations Core Control</h2>
+                <div class="glass-card" style="border-radius: 12px; overflow: hidden;">
+                    <table style="width: 100%; border-collapse: collapse; font-family: var(--font-sub); font-size: 1rem; min-width: 650px;">
+                        <thead style="background: rgba(0,0,0,0.4); text-align: left; color: var(--text-muted);">
+                            <tr>
+                                <th style="padding: 14px 20px;">Operator Profile</th>
+                                <th style="padding: 14px 20px;">Permission Rank</th>
+                                <th style="padding: 14px 20px;">Usage Quota Count</th>
+                                <th style="padding: 14px 20px;">IP Address Log</th>
+                                <th style="padding: 14px 20px; text-align: center;">Execute Alterations</th>
+                            </tr>
+                        </thead>
+                        <tbody id="boxAdminTableRowsContainer" style="color: #fff;"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        const SUPABASE_URL = "https://mgtbeiqqehvnrudlebio.supabase.co"; 
+        const SUPABASE_ANON_KEY = "sb_publishable_5I5otxiF4C5rA195oSxNqA_jft4qlZf";
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        let activeUserIdentitySession = null;
+        let globalUserProfileData = null;
+
+        // Fallback pre-loader engine that never freezes locally
+        window.addEventListener('DOMContentLoaded', () => {
+            const progressBar = document.getElementById('progress-bar');
+            const loader = document.getElementById('loader');
+            let progress = 0;
+            
+            const interval = setInterval(async () => {
+                progress += Math.floor(Math.random() * 25) + 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    
+                    try {
+                        const { data } = await supabase.auth.getSession();
+                        if (data && data.session) {
+                            activeUserIdentitySession = data.session.user;
+                            await executeProfileSynchronization();
+                            return;
+                        }
+                    } catch(e) { console.log("Offline local environment handled smoothly."); }
+
+                    // Local standalone fallback bypass
+                    document.body.classList.remove('loading');
+                    loader.style.opacity = '0'; loader.style.visibility = 'hidden';
+                    loadPublicMarketplaceAssets();
+                }
+                progressBar.style.width = `${progress}%`;
+            }, 30);
+        });
+
+        async function loginWithDiscord() {
+            await supabase.auth.signInWithOAuth({
+                provider: 'discord',
+                options: { redirectTo: window.location.origin }
+            });
+        }
+
+        async function executeProfileSynchronization() {
+            const dUser = activeUserIdentitySession;
+            let { data: profile } = await supabase.from('profiles').select('*').eq('id', dUser.id).single();
+
+            if (!profile) {
+                let userTerminalIP = 'unknown';
+                try { const res = await fetch('https://api.ipify.org?format=json'); const parsed = await res.json(); userTerminalIP = parsed.ip; } catch(e){}
+
+                const { data: ipCheck } = await supabase.from('profiles').select('id').eq('last_ip', userTerminalIP).not('id', 'eq', dUser.id);
+                if (ipCheck && ipCheck.length > 0) {
+                    alert("🚨 Firewall Invalidation Block: Multi-profile session session mapping collision found on terminal IP!");
+                    await logoutSession();
+                    return;
+                }
+
+                const { data: countQuery } = await supabase.from('profiles').select('id');
+                const automaticDesignatedRole = (!countQuery || countQuery.length === 0) ? 'admin' : 'dropper';
+
+                const { data: insertedProf } = await supabase.from('profiles').insert([{
+                    id: dUser.id,
+                    username: dUser.user_metadata.full_name || dUser.user_metadata.name || 'Clearance Profile',
+                    role: automaticDesignatedRole,
+                    downloads_today: 0,
+                    last_ip: userTerminalIP,
+                    blocked: false
+                }]).select().single();
+                profile = insertedProf;
+            }
+
+            if (profile.blocked) {
+                alert("🚫 Clearance Exception: Operational profile has been banished from the storage database.");
+                await logoutSession();
+                return;
+            }
+
+            globalUserProfileData = profile;
+            document.getElementById('landingPageScreen').classList.add('hidden');
+            document.getElementById('appScreen').classList.add('active');
+            document.body.classList.remove('loading');
+            document.getElementById('loader').style.opacity = '0';
+            document.getElementById('loader').style.visibility = 'hidden';
+            
+            assembleUserSidebarInterface();
+        }
+
+        function assembleUserSidebarInterface() {
+            document.getElementById('userMatrixName').innerText = globalUserProfileData.username;
+            document.getElementById('userMatrixAvatar').innerText = globalUserProfileData.username[0].toUpperCase();
+            
+            const badge = document.getElementById('userMatrixRole');
+            badge.innerText = globalUserProfileData.role === 'admin' ? 'ROOT OWNER' : globalUserProfileData.role === 'paid' ? 'CYBER ELITE' : 'VENDOR TIER';
+
+            if (globalUserProfileData.role === 'admin') {
+                document.getElementById('btnTabAdmin').classList.remove('hidden');
+                document.getElementById('btnTabDropper').classList.remove('hidden');
+            } else if (globalUserProfileData.role === 'dropper') {
+                document.getElementById('btnTabDropper').classList.remove('hidden');
+            }
+
+            document.getElementById('labelDownloadQuota').innerText = `DAILY DOWNLOAD QUANTUM DECODES REMAINING: ${Math.max(0, 3 - globalUserProfileData.downloads_today)} / 3 DECODES LEFT`;
+            fetchMarketplaceAssets();
+        }
+
+        // Render Public Visitor Catalog View Grid
+        async function loadPublicMarketplaceAssets() {
+            const catFilter = document.getElementById('publicFilterCategory').value;
+            let items = [];
+            try {
+                let query = supabase.from('resources').select('*').order('created_at', { ascending: false });
+                if (catFilter !== 'all') query = query.eq('category', catFilter);
+                const { data } = await query;
+                items = data || [];
+            } catch(e) {}
+
+            const publicGrid = document.getElementById('publicAssetsContainerGrid');
+            publicGrid.innerHTML = "";
+
+            if (!items || items.length === 0) {
+                publicGrid.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--text-muted); font-family:var(--font-sub); text-transform:uppercase; padding:40px 0; border:1px dashed var(--border-glass); border-radius:12px;">No active product configurations listings found inside database storage.</p>`;
+                return;
+            }
+
+            items.forEach(item => {
+                const requirePaid = item.required_perm === 'paid';
+                const card = document.createElement('div');
+                card.className = "glass-card bbb-card";
+                const fallbackImg = item.image_url || 'https://images.unsplash.com/photo-1607988795691-3d0147b43231?q=80&w=500';
+
+                card.innerHTML = `
+                    <div class="bbb-thumb" style="background-image: url('${fallbackImg}');">
+                        <div style="position: absolute; inset:0; background: linear-gradient(to top, #050505, transparent);"></div>
+                        <span style="position: absolute; top:12px; right:12px; font-family: var(--font-display); font-size: 0.7rem; font-weight:900; padding: 3px 10px; border-radius: 4px; border: 1px solid ${requirePaid ? '#ff003c44' : '#10b98144'}; background: ${requirePaid ? '#990024cc' : '#064e3bcc'}; text-transform: uppercase; color: #fff; tracking-wider;">
+                            ${requirePaid ? 'CYBER ELITE' : 'DROPPER PERM'}
+                        </span>
+                    </div>
+                    <div class="bbb-meta">
+                        <div style="display:flex; justify-content:space-between; align-items:center; font-family: var(--font-sub); font-size: 0.85rem; text-transform: uppercase; margin-bottom: 8px;">
+                            <span style="color: var(--primary); font-weight:700; border: 1px solid var(--border-glass); padding: 2px 8px; border-radius:4px; background: rgba(255,0,60,0.03);"><i class="fas fa-layer-group"></i> ${item.category}</span>
+                            <span style="color: var(--text-muted);"><i class="fas fa-user-tag text-blue-500"></i> ${item.uploaded_by || 'Vendor'}</span>
+                        </div>
+                        <h3 style="font-family: var(--font-display); font-size: 1.15rem; font-weight:700; color:#fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-bottom: 6px;">${item.name}</h3>
+                        <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5; margin-bottom: 15px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; background: rgba(0,0,0,0.2); padding: 8px; border: 1px solid rgba(255,255,255,0.02); border-radius:8px;">${item.description || 'No descriptive structural layout specifications details log available.'}</p>
+                        <button onclick="interceptUnauthenticatedAction()" class="btn btn-primary" style="width:100%; padding: 10px 0; font-size: 0.85rem;"><i class="fas fa-lock"></i> Login to Decode Pack</button>
+                    </div>
+                `;
+                publicGrid.appendChild(card);
+            });
+        }
+
+        function interceptUnauthenticatedAction() {
+            alert("🔒 Gatekeeper Alert: Please use the floating navbar Login Core option with Discord OAuth2 credentials link to decode file binaries packages mirrors!");
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Render Logged Panel User Grid Space Assets
+        async function fetchMarketplaceAssets() {
+            const activeFilter = document.getElementById('selectSortingCategory').value;
+            let marketplaceItems = [];
+            try {
+                let query = supabase.from('resources').select('*').order('created_at', { ascending: false });
+                if (activeFilter !== 'all') query = query.eq('category', activeFilter);
+                const { data } = await query;
+                marketplaceItems = data || [];
+            } catch(e) {}
+
+            const targetWrapper = document.getElementById('boxAssetsMatrixContainer');
+            targetWrapper.innerHTML = "";
+
+            if (!marketplaceItems || marketplaceItems.length === 0) {
+                targetWrapper.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--text-muted); font-family:var(--font-sub); text-transform:uppercase; padding:40px 0; border:1px dashed var(--border-glass); border-radius:12px;">No active data parameters found active inside registry clusters nodes.</p>`;
+                return;
+            }
+
+            marketplaceItems.forEach(item => {
+                const requirePaidPerm = item.required_perm === 'paid';
+                const itemCard = document.createElement('div');
+                itemCard.className = "glass-card bbb-card";
+                const imgBackground = item.image_url || 'https://images.unsplash.com/photo-1607988795691-3d0147b43231?q=80&w=500';
+
+                itemCard.innerHTML = `
+                    <div class="bbb-thumb" style="background-image: url('${imgBackground}');">
+                        <div style="position: absolute; inset:0; background: linear-gradient(to top, #040406, transparent);"></div>
+                        <span style="position: absolute; top:12px; right:12px; font-family: var(--font-display); font-size: 0.7rem; font-weight:900; padding: 3px 10px; border-radius: 4px; border: 1px solid ${requirePaidPerm ? '#ff003c44' : '#10b98144'}; background: ${requirePaidPerm ? '#990024cc' : '#064e3bcc'}; text-transform: uppercase; color: #fff; tracking-wider;">
+                            ${requirePaidPerm ? 'CYBER ELITE' : 'DROPPER PERM'}
+                        </span>
+                    </div>
+                    <div class="bbb-meta">
+                        <div style="display:flex; justify-content:space-between; align-items:center; font-family: var(--font-sub); font-size: 0.85rem; text-transform: uppercase; margin-bottom: 8px;">
+                            <span style="color: var(--primary); font-weight:700; border: 1px solid var(--border-glass); padding: 2px 8px; border-radius:4px; background: rgba(255,0,60,0.03);"><i class="fas fa-layer-group"></i> ${item.category}</span>
+                            <span style="color: var(--text-muted);"><i class="fas fa-user-tag text-blue-500"></i> ${item.uploaded_by || 'Operator'}</span>
+                        </div>
+                        <h3 style="font-family: var(--font-display); font-size: 1.15rem; font-weight:700; color:#fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-bottom: 6px;">${item.name}</h3>
+                        <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5; margin-bottom: 15px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; background: rgba(0,0,0,0.2); padding: 8px; border: 1px solid rgba(255,255,255,0.02); border-radius:8px;">${item.description || 'No supplementary data logs features lists provided.'}</p>
+                        <button onclick="executeSecureDownloadSequence('${item.id}', '${item.download_url}', '${item.required_perm}')" class="btn btn-primary" style="width:100%; padding: 10px 0; font-size: 0.85rem;"><i class="fas fa-circle-down"></i> Decode from Mediafire</button>
+                    </div>
+                `;
+                targetWrapper.appendChild(itemCard);
+            });
+        }
+
+        async function executeSecureDownloadSequence(id, downloadUrl, requiredPerm) {
+            if (globalUserProfileData.role !== 'admin') {
+                if (requiredPerm === 'paid' && globalUserProfileData.role !== 'paid') {
+                    alert("❌ Clearance Failure: Upgraded profile signature required to download Cyber Elite resources tier pack!");
+                    return;
+                }
+                if (globalUserProfileData.downloads_today >= 3) {
+                    alert("🚨 Quota Saturated: Maximum daily downloads ceiling threshold cap reached (3/3 actions today)!");
+                    return;
+                }
+            }
+
+            if (globalUserProfileData.role !== 'admin') {
+                const modifiedQuotaCount = globalUserProfileData.downloads_today + 1;
+                await supabase.from('profiles').update({ downloads_today: modifiedQuotaCount }).eq('id', activeUserIdentitySession.id);
+                globalUserProfileData.downloads_today = modifiedQuotaCount;
+                document.getElementById('labelDownloadQuota').innerText = `DAILY DOWNLOAD QUANTUM DECODES REMAINING: ${3 - globalUserProfileData.downloads_today} / 3 DECODES LEFT`;
+            }
+
+            alert("📥 Token credentials matched. Connecting proxy transfer pipeline node to Mediafire host...");
+            window.open(downloadUrl, '_blank');
+        }
+
+        async function executeVendorPublish(e) {
+            e.preventDefault();
+            const name = document.getElementById('formAssetTitle').value;
+            const category = document.getElementById('formAssetCategory').value;
+            const perm = document.getElementById('formAssetPerm').value;
+            const url = document.getElementById('formAssetDownloadLink').value;
+            const imgUrl = document.getElementById('formAssetImgUrl').value;
+            const desc = document.getElementById('formAssetDesc').value;
+
+            const { error } = await supabase.from('resources').insert([{
+                name, category, required_perm: perm, download_url: url, image_url: imgUrl, description: desc, uploaded_by: globalUserProfileData.username
+            }]);
+
+            if (!error) {
+                alert("🎉 Success: Asset product pack entry generated inside cloud cluster framework!");
+                document.getElementById('formAssetTitle').value = ""; document.getElementById('formAssetDownloadLink').value = "";
+                document.getElementById('formAssetImgUrl').value = ""; document.getElementById('formAssetDesc').value = "";
+                switchPanelTab('vault');
+            } else {
+                alert("Supabase SQL Registry Failure: " + error.message);
+            }
+        }
+
+        async function populateAdminControlDeck() {
+            const { data: usersArray } = await supabase.from('profiles').select('*');
+            const targetContainer = document.getElementById('boxAdminTableRowsContainer');
+            targetContainer.innerHTML = "";
+            if (!usersArray) return;
+
+            usersArray.forEach(u => {
+                if (u.id === activeUserIdentitySession.id) return;
+                const row = document.createElement('tr');
+                row.style.borderBottom = "1px solid var(--border-glass)";
+                row.className = "hover:bg-white/[0.02] transition";
+                
+                row.innerHTML = `
+                    <td style="padding: 14px 20px; font-weight: 700;"><i class="fab fa-discord text-blue-400 mr-2"></i> ${u.username}</td>
+                    <td style="padding: 14px 20px;"><span style="font-family:var(--font-display); font-size:0.7rem; font-weight:900; padding:3px 8px; border-radius:4px; background:${u.role==='paid'?'#ff003c22':u.role==='dropper'?'#10b98122':'#ffffff11'}; color:${u.role==='paid'?'#ff003c':u.role==='dropper'?'#10b981':'#fff'}; border:1px solid ${u.role==='paid'?'#ff003c44':u.role==='dropper'?'#10b98144':'#ffffff22'}">${u.role === 'admin' ? 'OWNER' : u.role === 'paid' ? 'CYBER ELITE' : 'VENDOR'}</span></td>
+                    <td style="padding: 14px 20px; font-family:var(--font-display); font-size:0.85rem; color:var(--text-muted);">${u.downloads_today} / 3 Decodes</td>
+                    <td style="padding: 14px 20px; font-family:var(--font-body); font-size:0.8rem; color:var(--text-muted);">${u.last_ip || '—'}</td>
+                    <td style="padding: 14px 20px; display:flex; justify-content:center; gap:8px;">
+                        <button onclick="alterUserRoleSequence('${u.id}', '${u.role==='paid'?'dropper':'paid'}')" style="background:transparent; border:1px solid var(--border-glass); color:#fff; font-family:var(--font-sub); font-size:0.8rem; padding:4px 12px; border-radius:4px; cursor:pointer;" class="hover:border-red-500 transition">Toggle Plan</button>
+                        <button onclick="alterUserBanSequence('${u.id}', ${!u.blocked})" style="background:rgba(255,0,60,0.05); border:1px solid rgba(255,0,60,0.2); color:var(--primary); font-family:var(--font-sub); font-size:0.8rem; padding:4px 12px; border-radius:4px; cursor:pointer;" class="hover:bg-red-600 hover:text-white transition">${u.blocked ? 'Unban' : 'Ban Profile'}</button>
+                    </td>
+                `;
+                targetContainer.appendChild(row);
+            });
+        }
+
+        async function alterUserRoleSequence(uid, targetRole) {
+            await supabase.from('profiles').update({ role: targetRole }).eq('id', uid);
+            populateAdminControlDeck();
+        }
+
+        async function alterUserBanSequence(uid, stateBoolean) {
+            await supabase.from('profiles').update({ blocked: stateBoolean }).eq('id', uid);
+            populateAdminControlDeck();
+        }
+
+        function switchPanelTab(panelTabId) {
+            document.querySelectorAll('.panel-tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById('panelTab' + panelTabId.charAt(0).toUpperCase() + panelTabId.slice(1)).classList.add('active');
+            
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            const buttonRef = document.getElementById('btnTab' + panelTabId.charAt(0).toUpperCase() + panelTabId.slice(1));
+            if (buttonRef) buttonRef.classList.add('active');
+
+            if (panelTabId === 'admin') populateAdminControlDeck();
+            if (panelTabId === 'vault') fetchMarketplaceAssets();
+        }
+
+        async function logoutSession() {
+            await supabase.auth.signOut();
+            window.location.reload();
+        }
+
+        /* --- PARTICLES.JS FRAME ENGINE DRIVER --- */
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#ff003c" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.2, "random": true },
+                "size": { "value": 2.5, "random": true },
+                "line_linked": { "enable": true, "distance": 140, "color": "#ff003c", "opacity": 0.12, "width": 1 },
+                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "out_mode": "out" }
+            },
+            "interactivity": { "events": { "onhover": { "enable": true, "mode": "grab" }, "resize": true } },
+            "retina_detect": true
+        });
+    </script>
+</body>
+</html>
