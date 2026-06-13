@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DARKLEAKER // DOWNLOAD. CUSTOMIZE. DOMINATE.</title>
+    <title>DARKLEAKER // PREMIUM MINECRAFT REPOSITORIES & LEAKS HUB</title>
     
+    <!-- Supabase Core Database Infrastructure CDN Injections -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Exo+2:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
@@ -14,7 +15,7 @@
             --bg-deep: #010102;
             --card-bg: rgba(14, 14, 22, 0.96);
             --primary: #ff003c;
-            --primary-glow: rgba(255, 0, 60, 0.5);
+            --primary-glow: rgba(255, 0, 60, 0.55);
             --green: #00ff88;
             --text-main: #f5f5fa;
             --text-muted: #6e6e8a;
@@ -26,18 +27,18 @@
         html { scroll-behavior: smooth; }
         body {
             font-family: 'Exo 2', sans-serif; background-color: var(--bg-dark); color: var(--text-main); overflow-x: hidden;
-            background-image: linear-gradient(rgba(255, 0, 60, 0.01) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 0, 60, 0.01) 1px, transparent 1px);
+            background-image: linear-gradient(rgba(255, 0, 60, 0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 0, 60, 0.012) 1px, transparent 1px);
             background-size: 60px 60px;
         }
 
         .scroll-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: var(--border-line); z-index: 110000; }
         .scroll-fill { height: 100%; background: var(--primary); width: 0%; box-shadow: 0 0 10px var(--primary); }
 
-        /* HEADER BRANDING NAVIGATION PANEL */
+        /* UPPER PLATFORM MAIN NAVIGATION STYLES */
         nav { position: sticky; top: 0; width: 100%; background: rgba(4, 4, 6, 0.96); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid var(--border-line); z-index: 10000; padding: 0 3rem; }
         .nav-inner { max-width: 1440px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 85px; }
         
-        /* 100% VISUAL SCREENSHOT EXACT LOGO MATCH LAYER */
+        /* THE VISUAL BRANDING LOGO ATTRIBUTES */
         .logo { display: flex; align-items: center; gap: 8px; cursor: pointer; text-decoration: none; font-family: 'Orbitron', sans-serif; font-size: 22px; font-weight: 900; color: #fff; letter-spacing: 1px; white-space: nowrap; }
         .logo span { color: var(--primary); text-shadow: 0 0 12px var(--primary-glow); }
         
@@ -45,7 +46,7 @@
         .nav-links button { background: transparent; border: none; color: var(--text-muted); font-size: 13px; font-family: 'Orbitron', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: all 0.2s; }
         .nav-links button:hover, .nav-links button.active-nav { color: var(--primary); text-shadow: 0 0 8px var(--primary-glow); }
 
-        /* BUTTON SYSTEM ENGINE METRICS */
+        /* CYBERPUNK BUTTON SYSTEM */
         .btn { padding: 12px 26px; border-radius: 4px; font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 900; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; border: none; display: inline-flex; align-items: center; gap: 8px; }
         .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 0 15px rgba(255, 0, 60, 0.3); }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 25px var(--primary-glow); }
@@ -55,7 +56,7 @@
         .page-route-view { display: none; }
         .page-route-view.active-route { display: block; }
 
-        /* ASYMMETRIC FLUID GRID CONTROLLER WORKSPACE */
+        /* THE MULTI-COLUMN ASYMMETRIC SPACE GRID INTERFACE */
         .asymmetric-hub-layout { display: grid; grid-template-columns: 1fr var(--sidebar-width); gap: 40px; max-width: 1440px; margin: 40px auto; padding: 0 3rem; }
         
         .hero-banner-sector { padding: 40px 0; position: relative; }
@@ -64,7 +65,7 @@
         .hero-main-title span { color: var(--primary); text-shadow: 0 0 15px var(--primary-glow); }
         .hero-meta-desc { color: var(--text-muted); font-size: 15px; line-height: 1.7; max-width: 680px; margin-bottom: 35px; }
 
-        /* STATS AUTOMATED STRIP METRICS */
+        /* AUTOMATED FLOATING TIMELINE STRIP PACKETS */
         .stats-infographic-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; background: #07070f; border: 1px solid var(--border-line); border-radius: 6px; padding: 20px; margin-bottom: 40px; }
         .stat-node-box { text-align: center; border-right: 1px solid rgba(255,255,255,0.03); }
         .stat-node-box:last-child { border: none; }
@@ -76,7 +77,7 @@
         .panel-header-link { font-size: 12px; color: var(--text-muted); text-decoration: none; cursor: pointer; font-family: 'Orbitron', sans-serif; font-weight: 700; }
         .panel-header-link:hover { color: var(--primary); }
 
-        /* GRID CARDS LAYOUT */
+        /* THE HARDWARE ASSETS RENDERING ENGINE MATRICES */
         .products-grid-matrix { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
         .product-card-node { background: var(--card-bg); border: 1px solid var(--border-line); border-radius: 6px; overflow: hidden; transition: all 0.3s cubic-bezier(.25,.46,.45,.94); }
         .product-card-node:hover { transform: translateY(-5px); border-color: #222233; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
@@ -93,18 +94,19 @@
         .category-box-emoji { font-size: 24px; margin-bottom: 8px; display: block; filter: drop-shadow(0 0 8px var(--primary-glow)); }
         .category-box-lbl { font-size: 11px; font-family: 'Orbitron', sans-serif; font-weight: 700; color: var(--text-main); text-transform: uppercase; }
 
+        /* THE RIGHT WIDGET STACKS */
         .sidebar-panel-stack { display: flex; flex-direction: column; gap: 25px; }
         .side-widget-card { background: var(--card-bg); border: 1px solid var(--border-line); border-radius: 6px; padding: 25px; position: relative; }
         .side-widget-title { font-family: 'Orbitron', sans-serif; font-size: 13px; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
         .side-widget-title span { color: var(--primary); }
         .side-widget-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px; }
 
-        /* LIVE TERMINAL FEED CONSOLE VIEW DESIGN */
+        /* THE ARTIFICIAL RECOGNITION CONSOLE STYLES */
         .ai-terminal-output { background: #020204; border: 1px solid #141424; border-radius: 4px; padding: 15px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--green); height: 200px; overflow-y: auto; margin-bottom: 15px; line-height: 1.6; border-left: 2px solid var(--primary); }
         .ai-msg-user { color: #fff; margin-bottom: 8px; font-weight: bold; border-bottom: 1px dashed rgba(255,255,255,0.05); padding-bottom: 4px; }
         .ai-msg-bot { color: var(--green); margin-bottom: 12px; white-space: pre-line; }
 
-        /* THE PRICING CARDS ROW */
+        /* PREMIUM PLANS MEMBERSHIPS DESIGN */
         .premium-plans-matrix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 30px; }
         .membership-tier-card { background: var(--card-bg); border: 1px solid var(--border-line); border-radius: 6px; padding: 35px; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
         .membership-tier-card.neon-active-focus { border-color: var(--primary); box-shadow: 0 0 30px rgba(255, 0, 60, 0.15); }
@@ -115,7 +117,7 @@
         .tier-benefits-list li { margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
         .tier-benefits-list li::before { content: "✓"; color: var(--primary); font-weight: bold; }
 
-        /* COMMAND CENTER INTERNAL DASH BOARD STRUCTURES */
+        /* COMMAND PANEL WORKSPACE TERMINALS */
         .dashboard-modular-frame { display: grid; grid-template-columns: 240px 1fr; gap: 30px; }
         .dashboard-tab-links { list-style: none; }
         .dashboard-tab-links button { width: 100%; padding: 12px 16px; background: transparent; border: none; color: var(--text-muted); font-family: 'Exo 2', sans-serif; font-size: 14px; text-align: left; cursor: pointer; border-radius: 4px; margin-bottom: 5px; display: flex; align-items: center; gap: 10px; font-weight: 600; }
@@ -124,6 +126,7 @@
         .dash-pane-segment { display: none; }
         .dash-pane-segment.active-pane-segment { display: block; }
         .cyber-input { width: 100%; background: #08080f; border: 1px solid var(--border-line); padding: 14px; color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 13px; outline: none; border-left: 3px solid var(--primary); border-radius: 4px; margin-top: 5px; }
+        .cyber-input:focus { border-left-color: var(--primary); box-shadow: 0 0 15px rgba(255,0,60,0.1); }
         .form-group { margin-bottom: 20px; }
         .form-group label { font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text-muted); text-transform: uppercase; }
 
@@ -140,7 +143,7 @@
         .rb-Premium { background: #8a2be2; color: #fff; }
         .rb-Member { background: #222233; color: #b0b0c0; }
 
-        /* HARDCORE CROSS COMPATIBILITY GLASS DEVICE BREAKPOINTS */
+        /* CROSS-PLATFORM DEVICE COMPATIBILITY MEDIA LAYERS */
         @media(max-width: 1150px) {
             .asymmetric-hub-layout { grid-template-columns: 1fr; padding: 0 1.5rem; }
             nav { padding: 0 1.5rem; }
@@ -159,8 +162,10 @@
 
     <div class="scroll-bar"><div class="scroll-fill" id="scroll-indicator"></div></div>
 
+    <!-- UPPER PLATFORM MAIN ROUTING MENU -->
     <nav>
         <div class="nav-inner">
+            <!-- LOGO FIXED TO SCREENSHOT CHARACTERISTICS -->
             <div class="logo" onclick="Navigation.goto('landing')">
                 👾 DARK <span style="color:var(--primary); text-shadow: 0 0 12px var(--primary-glow);">LEAKER //</span>
             </div>
@@ -174,10 +179,13 @@
         </div>
     </nav>
 
+    <!-- MAIN HUB CORE SECTION PLACEMENT -->
     <div class="asymmetric-hub-layout">
         
+        <!-- LEFT PRIMARY AREA SWITCH PANE FRAME ROUTING HOUSING -->
         <div class="left-workspace-column">
             
+            <!-- SUB-PANE ROUTE 1: INDEPENDENT INDEX LANDING BASE -->
             <div id="route-landing" class="page-route-view active-route">
                 <div class="hero-banner-sector">
                     <span class="hero-badge-tag">#1 Minecraft Resources Platform</span>
@@ -189,6 +197,7 @@
                     </div>
                 </div>
 
+                <!-- REAL TIME AUTO RUNNING INCREMENTAL MATRIX BLOCKS -->
                 <div class="stats-infographic-strip">
                     <div class="stat-node-box"><div class="stat-node-metric" id="stat-count-users">0</div><div class="stat-node-label">Members</div></div>
                     <div class="stat-node-box"><div class="stat-node-metric" id="stat-count-items">0</div><div class="stat-node-label">Resources</div></div>
@@ -202,8 +211,10 @@
                     <a class="panel-header-link" onclick="Navigation.goto('vault')">View All Resources →</a>
                 </div>
                 
+                <!-- AUTOMATIC POPULAR HIGH DOWN COUNT SORTED GRIDS -->
                 <div class="products-grid-matrix" id="home-popular-grid" style="margin-bottom: 40px;">
-                    </div>
+                    <!-- Syncs background values dynamically via Javascript factory threads -->
+                </div>
 
                 <div class="panel-header-row"><h2 class="panel-header-title">Browse Sectors Categories</h2></div>
                 <div class="categories-flex-wrapper">
@@ -217,6 +228,7 @@
                 </div>
             </div>
 
+            <!-- SUB-PANE ROUTE 2: REPOSITORIES DATA VAULT MANIFEST ARCHIVE -->
             <div id="route-vault" class="page-route-view">
                 <div class="panel-header-row"><h2 class="panel-header-title">Data Vault Manifest</h2></div>
 
@@ -238,6 +250,7 @@
                 <div id="vault-grid-display" class="products-grid-matrix"></div>
             </div>
 
+            <!-- SUB-PANE ROUTE 3: PREMIUM SUBSCRIPTION TIER PACKAGES -->
             <div id="route-premium" class="page-route-view">
                 <div class="panel-header-row"><h2 class="panel-header-title">Premium Membership Tiers</h2></div>
                 <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 25px;">Acquire secure premium elevation configurations. Submitting values grants direct unlimited bypass authorizations.</p>
@@ -287,6 +300,7 @@
                 </div>
             </div>
 
+            <!-- SUB-PANE ROUTE 4: PRIVILEGED SECURED COMMAND CENTER DASHBOARD -->
             <div id="route-dashboard" class="page-route-view">
                 <div class="panel-header-row"><h2 class="panel-header-title">Command Center Console</h2></div>
                 
@@ -306,6 +320,7 @@
                     </aside>
 
                     <div style="background: var(--card-bg); border: 1px solid var(--border-line); padding: 30px; border-radius: 6px;">
+                        <!-- TELEMETRY ANALYSIS VIEW -->
                         <div id="pane-overview" class="dash-pane-segment active-pane-segment">
                             <h3 style="font-family:'Orbitron',sans-serif; color:var(--primary); margin-bottom:15px;">Node Telemetry Analysis</h3>
                             <div style="background:#08080e; border:1px solid var(--border-line); padding:20px; border-radius:4px;">
@@ -314,6 +329,7 @@
                             </div>
                         </div>
 
+                        <!-- PACKET INJECT MODULE FROM FORMS -->
                         <div id="pane-uploader" class="dash-pane-segment">
                             <h3 style="font-family:'Orbitron',sans-serif; color:var(--primary); margin-bottom:15px;">// INJECT_ASSET_METRICS</h3>
                             <form id="upload-form" onsubmit="DropperHub.executeInjection(event)">
@@ -334,6 +350,7 @@
                             </form>
                         </div>
 
+                        <!-- MANAGEMENT USERS SECURITY CONTROLS OVERRIDES -->
                         <div id="pane-adminboard" class="dash-pane-segment">
                             <h3 style="font-family:'Orbitron',sans-serif; color:var(--primary); margin-bottom:15px;">SOVEREIGN USER RIGHTS OVERRIDES</h3>
                             <div style="overflow-x:auto; margin-bottom:30px;">
@@ -351,6 +368,7 @@
                             </div>
                         </div>
 
+                        <!-- ELEVATION CORE ACCELERATOR TERMINAL PASS KEY LOGS -->
                         <div id="pane-elevation" class="dash-pane-segment">
                             <h3 style="font-family:'Orbitron',sans-serif; color:var(--primary); margin-bottom:15px;">🔑 PRIVILEGE MODIFICATION TERMINAL</h3>
                             <div class="form-group">
@@ -374,30 +392,36 @@
 
         </div>
 
+        <!-- RIGHT RECONNECTED STABLE SIDEBAR SLOTS COMPONENTS -->
         <aside class="sidebar-panel-stack">
             
+            <!-- WIDGET CARD 1: EXTREMELY INTELLIGENT EXPERT DEEP TECHNICAL LEARNING AI ASSISTANT CORE -->
             <div class="side-widget-card">
                 <div style="position:absolute; top:-15px; right:-15px; font-size:80px; opacity:0.04; pointer-events:none;">🤖</div>
                 <div class="side-widget-title">🤖 AI Assistant <span>BETA</span></div>
                 
+                <!-- Chat Log View Window Portal -->
                 <div class="ai-terminal-output" id="ai-log-terminal">
-                    <div class="ai-msg-bot">[AI Matrix Core Online]: Welcome back Adarsh Kumar! I am your advanced architectural technical node assistant.
+                    <div class="ai-msg-bot">[AI Matrix Core Online Node]: Welcome back Adarsh Kumar! I am your advanced technical AI entity.
 
-                    Send me your Spigot/Paper server crash reports, plugin version dependencies exceptions, server lag benchmarks profiling, or database optimization questions directly. I will analyze the structural variables and deliver deep step-by-step blueprints instantly!</div>
+                    Send me your Spigot/Paper server crash threads, version configuration exceptions, profiling lag metrics, or server parameters questions. I will compile deep step-by-step resolution blueprints instantly!</div>
                 </div>
 
                 <input type="text" id="ai-user-query" class="cyber-input" placeholder="Ask AI Assistant anything..." style="margin-bottom: 12px; padding: 12px;">
                 <button class="btn btn-primary" id="ai-engine-btn" style="width:100%; justify-content:center;" onclick="AICoreEngine.processQuery()">Process Query</button>
             </div>
 
+            <!-- WIDGET CARD 2: DYNAMIC GATEWAY DISCORD LINK INTEGRATION -->
             <div class="side-widget-card">
                 <div class="side-widget-title">💬 Discord Community</div>
                 <p class="side-widget-desc">Join our Discord server for instant file deployments logs, verified asset packs updates, announcements, or chat directly with network agents.</p>
+                <!-- Direct linking straight to requested discord network destination platform channel -->
                 <a href="https://discord.gg/ZqWZnZm7P6" target="_blank" style="text-decoration:none;">
                     <button class="btn btn-primary" style="background:#5865F2; width:100%; justify-content:center; box-shadow:none;">Join Discord Matrix →</button>
                 </a>
             </div>
 
+            <!-- WIDGET CARD 3: TICKET RE-ROUTE VIA DISCORD REDIRECT MATRIX LOOP -->
             <div class="side-widget-card">
                 <div class="side-widget-title">⚡ Paid Support Channels</div>
                 <p class="side-widget-desc">Need 1-on-1 complex engineering help? Acquire dedicated remote support for deep server optimization, bug fixes, database structures setup, and NMS dependencies.</p>
@@ -410,6 +434,7 @@
 
     </div>
 
+    <!-- ROOT BASE BRANDING FOOTER SYSTEM -->
     <footer>
         <div class="footer-container">
             <div style="font-family:'Orbitron',sans-serif; font-size:16px; font-weight:900; color: #fff;">
@@ -425,7 +450,6 @@
     <div id="toast-box"></div>
 
     <script>
-        // PRIVILEGED MASTER CODES ACCESS TOKENS DICTIONARY
         const SYSTEM_SECURITY_KEYS = {
             Owner: "OWNER_ROOT_SECURE_2026",
             Admin: "ADMIN_GATEWAY_COMPILER_LOCK",
@@ -517,14 +541,14 @@
                 }
             },
 
-            // REAL-TIME INCREMENTAL SMOOTH COUNTERS ROLLING ENGINE
+            // INCREMENTAL STATS COUNT ANIMATOR FACTORY
             animateRollingCount(elementId, targetMetric, additiveBase = 0) {
                 const element = document.getElementById(elementId);
                 if (!element) return;
                 
                 let startValue = 0;
                 const grandTotalTarget = targetMetric + additiveBase;
-                const frameStep = Math.ceil(grandTotalTarget / 50);
+                const frameStep = Math.ceil(grandTotalTarget / 40);
                 
                 const executionInterval = setInterval(() => {
                     startValue = Math.min(startValue + frameStep, grandTotalTarget);
@@ -534,7 +558,6 @@
             },
 
             runRealtimeCountersEngine() {
-                // Fetch dynamic elements count from backend infrastructure live
                 _supabase.from('users').select('id', { count: 'exact', head: true }).then(({count}) => {
                     this.animateRollingCount('stat-count-users', (count || 0), 1481); 
                 });
@@ -555,69 +578,68 @@
             }
         };
 
-        // ADVANCED COGNITIVE DEEP ALIGNED TECHNICAL CONTEXT AI MACHINE ENGINE
+        // ADVANCED TECHNICAL DEEP RESPONDING AI CHAT ALGORITHM MODULE
         const AICoreEngine = {
             processQuery() {
                 const queryInput = document.getElementById('ai-user-query');
                 const terminal = document.getElementById('ai-log-terminal');
                 const rawPrompt = queryInput.value.trim();
 
-                if (!rawPrompt) { SystemState.pushNotification("Computational string verification empty.", "error"); return; }
+                if (!rawPrompt) { SystemState.pushNotification("Please provide a valid code string prompt.", "error"); return; }
 
                 terminal.innerHTML += `<div class="ai-msg-user">>> You: ${rawPrompt}</div>`;
                 terminal.scrollTop = terminal.scrollHeight;
                 queryInput.value = '';
 
-                // Fallback adaptive technical answer architecture
-                let aiResponse = `[DARKLEAKER Matrix AI Resolution Blueprint Analysis]:
-                Context validation check approved. Regarding your request "${rawPrompt}" — calculations completed.
+                let aiResponse = `[DARKLEAKER AI Core Metrics Trace Response]:
+                Hello Agent Kumar! Prompt parameters processed successfully inside the core. Analysis vector details for string "${rawPrompt}" completed.
 
-                🔧 Structural Fix Strategy Steps:
-                1. Navigate straight inside your Minecraft server root directory filesystem profile.
-                2. Inside the 'plugins' structure block array, check for NMS cross-hooks compilation errors.
-                3. Open your official Discord support gateway ticket section if compilation exceptions continue to isolate data blocks.`;
+                🔧 Structural Fix Recommendations:
+                1. Pull open your backend VPS storage terminal directory hierarchy.
+                2. Inside the 'plugins' structure folder, verify that luckperms or core dependencies maps aren't generating variables overlaps.
+                3. Open a direct validation thread inside our Discord Support node panel if anomalies persist so we can analyze the variables stack trace directly.`;
 
-                const cleanQueryString = rawPrompt.toLowerCase();
+                const processedPrompt = rawPrompt.toLowerCase();
 
-                if (cleanQueryString.includes("error") || cleanQueryString.includes("crash") || cleanQueryString.includes("fail") || cleanQueryString.includes("exception") || cleanQueryString.includes("nullpointer")) {
-                    aiResponse = `[DARKLEAKER AI Core - CRITICAL EVENT DISPATCH TRACE]:
-                    🚨 SERVER CRASH EXCEPTION REGISTERED NATIVELY.
+                if (processedPrompt.includes("error") || processedPrompt.includes("crash") || processedPrompt.includes("fail") || processedPrompt.includes("exception") || processedPrompt.includes("nullpointer")) {
+                    aiResponse = `[DARKLEAKER AI Core - STACK TRACE DECRYPTION]:
+                    🚨 SYSTEM RUNTIME CRASH INTERCEPTION COMPLETED.
 
-                    Detailed Resolution Action-Tree:
-                    * Root Mismatch: Your Spigot/Paper API jar build parameters has collided with an older configuration mapping schema.
-                    * Action Step 1: Open 'logs/latest.log' and filter out the 'Caused by' lines to inspect class references.
-                    * Action Step 2: Ensure your JVM container configuration parameters enforce Java 17 or Java 21 flags accurately.
-                    * Action Step 3: Purge broken nested folder configurations files, pull the stable verified asset packet out of our Resources Vault, and boot again.`;
-                } else if (cleanQueryString.includes("lag") || cleanQueryString.includes("fps") || cleanQueryString.includes("optimize") || cleanQueryString.includes("tps") || cleanQueryString.includes("boost")) {
-                    aiResponse = `[DARKLEAKER AI Core - HIGH-END PERFORMANCE COMPILER TUNING]:
-                    ⚡ PERFORMANCE MATRIX SLOWDOWN THREAD BOUNDED.
+                    Detailed Analytical Fix Plan:
+                    * Diagnostic: The server dump logs indicate an internal class-loading failure inside your Paper/Spigot core NMS dependencies layer.
+                    * Blueprint Action A: Load up your 'logs/latest.log' text packet data. Look at the lines directly following the 'Caused by' flag.
+                    * Blueprint Action B: Verify your Java compilation target environment flags. Real-time Paper API modules strictly force Java 17/21 parameters.
+                    * Blueprint Action C: Purge residual configurations variable directories from the plugins map, grab a clean verified build out of our Data Vault page, and reboot.`;
+                } else if (processedPrompt.includes("lag") || processedPrompt.includes("fps") || processedPrompt.includes("optimize") || processedPrompt.includes("tps") || processedPrompt.includes("boost")) {
+                    aiResponse = `[DARKLEAKER AI Core - SYSTEM ENGINE TPS OPTIMIZATION]:
+                    ⚡ ACCUMULATIVE DISK LATENCY OVERHEAD EXCEEDED.
 
-                    Step-by-Step Optimization Architecture:
-                    * Step 1: Access your server 'paper.yml' or structural config layer flags. Set 'entity-activation-range' parameters down to minimal values.
-                    * Step 2: In 'spigot.yml', limit 'chunks-per-tick' processing allocations matrices to 4 to reduce system disk ticks latency overhead bounds.
-                    * Step 3: Go onto our website's 'Resources Data Vault' screen frame and inject our pre-optimized production 'FPS Boost Config Packet' straight inside your VPS server container instance to normalize TPS back to 20.0 metrics count!`;
-                } else if (cleanQueryString.includes("lifesteal") || cleanQueryString.includes("setup") || cleanQueryString.includes("pack")) {
-                    aiResponse = `[DARKLEAKER AI Core - PRODUCT MANIFEST PARSER]:
-                    🏰 PACK INTEGRITY SCHEMATIC LOADED SUCCESSFULLY.
+                    Step-by-Step Server Optimization Blueprints:
+                    * Step 1: Open 'paper.yml' or server properties parameters flags. Reduce 'entity-activation-range' boundaries values significantly.
+                    * Step 2: Inside 'spigot.yml', restrict 'chunks-per-tick' real-time parsing bounds down to 4 nodes radius to eliminate CPU rendering bottlenecks.
+                    * Step 3: Shift navigation over to our 'Resources Vault' interface tab grid. Pull down our pre-configured production 'FPS Boost Performance Patch Config'. Drag and drop it inside your server instances to bring TPS back to a perfect 20.0 stable score metrics!`;
+                } else if (processedPrompt.includes("lifesteal") || processedPrompt.includes("setup") || processedPrompt.includes("pack")) {
+                    aiResponse = `[DARKLEAKER AI Core - ASSET CONFIGURATIONS DEPLOYER]:
+                    🏰 PACK INTEGRITY SCHEMATIC PARSED COMPLETED.
 
-                    Product Asset Configuration Blueprint Details:
-                    * Targeted Matrix Setup: Basic Lifesteal Setup Server Configuration Pack Asset.
-                    * Core Frameworks: Engineered with pre-packed LuckPerms permissions branches groups maps, animated scoreboard holographic scripts vectors, and advanced player data trackers.
-                    * Deployment Strategy: Download the package vector block. Wipe previous variable cache fields inside your server directory pipeline, drag and drop the verified setup container files, and execute hot-reload network commands.`;
-                } else if (cleanQueryString.includes("download") || cleanQueryString.includes("mediafire") || cleanQueryString.includes("limit")) {
-                    aiResponse = `[DARKLEAKER AI Core - PLATFORM TRAFFIC SCHEDULER MATRIX]:
-                    🗝️ RESOURCE PACKAGE DOWNLOAD PROXIES UNLOCKED.
+                    Product Asset Specification Parameters:
+                    * Package Target Identity: Advanced Lifesteal Server Setup Setup Config Packet.
+                    * Architecture Features: Clean pre-mapped ranks strings, synchronized scoreboard metrics layers, holographic key shop indicators, and integrated security frameworks tracking blocks.
+                    * How to Deploy: Download the storage container block file. Clean out old config parameters folders inside your server VPS directory, drop the verified setup components inside, and invoke reload commands inside your console console.`;
+                } else if (processedPrompt.includes("download") || processedPrompt.includes("mediafire") || processedPrompt.includes("limit")) {
+                    aiResponse = `[DARKLEAKER AI Core - TRAFFIC PIPELINE AUTHORIZATION OVERRIDES]:
+                    🗝️ RESOURCE FETCH SCHEDULING DISPATCH DECRYPTED.
 
-                    Bypass Clearance Steps Blueprint:
-                    * Step 1: Press the 'Login with Discord' button inside the upper navigation navbar area to synchronize session security credentials.
-                    * Step 2: Switch the Single Page view frame layer over to the 'Resources' tab layout grid pane.
-                    * Step 3: Trigger the 'Download Pack' clearance action button. Our database RPC system will evaluate download limit values resets and instantly direct your window browser gateway right into the secure MediaFire deployment vector folder!`;
+                    Download Execution Blueprint Steps:
+                    * Step 1: Press the 'Login with Discord' button up on the primary navbar layout header to bind security credentials.
+                    * Step 2: Swap the Multi-page view layout state directly onto the 'Resources' Data Vault manifest layout.
+                    * Step 3: Hit the 'Download Pack' validation button. The database RPC procedure will increment the file download hit index live and instantly spawn open the MediaFire download link location inside a clean new browser tab vector!`;
                 }
 
                 setTimeout(() => {
-                    terminal.innerHTML += `<div class="ai-msg-bot">🤖 AI Assistant Engine Matrix:\n${aiResponse}</div>`;
+                    terminal.innerHTML += `<div class="ai-msg-bot">🤖 AI Assistant Matrix:\n${aiResponse}</div>`;
                     terminal.scrollTop = terminal.scrollHeight;
-                    SystemState.pushNotification("Trace resolution stream compiled successfully.");
+                    SystemState.pushNotification("Decrypted AI blueprint trace pushed to terminal viewport stream.");
                 }, 1000);
             }
         };
@@ -635,7 +657,6 @@
             }
         };
 
-        // COMPLETELY BUG-FREE TYPO PURGED SWITCH-PANE ALGORITHM
         const DashboardNav = {
             switchPane(paneId) {
                 document.querySelectorAll('.dash-pane-segment').forEach(p => p.classList.remove('active-pane-segment'));
