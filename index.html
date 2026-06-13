@@ -33,20 +33,20 @@
         .scroll-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: var(--border-line); z-index: 110000; }
         .scroll-fill { height: 100%; background: var(--primary); width: 0%; box-shadow: 0 0 10px var(--primary); }
 
-        /* FIXED HEADER BRANDING CONTROL NAVIGATION */
-        nav { position: sticky; top: 0; width: 100%; background: rgba(4, 4, 6, 0.96); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid var(--border-line); z-index: 10000; padding: 0 2rem; }
+        /* HEADER BRANDING NAVIGATION PANEL */
+        nav { position: sticky; top: 0; width: 100%; background: rgba(4, 4, 6, 0.96); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid var(--border-line); z-index: 10000; padding: 0 3rem; }
         .nav-inner { max-width: 1440px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 85px; }
         
-        /* REALTIME SCREENSHOT MATCHING FIXED LOGO */
+        /* 100% VISUAL SCREENSHOT EXACT LOGO MATCH LAYER */
         .logo { display: flex; align-items: center; gap: 8px; cursor: pointer; text-decoration: none; font-family: 'Orbitron', sans-serif; font-size: 22px; font-weight: 900; color: #fff; letter-spacing: 1px; white-space: nowrap; }
         .logo span { color: var(--primary); text-shadow: 0 0 12px var(--primary-glow); }
         
-        .nav-links { display: flex; align-items: center; gap: 1.5rem; list-style: none; }
-        .nav-links button { background: transparent; border: none; color: var(--text-muted); font-size: 12px; font-family: 'Orbitron', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: all 0.2s; }
+        .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+        .nav-links button { background: transparent; border: none; color: var(--text-muted); font-size: 13px; font-family: 'Orbitron', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: all 0.2s; }
         .nav-links button:hover, .nav-links button.active-nav { color: var(--primary); text-shadow: 0 0 8px var(--primary-glow); }
 
-        /* INTERACTIVE BUTTONS CONTROLLERS */
-        .btn { padding: 12px 24px; border-radius: 4px; font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 900; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; border: none; display: inline-flex; align-items: center; gap: 8px; }
+        /* BUTTON SYSTEM ENGINE METRICS */
+        .btn { padding: 12px 26px; border-radius: 4px; font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 900; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; border: none; display: inline-flex; align-items: center; gap: 8px; }
         .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 0 15px rgba(255, 0, 60, 0.3); }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 25px var(--primary-glow); }
         .btn-ghost { background: transparent; border: 1px solid #222233; color: var(--text-main); }
@@ -55,43 +55,43 @@
         .page-route-view { display: none; }
         .page-route-view.active-route { display: block; }
 
-        /* ADVANCED FLEXIBLE ASYMMETRIC GRID SYSTEM */
-        .asymmetric-hub-layout { display: grid; grid-template-columns: 1fr var(--sidebar-width); gap: 40px; max-width: 1440px; margin: 40px auto; padding: 0 2rem; }
+        /* ASYMMETRIC FLUID GRID CONTROLLER WORKSPACE */
+        .asymmetric-hub-layout { display: grid; grid-template-columns: 1fr var(--sidebar-width); gap: 40px; max-width: 1440px; margin: 40px auto; padding: 0 3rem; }
         
-        .hero-banner-sector { padding: 30px 0; position: relative; }
+        .hero-banner-sector { padding: 40px 0; position: relative; }
         .hero-badge-tag { display: inline-block; padding: 4px 10px; background: rgba(255, 0, 60, 0.08); border: 1px solid var(--primary); color: var(--primary); font-size: 10px; font-family: 'JetBrains Mono', monospace; font-weight: 700; letter-spacing: 1px; margin-bottom: 20px; text-transform: uppercase; }
         .hero-main-title { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 900; line-height: 1.1; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; }
         .hero-main-title span { color: var(--primary); text-shadow: 0 0 15px var(--primary-glow); }
-        .hero-meta-desc { color: var(--text-muted); font-size: 14px; line-height: 1.7; max-width: 680px; margin-bottom: 35px; }
+        .hero-meta-desc { color: var(--text-muted); font-size: 15px; line-height: 1.7; max-width: 680px; margin-bottom: 35px; }
 
-        /* STATS DATA STRIP COMPONENT */
-        .stats-infographic-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; background: #07070f; border: 1px solid var(--border-line); border-radius: 6px; padding: 20px; margin-bottom: 40px; }
+        /* STATS AUTOMATED STRIP METRICS */
+        .stats-infographic-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; background: #07070f; border: 1px solid var(--border-line); border-radius: 6px; padding: 20px; margin-bottom: 40px; }
         .stat-node-box { text-align: center; border-right: 1px solid rgba(255,255,255,0.03); }
         .stat-node-box:last-child { border: none; }
         .stat-node-metric { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 900; color: #fff; }
-        .stat-node-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; margin-top: 5px; font-family: 'JetBrains Mono', monospace; }
+        .stat-node-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-top: 5px; font-family: 'JetBrains Mono', monospace; }
 
         .panel-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-left: 4px solid var(--primary); padding-left: 15px; }
-        .panel-header-title { font-family: 'Orbitron', sans-serif; font-size: 1.4rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; }
-        .panel-header-link { font-size: 11px; color: var(--text-muted); text-decoration: none; cursor: pointer; font-family: 'Orbitron', sans-serif; font-weight: 700; }
+        .panel-header-title { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; }
+        .panel-header-link { font-size: 12px; color: var(--text-muted); text-decoration: none; cursor: pointer; font-family: 'Orbitron', sans-serif; font-weight: 700; }
         .panel-header-link:hover { color: var(--primary); }
 
-        /* ASSET CARDS ARCHITECTURE RENDERING */
-        .products-grid-matrix { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 20px; }
-        .product-card-node { background: var(--card-bg); border: 1px solid var(--border-line); border-radius: 6px; overflow: hidden; transition: all 0.3s ease; }
+        /* GRID CARDS LAYOUT */
+        .products-grid-matrix { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .product-card-node { background: var(--card-bg); border: 1px solid var(--border-line); border-radius: 6px; overflow: hidden; transition: all 0.3s cubic-bezier(.25,.46,.45,.94); }
         .product-card-node:hover { transform: translateY(-5px); border-color: #222233; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
-        .product-card-thumb { height: 140px; background: #08080e; display: flex; align-items: center; justify-content: center; font-size: 40px; position: relative; }
+        .product-card-thumb { height: 150px; background: #08080e; display: flex; align-items: center; justify-content: center; font-size: 45px; position: relative; }
         .product-card-badge { position: absolute; top: 12px; left: 12px; padding: 3px 8px; border-radius: 3px; font-size: 9px; font-family: 'JetBrains Mono', monospace; font-weight: 700; text-transform: uppercase; background: rgba(255, 0, 60, 0.12); color: var(--primary); border: 1px solid rgba(255, 0, 60, 0.2); }
         .product-card-body { padding: 20px; }
         .product-card-title { font-family: 'Orbitron', sans-serif; font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 8px; }
-        .product-card-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; height: 36px; overflow: hidden; }
-        .product-tag-info { background: rgba(255,0,60,0.04); color: var(--primary); border: 1px solid rgba(255,0,60,0.12); padding: 4px 8px; font-size: 9px; font-family: 'JetBrains Mono', monospace; font-weight: bold; width: fit-content; margin-bottom: 15px; border-radius: 3px; }
+        .product-card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; height: 38px; overflow: hidden; }
+        .product-tag-info { background: rgba(255,0,60,0.04); color: var(--primary); border: 1px solid rgba(255,0,60,0.12); padding: 4px 8px; font-size: 10px; font-family: 'JetBrains Mono', monospace; font-weight: bold; width: fit-content; margin-bottom: 15px; border-radius: 3px; }
 
-        .categories-flex-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin-bottom: 40px; }
-        .category-icon-box { background: var(--card-bg); border: 1px solid var(--border-line); border-radius: 6px; padding: 16px 8px; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .categories-flex-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 12px; margin-bottom: 40px; }
+        .category-icon-box { background: var(--card-bg); border: 1px solid var(--border-line); border-radius: 6px; padding: 18px 10px; text-align: center; cursor: pointer; transition: all 0.2s; }
         .category-icon-box:hover { border-color: var(--primary); background: rgba(255, 0, 60, 0.04); }
-        .category-box-emoji { font-size: 22px; margin-bottom: 8px; display: block; filter: drop-shadow(0 0 8px var(--primary-glow)); }
-        .category-box-lbl { font-size: 10px; font-family: 'Orbitron', sans-serif; font-weight: 700; color: var(--text-main); text-transform: uppercase; }
+        .category-box-emoji { font-size: 24px; margin-bottom: 8px; display: block; filter: drop-shadow(0 0 8px var(--primary-glow)); }
+        .category-box-lbl { font-size: 11px; font-family: 'Orbitron', sans-serif; font-weight: 700; color: var(--text-main); text-transform: uppercase; }
 
         .sidebar-panel-stack { display: flex; flex-direction: column; gap: 25px; }
         .side-widget-card { background: var(--card-bg); border: 1px solid var(--border-line); border-radius: 6px; padding: 25px; position: relative; }
@@ -99,23 +99,23 @@
         .side-widget-title span { color: var(--primary); }
         .side-widget-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px; }
 
-        /* HIGH INTELLIGENCE AI MODULE VIEW SYSTEM */
+        /* LIVE TERMINAL FEED CONSOLE VIEW DESIGN */
         .ai-terminal-output { background: #020204; border: 1px solid #141424; border-radius: 4px; padding: 15px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--green); height: 200px; overflow-y: auto; margin-bottom: 15px; line-height: 1.6; border-left: 2px solid var(--primary); }
         .ai-msg-user { color: #fff; margin-bottom: 8px; font-weight: bold; border-bottom: 1px dashed rgba(255,255,255,0.05); padding-bottom: 4px; }
         .ai-msg-bot { color: var(--green); margin-bottom: 12px; white-space: pre-line; }
 
-        /* THE TIERS MATRIX GRIDS */
-        .premium-plans-matrix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; margin-top: 30px; }
+        /* THE PRICING CARDS ROW */
+        .premium-plans-matrix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 30px; }
         .membership-tier-card { background: var(--card-bg); border: 1px solid var(--border-line); border-radius: 6px; padding: 35px; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
         .membership-tier-card.neon-active-focus { border-color: var(--primary); box-shadow: 0 0 30px rgba(255, 0, 60, 0.15); }
         .popular-badge-sticker { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--primary); color: #fff; padding: 3px 16px; border-radius: 30px; font-size: 10px; font-family: 'JetBrains Mono', monospace; font-weight: 700; }
-        .tier-amount-display { font-family: 'Orbitron', sans-serif; font-size: 2.3rem; font-weight: 900; color: #fff; margin: 12px 0; }
-        .tier-amount-display span { font-size: 13px; color: var(--text-muted); font-family: 'Exo 2', sans-serif; }
+        .tier-amount-display { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; font-weight: 900; color: #fff; margin: 12px 0; }
+        .tier-amount-display span { font-size: 14px; color: var(--text-muted); font-family: 'Exo 2', sans-serif; }
         .tier-benefits-list { list-style: none; margin: 20px 0; font-size: 13px; color: var(--text-main); }
         .tier-benefits-list li { margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
         .tier-benefits-list li::before { content: "✓"; color: var(--primary); font-weight: bold; }
 
-        /* INTERNAL PRIVILEGED COMMAND PANEL SYSTEM */
+        /* COMMAND CENTER INTERNAL DASH BOARD STRUCTURES */
         .dashboard-modular-frame { display: grid; grid-template-columns: 240px 1fr; gap: 30px; }
         .dashboard-tab-links { list-style: none; }
         .dashboard-tab-links button { width: 100%; padding: 12px 16px; background: transparent; border: none; color: var(--text-muted); font-family: 'Exo 2', sans-serif; font-size: 14px; text-align: left; cursor: pointer; border-radius: 4px; margin-bottom: 5px; display: flex; align-items: center; gap: 10px; font-weight: 600; }
@@ -133,14 +133,21 @@
 
         .select-role-dropdown { background: #08080f; color: #fff; border: 1px solid var(--border-line); padding: 6px; font-size: 12px; outline: none; }
 
-        /* RESPONSIVE MEDIA BREAKPOINTS CONTROL PLATFORM */
+        .role-badge { padding: 3px 8px; font-size: 9px; font-weight: 900; text-transform: uppercase; border-radius: 2px; font-family: 'JetBrains Mono', monospace; }
+        .rb-Owner { background: var(--primary); color: #fff; }
+        .rb-Admin { background: #ff7700; color: #fff; }
+        .rb-Dropper { background: var(--green); color: #000; }
+        .rb-Premium { background: #8a2be2; color: #fff; }
+        .rb-Member { background: #222233; color: #b0b0c0; }
+
+        /* HARDCORE CROSS COMPATIBILITY GLASS DEVICE BREAKPOINTS */
         @media(max-width: 1150px) {
             .asymmetric-hub-layout { grid-template-columns: 1fr; padding: 0 1.5rem; }
             nav { padding: 0 1.5rem; }
             .stats-infographic-strip { grid-template-columns: repeat(3, 1fr); }
         }
         @media(max-width: 768px) {
-            .hero-main-title { font-size: 2.3rem; }
+            .hero-main-title { font-size: 2.4rem; }
             .nav-inner { height: auto; flex-direction: column; gap: 15px; padding: 15px 0; }
             .nav-links { flex-wrap: wrap; justify-content: center; gap: 12px; }
             .stats-infographic-strip { grid-template-columns: repeat(2, 1fr); }
@@ -183,11 +190,11 @@
                 </div>
 
                 <div class="stats-infographic-strip">
-                    <div class="stat-node-box"><div class="stat-node-metric" id="stat-count-users">...</div><div class="stat-node-label">Members</div></div>
-                    <div class="stat-node-box"><div class="stat-node-metric" id="stat-count-items">...</div><div class="stat-node-label">Resources</div></div>
+                    <div class="stat-node-box"><div class="stat-node-metric" id="stat-count-users">0</div><div class="stat-node-label">Members</div></div>
+                    <div class="stat-node-box"><div class="stat-node-metric" id="stat-count-items">0</div><div class="stat-node-label">Resources</div></div>
                     <div class="stat-node-box"><div class="stat-node-metric">99.9%</div><div class="stat-node-label">Uptime</div></div>
                     <div class="stat-node-box"><div class="stat-node-metric">24/7</div><div class="stat-node-label">Support</div></div>
-                    <div class="stat-node-box"><div class="stat-node-metric" id="stat-count-hits">...</div><div class="stat-node-label">Downloads</div></div>
+                    <div class="stat-node-box"><div class="stat-node-metric" id="stat-count-hits">0</div><div class="stat-node-label">Downloads</div></div>
                 </div>
 
                 <div class="panel-header-row">
@@ -233,7 +240,7 @@
 
             <div id="route-premium" class="page-route-view">
                 <div class="panel-header-row"><h2 class="panel-header-title">Premium Membership Tiers</h2></div>
-                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">Acquire secure premium elevation configurations. Submitting values grants direct unlimited bypass authorizations.</p>
+                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 25px;">Acquire secure premium elevation configurations. Submitting values grants direct unlimited bypass authorizations.</p>
 
                 <div class="premium-plans-matrix-grid">
                     <div class="membership-tier-card">
@@ -374,10 +381,9 @@
                 <div class="side-widget-title">🤖 AI Assistant <span>BETA</span></div>
                 
                 <div class="ai-terminal-output" id="ai-log-terminal">
-                    <div class="ai-msg-bot">[AI Matrix Core Initialization Complete]: 
-                    Hello Adarsh Kumar! I am your advanced technical assistant node. 
+                    <div class="ai-msg-bot">[AI Matrix Core Online]: Welcome back Adarsh Kumar! I am your advanced architectural technical node assistant.
 
-                    Send me your Spigot/Paper server crash threads, server lag benchmarks, config parameters request, or database optimization questions directly. I am synchronized to compile answers with step-by-step blueprints!</div>
+                    Send me your Spigot/Paper server crash reports, plugin version dependencies exceptions, server lag benchmarks profiling, or database optimization questions directly. I will analyze the structural variables and deliver deep step-by-step blueprints instantly!</div>
                 </div>
 
                 <input type="text" id="ai-user-query" class="cyber-input" placeholder="Ask AI Assistant anything..." style="margin-bottom: 12px; padding: 12px;">
@@ -408,7 +414,7 @@
         <div class="footer-container">
             <div style="font-family:'Orbitron',sans-serif; font-size:16px; font-weight:900; color: #fff;">
                 👾 DARK <span style="color:var(--primary); text-shadow: 0 0 10px var(--primary-glow);">LEAKER //</span>
-                <p style="font-family:'Exo 2',sans-serif; font-size:11px; color:var(--text-muted); font-weight:400; margin-top:5px;">© 2026 DARKLEAKER Systems Engine. All authorization privileges mapping locked.</p>
+                <p style="font-family:'Exo 2',sans-serif; font-size:11px; color:var(--text-muted); font-weight:400; margin-top:5px;">© 2026 DARKLEAKER Systems Engine. All privileges protected.</p>
             </div>
             <div style="font-size:11px; font-family:'JetBrains Mono',monospace; color:var(--green);">
                 ● HARDWARE CLOUD STORAGE LAYER SYNC AUTHORIZED (0% LOAD)
@@ -419,7 +425,7 @@
     <div id="toast-box"></div>
 
     <script>
-        // MASTER CLEARANCES SECURITY PARAMETERS KEY PASSWORDS
+        // PRIVILEGED MASTER CODES ACCESS TOKENS DICTIONARY
         const SYSTEM_SECURITY_KEYS = {
             Owner: "OWNER_ROOT_SECURE_2026",
             Admin: "ADMIN_GATEWAY_COMPILER_LOCK",
@@ -511,13 +517,32 @@
                 }
             },
 
+            // REAL-TIME INCREMENTAL SMOOTH COUNTERS ROLLING ENGINE
+            animateRollingCount(elementId, targetMetric, additiveBase = 0) {
+                const element = document.getElementById(elementId);
+                if (!element) return;
+                
+                let startValue = 0;
+                const grandTotalTarget = targetMetric + additiveBase;
+                const frameStep = Math.ceil(grandTotalTarget / 50);
+                
+                const executionInterval = setInterval(() => {
+                    startValue = Math.min(startValue + frameStep, grandTotalTarget);
+                    element.innerText = startValue.toLocaleString('en-IN');
+                    if (startValue >= grandTotalTarget) clearInterval(executionInterval);
+                }, 30);
+            },
+
             runRealtimeCountersEngine() {
+                // Fetch dynamic elements count from backend infrastructure live
                 _supabase.from('users').select('id', { count: 'exact', head: true }).then(({count}) => {
-                    document.getElementById('stat-count-users').innerText = (count || 0) + 1481; 
+                    this.animateRollingCount('stat-count-users', (count || 0), 1481); 
                 });
-                document.getElementById('stat-count-items').innerText = VaultHub.cachedItems.length;
+                
+                this.animateRollingCount('stat-count-items', VaultHub.cachedItems.length, 0);
+                
                 const aggregatedDownloads = VaultHub.cachedItems.reduce((acc, item) => acc + (item.downloads || 0), 0);
-                document.getElementById('stat-count-hits').innerText = aggregatedDownloads + 942;
+                this.animateRollingCount('stat-count-hits', aggregatedDownloads, 942);
             },
 
             pushNotification(msg, status = 'success') {
@@ -530,68 +555,69 @@
             }
         };
 
-        // EXTREMELY INTELLIGENT EXPERT LEVEL CONTEXT REPLY AI MACHINE ENGINE
+        // ADVANCED COGNITIVE DEEP ALIGNED TECHNICAL CONTEXT AI MACHINE ENGINE
         const AICoreEngine = {
             processQuery() {
                 const queryInput = document.getElementById('ai-user-query');
                 const terminal = document.getElementById('ai-log-terminal');
-                const promptText = queryInput.value.trim();
+                const rawPrompt = queryInput.value.trim();
 
-                if (!promptText) { SystemState.pushNotification("Please type a clear configuration request.", "error"); return; }
+                if (!rawPrompt) { SystemState.pushNotification("Computational string verification empty.", "error"); return; }
 
-                terminal.innerHTML += `<div class="ai-msg-user">>> You: ${promptText}</div>`;
+                terminal.innerHTML += `<div class="ai-msg-user">>> You: ${rawPrompt}</div>`;
                 terminal.scrollTop = terminal.scrollHeight;
                 queryInput.value = '';
 
-                let aiResponse = `[DARKLEAKER Matrix AI Core Engine Response]:
-                Hello Agent! I have processed your technical prompt. Analysis for query logs on "${promptText}" has finished with compiled records.
-                
-                💡 Master Fix Recommendations Strategy:
-                1. Verify that your core server build dependencies aren't generating multi-hook conflicts.
-                2. Inside the 'plugins' structure folder, clear out residual nested cache folders and check logs.
-                3. If anomalies remain, deploy an engineering support ticket inside our official Discord Channel Node immediately so the staff team can debug live.`;
+                // Fallback adaptive technical answer architecture
+                let aiResponse = `[DARKLEAKER Matrix AI Resolution Blueprint Analysis]:
+                Context validation check approved. Regarding your request "${rawPrompt}" — calculations completed.
 
-                const processedPrompt = promptText.toLowerCase();
+                🔧 Structural Fix Strategy Steps:
+                1. Navigate straight inside your Minecraft server root directory filesystem profile.
+                2. Inside the 'plugins' structure block array, check for NMS cross-hooks compilation errors.
+                3. Open your official Discord support gateway ticket section if compilation exceptions continue to isolate data blocks.`;
 
-                if (processedPrompt.includes("error") || processedPrompt.includes("crash") || processedPrompt.includes("fail") || processedPrompt.includes("nullpointer") || processedPrompt.includes("exception")) {
-                    aiResponse = `[DARKLEAKER AI Core - CRITICAL TRACE COMPILER]:
-                    🚨 SERVER CRASH / EXCEPTION EXHAUSTION DISCOVERED.
-                    
-                    Detailed Technical Action Plan:
-                    * Diagnostic: The server stack indicates a version mismatch or internal variable collision inside your Spigot dependencies pipeline.
-                    * Resolution Blueprint 1: Open 'crash-reports' data block and look at the 'Caused by' log trace lines.
-                    * Resolution Blueprint 2: Verify if your Java runtime flags match (Java 17/21 are strictly forced for latest Paper API builds).
-                    * Resolution Blueprint 3: Re-download the clean artifact manifest packet directly from our direct Resources Vault page and wipe previous configuration blocks.`;
-                } else if (processedPrompt.includes("lag") || processedPrompt.includes("fps") || processedPrompt.includes("optimize") || processedPrompt.includes("tps") || processedPrompt.includes("boost")) {
-                    aiResponse = `[DARKLEAKER AI Core - PERFORMANCE TUNING PROTOCOLS]:
-                    ⚡ PERFORMANCE MATRIX DEGRADATION DETECTED.
-                    
-                    Step-by-Step Optimization Architecture Blueprint:
-                    * Step 1: Open your 'spigot.yml' file parameters. Set 'save-user-cache-on-stop-only' flag to true.
-                    * Step 2: Shift into the 'paper.yml' or global configuration environment variables. Adjust 'max-auto-save-chunks-per-tick' down to 6 to free processing bottlenecks.
-                    * Step 3: Head directly onto our 'Resources' sub-pane. Fetch our pre-optimized 'FPS Boost Performance Configuration' package. Drop it straight into your VPS backend storage node to normalize TPS back to a steady 20.0 metrics count!`;
-                } else if (processedPrompt.includes("lifesteal") || processedPrompt.includes("setup") || processedPrompt.includes("pack")) {
-                    aiResponse = `[DARKLEAKER AI Core - REPOSITORY ARCHITECTURE VERIFIER]:
+                const cleanQueryString = rawPrompt.toLowerCase();
+
+                if (cleanQueryString.includes("error") || cleanQueryString.includes("crash") || cleanQueryString.includes("fail") || cleanQueryString.includes("exception") || cleanQueryString.includes("nullpointer")) {
+                    aiResponse = `[DARKLEAKER AI Core - CRITICAL EVENT DISPATCH TRACE]:
+                    🚨 SERVER CRASH EXCEPTION REGISTERED NATIVELY.
+
+                    Detailed Resolution Action-Tree:
+                    * Root Mismatch: Your Spigot/Paper API jar build parameters has collided with an older configuration mapping schema.
+                    * Action Step 1: Open 'logs/latest.log' and filter out the 'Caused by' lines to inspect class references.
+                    * Action Step 2: Ensure your JVM container configuration parameters enforce Java 17 or Java 21 flags accurately.
+                    * Action Step 3: Purge broken nested folder configurations files, pull the stable verified asset packet out of our Resources Vault, and boot again.`;
+                } else if (cleanQueryString.includes("lag") || cleanQueryString.includes("fps") || cleanQueryString.includes("optimize") || cleanQueryString.includes("tps") || cleanQueryString.includes("boost")) {
+                    aiResponse = `[DARKLEAKER AI Core - HIGH-END PERFORMANCE COMPILER TUNING]:
+                    ⚡ PERFORMANCE MATRIX SLOWDOWN THREAD BOUNDED.
+
+                    Step-by-Step Optimization Architecture:
+                    * Step 1: Access your server 'paper.yml' or structural config layer flags. Set 'entity-activation-range' parameters down to minimal values.
+                    * Step 2: In 'spigot.yml', limit 'chunks-per-tick' processing allocations matrices to 4 to reduce system disk ticks latency overhead bounds.
+                    * Step 3: Go onto our website's 'Resources Data Vault' screen frame and inject our pre-optimized production 'FPS Boost Config Packet' straight inside your VPS server container instance to normalize TPS back to 20.0 metrics count!`;
+                } else if (cleanQueryString.includes("lifesteal") || cleanQueryString.includes("setup") || cleanQueryString.includes("pack")) {
+                    aiResponse = `[DARKLEAKER AI Core - PRODUCT MANIFEST PARSER]:
                     🏰 PACK INTEGRITY SCHEMATIC LOADED SUCCESSFULLY.
-                    
-                    Product Configuration Matrix Specifications:
-                    * Deployment Pack Name: Advanced Lifesteal Server Setup Setup Packet Core.
-                    * Architectural Design: Engineered cleanly with pre-built LuckPerms permissions layers, dynamic hearts distribution metrics equations, and secure anti-griefing system loops.
-                    * Deployment Method: Download the setup payload. Unpack it straight into your server VPS root framework file channel and boot up the system container.`;
-                } else if (processedPrompt.includes("download") || processedPrompt.includes("mediafire") || processedPrompt.includes("limit")) {
-                    aiResponse = `[DARKLEAKER AI Core - ACCESS GATEWAY OVERRIDE LOGS]:
-                    🗝️ RESOURCE PACKAGE DOWNLOAD CLAIMS SCHEDULER.
-                    
-                    Step-by-Step Download Execution Steps:
-                    * Step 1: Hit the 'Login with Discord' button up on the navigation bar to map your account node data.
-                    * Step 2: Proceed straight onto the 'Resources' data tab layout page.
-                    * Step 3: Click on 'Download Pack'. The background storage procedure will increment the file download counter hits and instantly open your MediaFire destination package vector inside an independent browser viewport tab!`;
+
+                    Product Asset Configuration Blueprint Details:
+                    * Targeted Matrix Setup: Basic Lifesteal Setup Server Configuration Pack Asset.
+                    * Core Frameworks: Engineered with pre-packed LuckPerms permissions branches groups maps, animated scoreboard holographic scripts vectors, and advanced player data trackers.
+                    * Deployment Strategy: Download the package vector block. Wipe previous variable cache fields inside your server directory pipeline, drag and drop the verified setup container files, and execute hot-reload network commands.`;
+                } else if (cleanQueryString.includes("download") || cleanQueryString.includes("mediafire") || cleanQueryString.includes("limit")) {
+                    aiResponse = `[DARKLEAKER AI Core - PLATFORM TRAFFIC SCHEDULER MATRIX]:
+                    🗝️ RESOURCE PACKAGE DOWNLOAD PROXIES UNLOCKED.
+
+                    Bypass Clearance Steps Blueprint:
+                    * Step 1: Press the 'Login with Discord' button inside the upper navigation navbar area to synchronize session security credentials.
+                    * Step 2: Switch the Single Page view frame layer over to the 'Resources' tab layout grid pane.
+                    * Step 3: Trigger the 'Download Pack' clearance action button. Our database RPC system will evaluate download limit values resets and instantly direct your window browser gateway right into the secure MediaFire deployment vector folder!`;
                 }
 
                 setTimeout(() => {
                     terminal.innerHTML += `<div class="ai-msg-bot">🤖 AI Assistant Engine Matrix:\n${aiResponse}</div>`;
                     terminal.scrollTop = terminal.scrollHeight;
-                    SystemState.pushNotification("Decrypted AI response trace pushed to screen viewer.");
+                    SystemState.pushNotification("Trace resolution stream compiled successfully.");
                 }, 1000);
             }
         };
@@ -609,14 +635,17 @@
             }
         };
 
-        // FIXED CRITICAL ARRAYS LOOP SWITCH ACCURATELY TYPO FREE
+        // COMPLETELY BUG-FREE TYPO PURGED SWITCH-PANE ALGORITHM
         const DashboardNav = {
             switchPane(paneId) {
                 document.querySelectorAll('.dash-pane-segment').forEach(p => p.classList.remove('active-pane-segment'));
                 document.querySelectorAll('.dashboard-tab-links button').forEach(b => b.classList.remove('active-pane-btn'));
                 
-                document.getElementById(`pane-${paneId}`).classList.add('active-pane-segment');
-                document.getElementById(`tab-btn-${paneId}`).classList.add('active-pane-btn');
+                const targetPane = document.getElementById(`pane-${paneId}`);
+                if (targetPane) targetPane.classList.add('active-pane-segment');
+                
+                const targetButton = document.getElementById(`tab-btn-${paneId}`);
+                if (targetButton) targetButton.classList.add('active-pane-btn');
             }
         };
 
@@ -671,7 +700,7 @@
                 });
 
                 if(filtered.length === 0) {
-                    targetGrid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:50px; font-family:'JetBrains Mono',monospace; color:var(--text-muted);">>> NO DATA ARTIFACTS CONFIGURED IN THIS SECTOR DISPATCH...</div>`;
+                    targetGrid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:50px; font-family:'JetBrains Mono',monospace; color:var(--text-muted);">>> NO DATA ARTIFACTS CONFIGURED...</div>`;
                     return;
                 }
 
