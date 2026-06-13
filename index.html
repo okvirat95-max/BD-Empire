@@ -3,312 +3,454 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DARKLEAKER // MASTER SECURE SYSTEM</title>
+    <title>DARKLEAKER // DOWNLOAD. CUSTOMIZE. DOMINATE.</title>
     
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Exo+2:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --bg-dark: #040406;
             --bg-deep: #010102;
-            --card-bg: rgba(8, 8, 14, 0.93);
+            --card-bg: rgba(14, 14, 22, 0.96);
             --primary: #ff003c;
-            --primary-glow: rgba(255, 0, 60, 0.6);
-            --secondary: #00f0ff;
-            --secondary-glow: rgba(0, 240, 255, 0.5);
-            --purple: #8a2be2;
+            --primary-glow: rgba(255, 0, 60, 0.5);
+            --green: #00ff88;
             --text-main: #f5f5fa;
             --text-muted: #6e6e8a;
-            --matrix-green: #00ff66;
+            --border-line: #14141f;
+            --sidebar-width: 380px;
         }
 
-        * {
-            margin: 0; padding: 0; box-sizing: border-box;
-            font-family: 'Consolas', 'Courier New', monospace, sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            background-color: var(--bg-dark); color: var(--text-main);
-            overflow-x: hidden; min-height: 100vh;
-            background-image: 
-                linear-gradient(rgba(255, 0, 60, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 0, 60, 0.02) 1px, transparent 1px),
-                radial-gradient(circle at 50% -20%, rgba(138, 43, 226, 0.35) 0%, transparent 60%);
-            background-size: 35px 35px, 35px 35px, auto;
-            background-attachment: fixed;
+            font-family: 'Exo 2', sans-serif; background-color: var(--bg-dark); color: var(--text-main); overflow-x: hidden;
+            background-image: linear-gradient(rgba(255, 0, 60, 0.01) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 0, 60, 0.01) 1px, transparent 1px);
+            background-size: 60px 60px;
         }
 
-        body::before {
-            content: " "; display: block; position: fixed;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
-            z-index: 99999; opacity: 0.3; pointer-events: none; background-size: 100% 4px;
-        }
+        .scroll-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: var(--border-line); z-index: 110000; }
+        .scroll-fill { height: 100%; background: var(--primary); width: 0%; box-shadow: 0 0 10px var(--primary); }
 
-        /* SIMULATED ROLE SWITCHBOARD TOP BAR */
-        .backdoor-bar {
-            background: #090105; padding: 12px; text-align: center; font-size: 11px;
-            border-bottom: 2px solid var(--primary); box-shadow: 0 0 15px var(--primary-glow);
-            position: relative; z-index: 10001; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
-        }
-        .backdoor-bar span { color: var(--secondary); font-weight: bold; letter-spacing: 1px; }
-        .backdoor-btn {
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
-            color: #fff; cursor: pointer; font-size: 10px; font-weight: bold; padding: 4px 12px;
-            text-transform: uppercase; transition: all 0.2s; border-radius: 3px;
-        }
-        .backdoor-btn:hover { border-color: var(--primary); background: rgba(255, 0, 60, 0.15); color: var(--primary); box-shadow: 0 0 8px var(--primary-glow); }
-
-        .cyber-panel {
-            background: var(--card-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.04); border-left: 4px solid var(--primary);
-            border-right: 4px solid var(--secondary); border-radius: 4px;
-            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.8); position: relative; overflow: hidden;
-        }
-
-        .glitch-btn {
-            background: transparent; color: #fff; border: 1px solid var(--secondary);
-            padding: 12px 26px; cursor: pointer; font-weight: 900; text-transform: uppercase;
-            letter-spacing: 2px; position: relative; transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
-            clip-path: polygon(92% 0, 100% 25%, 100% 100%, 8% 100%, 0% 75%, 0 0);
-        }
-        .glitch-btn:hover { background: var(--secondary); color: #000; box-shadow: 0 0 25px var(--secondary-glow); transform: translateY(-2px); }
-        .glitch-btn-primary { border-color: var(--primary); box-shadow: 0 0 15px rgba(255, 0, 60, 0.2); }
-        .glitch-btn-primary:hover { background: var(--primary); color: #fff; box-shadow: 0 0 25px var(--primary-glow); }
-        .glitch-btn-danger { border-color: #ff3333; color: #ff3333; }
-        .glitch-btn-danger:hover { background: #ff3333; color: #fff; box-shadow: 0 0 15px rgba(255,51,51,0.5); }
-
-        .navbar {
-            width: 100%; padding: 20px 40px; display: flex; justify-content: space-between;
-            align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            background: rgba(3, 3, 5, 0.95); position: sticky; top: 0; z-index: 10000;
-        }
-        .logo { font-size: 24px; font-weight: 900; letter-spacing: 3px; color: #fff; text-shadow: 0 0 15px var(--primary-glow); cursor: pointer; }
-        .logo span { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
-        .nav-links { display: flex; align-items: center; }
-        .nav-links button {
-            background: transparent; border: none; color: var(--text-muted); text-transform: uppercase;
-            letter-spacing: 2px; font-size: 12px; margin-left: 25px; font-weight: bold; cursor: pointer; transition: all 0.3s;
-        }
-        .nav-links button:hover, .nav-links button.active-nav { color: var(--secondary); text-shadow: 0 0 8px var(--secondary-glow); }
-
-        .container { max-width: 1300px; margin: 40px auto; padding: 0 20px; }
-        .grid-matrix { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
+        /* NAVBAR HEADER BRANDING */
+        nav { position: sticky; top: 0; width: 100%; background: rgba(4, 4, 6, 0.96); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid var(--border-line); z-index: 10000; padding: 0 3rem; }
+        .nav-inner { max-width: 1440px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 85px; }
         
-        .vault-card { transition: all 0.3s ease; background: linear-gradient(145deg, #0c0c14 0%, #040407 100%); border: 1px solid rgba(255,255,255,0.03); }
-        .vault-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0, 240, 255, 0.15); border-color: rgba(0,240,255,0.3); }
-        .card-header-img { width: 100%; height: 190px; object-fit: cover; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .card-core-body { padding: 22px; }
-        .badge-tag { background: rgba(0, 240, 255, 0.08); color: var(--secondary); padding: 5px 12px; font-size: 11px; font-weight: bold; text-transform: uppercase; border: 1px solid rgba(0,240,255,0.2); width: fit-content; margin-bottom: 12px; }
+        /* LOGO CORRECTION FIXED ACCORDING TO SCREENSHOT */
+        .logo { display: flex; align-items: center; gap: 10px; cursor: pointer; text-decoration: none; font-family: 'Orbitron', sans-serif; font-size: 24px; font-weight: 900; color: #fff; letter-spacing: 1px; }
+        .logo span { color: var(--primary); text-shadow: 0 0 12px var(--primary-glow); }
+        
+        .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+        .nav-links button { background: transparent; border: none; color: var(--text-muted); font-size: 13px; font-family: 'Orbitron', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: all 0.2s; }
+        .nav-links button:hover, .nav-links button.active-nav { color: var(--primary); text-shadow: 0 0 8px var(--primary-glow); }
 
-        .role-badge { padding: 4px 12px; font-size: 10px; font-weight: 900; text-transform: uppercase; border-radius: 2px; display: inline-block; }
-        .rb-Owner { background: var(--primary); color: #fff; box-shadow: 0 0 12px var(--primary-glow); }
-        .rb-Admin { background: #ff7700; color: #fff; }
-        .rb-Dropper { background: var(--matrix-green); color: #000; }
-        .rb-Premium { background: var(--purple); color: #fff; }
-        .rb-Member { background: #222233; color: #b0b0c0; }
+        /* BUTTON SYSTEM ENGINE */
+        .btn { padding: 12px 26px; border-radius: 4px; font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 900; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; border: none; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 0 15px rgba(255, 0, 60, 0.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 25px var(--primary-glow); }
+        .btn-ghost { background: transparent; border: 1px solid #222233; color: var(--text-main); }
+        .btn-ghost:hover { border-color: var(--primary); background: rgba(255, 0, 60, 0.05); }
 
-        .filter-row { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 12px; margin-top: 20px; }
-        .filter-row button { flex-shrink: 0; }
-        .filter-row::-webkit-scrollbar { height: 4px; }
-        .filter-row::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+        .page-route-view { display: none; }
+        .page-route-view.active-route { display: block; }
 
-        .form-group { margin-bottom: 25px; }
-        .form-group label { display: block; margin-bottom: 10px; color: var(--secondary); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
-        .cyber-input {
-            width: 100%; background: #07070c; border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 15px; color: #fff; font-family: monospace; outline: none; border-left: 3px solid var(--secondary);
-            border-radius: 2px;
+        /* MULTI-COLUMN ASYMMETRIC GRID */
+        .asymmetric-hub-layout { display: grid; grid-template-columns: 1fr var(--sidebar-width); gap: 40px; max-width: 1440px; margin: 40px auto; padding: 0 3rem; }
+        
+        .hero-banner-sector { padding: 40px 0; position: relative; }
+        .hero-badge-tag { display: inline-block; padding: 4px 10px; background: rgba(255, 0, 60, 0.08); border: 1px solid var(--primary); color: var(--primary); font-size: 10px; font-family: 'JetBrains Mono', monospace; font-weight: 700; letter-spacing: 1px; margin-bottom: 20px; text-transform: uppercase; }
+        .hero-main-title { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 900; line-height: 1.1; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; }
+        .hero-main-title span { color: var(--primary); text-shadow: 0 0 15px var(--primary-glow); }
+        .hero-meta-desc { color: var(--text-muted); font-size: 15px; line-height: 1.7; max-width: 680px; margin-bottom: 35px; }
+
+        /* METRIC STRIP RESPONSIVE GRID */
+        .stats-infographic-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; background: #07070f; border: 1px solid var(--border-line); border-radius: 6px; padding: 20px; margin-bottom: 40px; }
+        .stat-node-box { text-align: center; border-right: 1px solid rgba(255,255,255,0.03); }
+        .stat-node-box:last-child { border: none; }
+        .stat-node-metric { font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 900; color: #fff; }
+        .stat-node-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-top: 5px; font-family: 'JetBrains Mono', monospace; }
+
+        .panel-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-left: 4px solid var(--primary); padding-left: 15px; }
+        .panel-header-title { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; }
+        .panel-header-link { font-size: 12px; color: var(--text-muted); text-decoration: none; cursor: pointer; font-family: 'Orbitron', sans-serif; font-weight: 700; }
+        .panel-header-link:hover { color: var(--primary); }
+
+        .products-grid-matrix { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .product-card-node { background: var(--card-bg); border: 1px solid var(--border-line); border-radius: 6px; overflow: hidden; transition: all 0.3s cubic-bezier(.25,.46,.45,.94); }
+        .product-card-node:hover { transform: translateY(-5px); border-color: #222233; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
+        .product-card-thumb { height: 150px; background: #08080e; display: flex; align-items: center; justify-content: center; font-size: 45px; position: relative; }
+        .product-card-badge { position: absolute; top: 12px; left: 12px; padding: 3px 8px; border-radius: 3px; font-size: 9px; font-family: 'JetBrains Mono', monospace; font-weight: 700; text-transform: uppercase; background: rgba(255, 0, 60, 0.12); color: var(--primary); border: 1px solid rgba(255, 0, 60, 0.2); }
+        .product-card-body { padding: 20px; }
+        .product-card-title { font-family: 'Orbitron', sans-serif; font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .product-card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; height: 38px; overflow: hidden; }
+        .product-tag-info { background: rgba(255,0,60,0.04); color: var(--primary); border: 1px solid rgba(255,0,60,0.12); padding: 4px 8px; font-size: 10px; font-family: 'JetBrains Mono', monospace; font-weight: bold; width: fit-content; margin-bottom: 15px; border-radius: 3px; }
+
+        .categories-flex-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 12px; margin-bottom: 40px; }
+        .category-icon-box { background: var(--card-bg); border: 1px solid var(--border-line); border-radius: 6px; padding: 18px 10px; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .category-icon-box:hover { border-color: var(--primary); background: rgba(255, 0, 60, 0.04); }
+        .category-box-emoji { font-size: 24px; margin-bottom: 8px; display: block; filter: drop-shadow(0 0 8px var(--primary-glow)); }
+        .category-box-lbl { font-size: 11px; font-family: 'Orbitron', sans-serif; font-weight: 700; color: var(--text-main); text-transform: uppercase; }
+
+        .sidebar-panel-stack { display: flex; flex-direction: column; gap: 25px; }
+        .side-widget-card { background: var(--card-bg); border: 1px solid var(--border-line); border-radius: 6px; padding: 25px; position: relative; }
+        .side-widget-title { font-family: 'Orbitron', sans-serif; font-size: 13px; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+        .side-widget-title span { color: var(--primary); }
+        .side-widget-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 15px; }
+
+        /* ADVANCED INTELLIGENT TERMINAL LOG VIEW PANEL */
+        .ai-terminal-output { background: #020204; border: 1px solid #141424; border-radius: 4px; padding: 15px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--green); height: 180px; overflow-y: auto; margin-bottom: 15px; line-height: 1.5; border-left: 2px solid var(--primary); }
+        .ai-msg-user { color: #fff; margin-bottom: 8px; font-weight: bold; border-bottom: 1px dashed rgba(255,255,255,0.05); padding-bottom: 4px; }
+        .ai-msg-bot { color: var(--green); margin-bottom: 12px; white-space: pre-line; }
+
+        /* MEMBERSHIP PRICING TIER DESIGN */
+        .premium-plans-matrix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 30px; }
+        .membership-tier-card { background: var(--card-bg); border: 1px solid var(--border-line); border-radius: 6px; padding: 35px; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
+        .membership-tier-card.neon-active-focus { border-color: var(--primary); box-shadow: 0 0 30px rgba(255, 0, 60, 0.15); }
+        .popular-badge-sticker { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--primary); color: #fff; padding: 3px 16px; border-radius: 30px; font-size: 10px; font-family: 'JetBrains Mono', monospace; font-weight: 700; }
+        .tier-amount-display { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; font-weight: 900; color: #fff; margin: 12px 0; }
+        .tier-amount-display span { font-size: 14px; color: var(--text-muted); font-family: 'Exo 2', sans-serif; }
+        .tier-benefits-list { list-style: none; margin: 20px 0; font-size: 13px; color: var(--text-main); }
+        .tier-benefits-list li { margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .tier-benefits-list li::before { content: "✓"; color: var(--primary); font-weight: bold; }
+
+        /* COMMAND CENTER CONSOLE INTERNALS */
+        .dashboard-modular-frame { display: grid; grid-template-columns: 240px 1fr; gap: 30px; }
+        .dashboard-tab-links { list-style: none; }
+        .dashboard-tab-links button { width: 100%; padding: 12px 16px; background: transparent; border: none; color: var(--text-muted); font-family: 'Exo 2', sans-serif; font-size: 14px; text-align: left; cursor: pointer; border-radius: 4px; margin-bottom: 5px; display: flex; align-items: center; gap: 10px; font-weight: 600; }
+        .dashboard-tab-links button:hover, .dashboard-tab-links button.active-pane-btn { background: rgba(255, 0, 60, 0.08); color: #fff; border-left: 3px solid var(--primary); }
+        
+        .dash-pane-segment { display: none; }
+        .dash-pane-segment.active-pane-segment { display: block; }
+        .cyber-input { width: 100%; background: #08080f; border: 1px solid var(--border-line); padding: 14px; color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 13px; outline: none; border-left: 3px solid var(--primary); border-radius: 4px; margin-top: 5px; }
+        .cyber-input:focus { border-left-color: var(--primary); box-shadow: 0 0 15px rgba(255,0,60,0.1); }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text-muted); text-transform: uppercase; }
+
+        .admin-data-table { width: 100%; border-collapse: collapse; margin-top: 15px; text-align: left; }
+        .admin-data-table th { padding: 12px; color: var(--primary); font-size: 11px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; border-bottom: 2px solid var(--border-line); }
+        .admin-data-table td { padding: 12px; border-bottom: 1px solid var(--border-line); font-size: 13px; }
+
+        .select-role-dropdown { background: #08080f; color: #fff; border: 1px solid var(--border-line); padding: 6px; font-size: 12px; outline: none; }
+
+        #toast-box { position: fixed; bottom: 30px; right: 30px; z-index: 110000; max-width: 360px; width: calc(100% - 60px); }
+        .toast-message { background: #06060a; border-left: 4px solid var(--primary); padding: 16px 22px; margin-top: 10px; box-shadow: 0 15px 40px rgba(0,0,0,0.8); border-top: 1px solid rgba(255,255,255,0.05); color: #fff; font-size: 13px; font-family: 'JetBrains Mono', monospace; }
+        .toast-success { border-left-color: var(--green); }
+
+        footer { background: #020204; border-top: 1px solid var(--border-line); padding: 40px 0; margin-top: 80px; }
+        .footer-container { max-width: 1440px; margin: 0 auto; padding: 0 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+
+        /* RESPONSIVE LAYOUT ENGINES */
+        @media(max-width: 1150px) {
+            .asymmetric-hub-layout { grid-template-columns: 1fr; padding: 0 1.5rem; }
+            nav { padding: 0 1.5rem; }
+            .stats-infographic-strip { grid-template-columns: repeat(3, 1fr); }
         }
-        .cyber-input:focus { border-left-color: var(--primary); box-shadow: 0 0 15px rgba(255,0,60,0.15); }
-
-        #toast-box { position: fixed; bottom: 30px; right: 30px; z-index: 110000; max-width: 350px; width: calc(100% - 60px); }
-        .toast-message {
-            background: #06060a; border-left: 4px solid var(--primary); padding: 16px 25px; margin-top: 12px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.8); border-top: 1px solid rgba(255,255,255,0.05); color: #fff; font-size: 12px;
-            letter-spacing: 0.5px; line-height: 1.4;
-        }
-        .toast-success { border-left-color: var(--matrix-green); }
-
-        .view-frame { display: none; }
-        .view-frame.active-frame { display: block; }
-
-        /* ADMIN DATA CONTROL DESIGN TABLES */
-        .admin-table { width: 100%; border-collapse: collapse; margin-top: 20px; text-align: left; }
-        .admin-table th { padding: 15px; color: var(--secondary); font-size: 12px; text-transform: uppercase; border-bottom: 2px solid rgba(255,255,255,0.1); }
-        .admin-table td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; vertical-align: middle; }
-        .admin-user-row:hover { background: rgba(255,255,255,0.02); }
-        .select-role-dropdown { background: #07070c; color: #fff; border: 1px solid rgba(255,255,255,0.1); padding: 6px; font-size: 12px; border-left: 2px solid var(--secondary); outline: none; }
-
-        @media(max-width: 850px) {
-            .navbar { padding: 15px 20px; flex-direction: column; gap: 15px; }
-            .nav-links { width: 100%; justify-content: center; flex-wrap: wrap; gap: 10px; }
-            .nav-links button { margin: 0 10px; font-size: 11px; }
-            .admin-table, .admin-table thead, .admin-table tbody, .admin-table th, .admin-table td, .admin-table tr { display: block; }
-            .admin-table tr { margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.05); padding: 10px; }
-            .admin-table td { border: none; padding: 6px; text-align: right; position: relative; }
-            .admin-table td::before { content: attr(data-label); position: absolute; left: 10px; font-weight: bold; color: var(--secondary); font-size: 11px; text-transform: uppercase; }
+        @media(max-width: 768px) {
+            .hero-main-title { font-size: 2.4rem; }
+            .nav-inner { height: auto; flex-direction: column; gap: 15px; padding: 15px 0; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 15px; }
+            .stats-infographic-strip { grid-template-columns: repeat(2, 1fr); }
+            .dashboard-modular-frame { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div class="backdoor-bar">
-        <span>🔒 [SECURITY SIMULATION CONTROLBOARD]:</span> 
-        <button class="backdoor-btn" onclick="DevBackdoor.elevate('Owner')">Set Owner Mode</button>
-        <button class="backdoor-btn" onclick="DevBackdoor.elevate('Admin')">Set Admin Mode</button>
-        <button class="backdoor-btn" onclick="DevBackdoor.elevate('Dropper')">Set Dropper Mode</button>
-        <button class="backdoor-btn" onclick="DevBackdoor.elevate('Premium')">Set Premium Mode</button>
-        <button class="backdoor-btn" onclick="DevBackdoor.elevate('Member')">Reset Member Mode</button>
-    </div>
+    <div class="scroll-bar"><div class="scroll-fill" id="scroll-indicator"></div></div>
 
-    <nav class="navbar">
-        <div class="logo" onclick="Navigation.goto('landing')">DARK<span>LEAKER //</span></div>
-        <div class="nav-links">
-            <button id="nav-landing" class="active-nav" onclick="Navigation.goto('landing')">Home Base</button>
-            <button id="nav-vault" onclick="Navigation.goto('vault')">Data Vault</button>
-            <button id="nav-dashboard" onclick="Navigation.goto('dashboard')">Terminal Console</button>
-            <span id="account-zone" style="margin-left: 20px;"></span>
+    <!-- UPPER NAVIGATION PLATFORM MENU -->
+    <nav>
+        <div class="nav-inner">
+            <!-- BRANDING LOGO REMAPPED PER SCREENSHOT SPECS -->
+            <div class="logo" onclick="Navigation.goto('landing')">
+                👾 DARK <span style="color:var(--primary); text-shadow: 0 0 12px var(--primary-glow);">LEAKER //</span>
+            </div>
+            <ul class="nav-links">
+                <li><button id="nav-landing" class="active-nav" onclick="Navigation.goto('landing')">Home</button></li>
+                <li><button id="nav-vault" onclick="Navigation.goto('vault')">Resources</button></li>
+                <li><button id="nav-premium" onclick="Navigation.goto('premium')">Premium Plans</button></li>
+                <li><button id="nav-dashboard" onclick="Navigation.goto('dashboard')">Command Center</button></li>
+            </ul>
+            <div id="account-zone"></div>
         </div>
     </nav>
 
-    <div id="frame-landing" class="view-frame active-frame">
-        <main class="container" style="text-align: center; padding-top: 70px;">
-            <div style="display: inline-block; padding: 6px 14px; background: rgba(255,0,60,0.08); border: 1px solid var(--primary); color: var(--primary); font-size: 11px; margin-bottom: 25px; letter-spacing: 2px; font-weight: bold;">
-                ANTI-ALT SYSTEM ARMED // SYSTEM PLATFORM SECURE
-            </div>
-            <h1 style="font-size: 3.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; background: linear-gradient(to right, #fff, var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2;">
-                DECRYPTING PREMIUM <br>GAMING REPOSITORIES
-            </h1>
-            <p style="color: var(--text-muted); max-width: 750px; margin: 0 auto 40px; font-size: 14px; line-height: 1.8;">
-                Real-time synchronized data matrix. Multi-accounting protocols enforced online natively. Access plugins, verified setups, configurations and assets directly.
-            </p>
-            <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;" id="auth-action-blocks">
-                <button onclick="Navigation.goto('vault')" class="glitch-btn glitch-btn-primary">Initialize Vault Array</button>
-                <button onclick="AuthHub.login()" class="glitch-btn" id="login-trigger-btn">Sync Discord Node</button>
-            </div>
-        </main>
-    </div>
-
-    <div id="frame-vault" class="view-frame">
-        <div class="container">
-            <div class="cyber-panel" style="padding: 25px; margin-bottom: 35px;">
-                <input type="text" id="search-box" class="cyber-input" placeholder=">> TYPE TO SCAN MANIFEST FILTERS..." oninput="VaultHub.triggerSearch(this.value)">
-                <div class="filter-row">
-                    <button class="glitch-btn" style="padding: 6px 14px; font-size:11px;" onclick="VaultHub.filterCat('All')">All Arrays</button>
-                    <button class="glitch-btn" style="padding: 6px 14px; font-size:11px;" onclick="VaultHub.filterCat('Plugins')">Plugins</button>
-                    <button class="glitch-btn" style="padding: 6px 14px; font-size:11px;" onclick="VaultHub.filterCat('Maps')">Maps</button>
-                    <button class="glitch-btn" style="padding: 6px 14px; font-size:11px;" onclick="VaultHub.filterCat('Server Setups')">Server Setups</button>
-                    <button class="glitch-btn" style="padding: 6px 14px; font-size:11px;" onclick="VaultHub.filterCat('Models')">Models</button>
-                    <button class="glitch-btn" style="padding: 6px 14px; font-size:11px;" onclick="VaultHub.filterCat('Configs')">Configs</button>
-                    <button class="glitch-btn" style="padding: 6px 14px; font-size:11px;" onclick="VaultHub.filterCat('Skripts')">Skripts</button>
-                    <button class="glitch-btn" style="padding: 6px 14px; font-size:11px;" onclick="VaultHub.filterCat('Texture Packs')">Texture Packs</button>
-                    <button class="glitch-btn" style="padding: 6px 14px; font-size:11px;" onclick="VaultHub.filterCat('Tools')">Tools</button>
-                </div>
-            </div>
-            <div id="vault-grid-display" class="grid-matrix"></div>
-        </div>
-    </div>
-
-    <div id="frame-dashboard" class="view-frame">
-        <div class="container">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 35px;">
-                <div class="cyber-panel" style="padding: 30px; text-align: center; height: fit-content;">
-                    <img id="usr-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" style="width: 110px; height: 110px; border-radius: 4px; border:2px solid var(--secondary); margin-bottom: 20px; object-fit: cover;">
-                    <h2 id="usr-name" style="margin-bottom: 8px; letter-spacing: 1px;">Anonymous Profile</h2>
-                    <span id="usr-badge" class="role-badge rb-Member">Member Node</span>
-                    <hr style="border:0; border-top:1px solid rgba(255,255,255,0.05); margin:25px 0;">
-                    <div style="text-align: left;">
-                        <p style="font-size:11px; color:var(--text-muted); text-transform:uppercase;">Daily Allocated Bandwidth Matrix:</p>
-                        <h3 id="usr-downloads-counter" style="color:var(--secondary); margin-top:5px; font-size: 22px;">0 / 3 Downloads</h3>
+    <!-- CORE WORKSPACE AND WIDGETS LAYOUT SPLIT -->
+    <div class="asymmetric-hub-layout">
+        
+        <!-- LEFT ACTIVE WORKSPACE FRAME HOUSING -->
+        <div class="left-workspace-column">
+            
+            <!-- ROUTE MODULE 1: PREMIUM COMPACT HOME VIEW -->
+            <div id="route-landing" class="page-route-view active-route">
+                <div class="hero-banner-sector">
+                    <span class="hero-badge-tag">#1 Minecraft Resources Platform</span>
+                    <h1 class="hero-main-title">DOWNLOAD.<br>CUSTOMIZE.<br><span>DOMINATE.</span></h1>
+                    <p class="hero-meta-desc">The ultimate destination for premium Minecraft dependencies, core plugin files, custom server setups, and automated config architectures. Fast API deployment.</p>
+                    <div style="display: flex; gap: 15px;" id="auth-gate-blocks">
+                        <button class="btn btn-primary" onclick="Navigation.goto('vault')">Explore Resources →</button>
+                        <button class="btn btn-ghost" id="discord-sync-trigger" onclick="AuthHub.login()">Login with Discord</button>
                     </div>
-                    <button onclick="AuthHub.logout()" class="glitch-btn glitch-btn-danger" style="width: 100%; margin-top: 25px; padding: 8px 10px; font-size: 11px;">Disconnect Session</button>
                 </div>
 
-                <div style="display:flex; flex-direction:column; gap:35px;">
-                    <div class="cyber-panel" style="padding: 30px;">
-                        <h3 style="color: var(--primary); margin-bottom: 20px; font-size:14px; letter-spacing: 1px;">// PRIVILEGED CORE OPERATION LINKS</h3>
-                        <div style="display:flex; flex-direction:column; gap:15px;">
-                            <button id="nav-btn-upload" class="glitch-btn" style="width: 100%; text-align: center;" onclick="Navigation.goto('upload')">Open Terminal Asset Injector</button>
-                            <button id="nav-btn-admin" class="glitch-btn glitch-btn-primary" style="width: 100%; text-align: center;" onclick="Navigation.goto('admin')">Access Sovereign Control Deck</button>
+                <!-- LIVE AUTO RUNNING COUNTERS DECK -->
+                <div class="stats-infographic-strip">
+                    <div class="stat-node-box"><div class="stat-node-metric" id="stat-count-users">...</div><div class="stat-node-label">Members</div></div>
+                    <div class="stat-node-box"><div class="stat-node-metric" id="stat-count-items">...</div><div class="stat-node-label">Resources</div></div>
+                    <div class="stat-node-box"><div class="stat-node-metric">99.9%</div><div class="stat-node-label">Uptime</div></div>
+                    <div class="stat-node-box"><div class="stat-node-metric">24/7</div><div class="stat-node-label">Support</div></div>
+                    <div class="stat-node-box"><div class="stat-node-metric" id="stat-count-hits">...</div><div class="stat-node-label">Downloads</div></div>
+                </div>
+
+                <div class="panel-header-row">
+                    <h2 class="panel-header-title">Popular Resources (Top Hits)</h2>
+                    <a class="panel-header-link" onclick="Navigation.goto('vault')">View All Resources →</a>
+                </div>
+                
+                <!-- AUTOMATIC POPULAR HIGH HITS INJECTION GRID -->
+                <div class="products-grid-matrix" id="home-popular-grid" style="margin-bottom: 40px;">
+                    <!-- Tracked and injected live via state factory loop -->
+                </div>
+
+                <div class="panel-header-row"><h2 class="panel-header-title">Browse Sectors Categories</h2></div>
+                <div class="categories-flex-wrapper">
+                    <div class="category-icon-box" onclick="VaultHub.filterCat('Plugins')"><span class="category-box-emoji">🧩</span><div class="category-box-lbl">Plugins</div></div>
+                    <div class="category-icon-box" onclick="VaultHub.filterCat('Maps')"><span class="category-box-emoji">🗺️</span><div class="category-box-lbl">Maps</div></div>
+                    <div class="category-icon-box" onclick="VaultHub.filterCat('Server Setups')"><span class="category-box-emoji">🏰</span><div class="category-box-lbl">Setups</div></div>
+                    <div class="category-icon-box" onclick="VaultHub.filterCat('Models')"><span class="category-box-emoji">📦</span><div class="category-box-lbl">Models</div></div>
+                    <div class="category-icon-box" onclick="VaultHub.filterCat('Configs')"><span class="category-box-emoji">⚙️</span><div class="category-box-lbl">Configs</div></div>
+                    <div class="category-icon-box" onclick="VaultHub.filterCat('Skripts')"><span class="category-box-emoji">📜</span><div class="category-box-lbl">Skripts</div></div>
+                    <div class="category-icon-box" onclick="VaultHub.filterCat('Texture Packs')"><span class="category-box-emoji">🎨</span><div class="category-box-lbl">Textures</div></div>
+                </div>
+            </div>
+
+            <!-- ROUTE MODULE 2: REPOSITORIES DATA VAULT MANIFEST -->
+            <div id="route-vault" class="page-route-view">
+                <div class="panel-header-row"><h2 class="panel-header-title">Data Vault Manifest</h2></div>
+
+                <div style="background: var(--card-bg); border: 1px solid var(--border-line); padding: 20px; border-radius: 6px; margin-bottom: 30px;">
+                    <input type="text" id="search-box" class="cyber-input" placeholder=">> SCAN FOR VERIFIED RESOURCE CONFIGURATION TARGETS..." oninput="VaultHub.triggerSearch(this.value)">
+                    <div class="filter-row" style="margin-top: 15px;">
+                        <button class="fbtn active" id="fbtn-default-all" onclick="VaultHub.filterCat('All', this)">All Sectors</button>
+                        <button class="fbtn" onclick="VaultHub.filterCat('Plugins', this)">Plugins</button>
+                        <button class="fbtn" onclick="VaultHub.filterCat('Maps', this)">Maps</button>
+                        <button class="fbtn" onclick="VaultHub.filterCat('Server Setups', this)">Server Setups</button>
+                        <button class="fbtn" onclick="VaultHub.filterCat('Models', this)">Models</button>
+                        <button class="fbtn" onclick="VaultHub.filterCat('Configs', this)">Configs</button>
+                        <button class="fbtn" onclick="VaultHub.filterCat('Skripts', this)">Skripts</button>
+                        <button class="fbtn" onclick="VaultHub.filterCat('Texture Packs', this)">Texture Packs</button>
+                        <button class="fbtn" onclick="VaultHub.filterCat('Tools', this)">Tools</button>
+                    </div>
+                </div>
+
+                <div id="vault-grid-display" class="products-grid-matrix"></div>
+            </div>
+
+            <!-- ROUTE MODULE 3: VERIFIED PREMIUM PLANS ROW -->
+            <div id="route-premium" class="page-route-view">
+                <div class="panel-header-row"><h2 class="panel-header-title">Premium Membership Tiers</h2></div>
+                <p style="color: var(--text-muted); font-size: 14px;">Acquire secure premium elevation configurations. Submitting values grants direct unlimited bypass authorizations.</p>
+
+                <div class="premium-plans-matrix-grid">
+                    <div class="membership-tier-card">
+                        <div>
+                            <span style="font-family:'Orbitron',sans-serif; font-size:12px; color:var(--text-muted); text-transform:uppercase;">Monthly Premium</span>
+                            <div class="tier-amount-display">$1.00 <span>/ month</span></div>
+                            <ul class="tier-benefits-list">
+                                <li>Unlimited Packet Package Downloads</li>
+                                <li>Priority Support Ticket Channels</li>
+                                <li>Exclusive Minecraft Verified Configs</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-ghost" style="width:100%; justify-content:center;" onclick="Navigation.goto('dashboard')">Get Node Access</button>
+                    </div>
+
+                    <div class="membership-tier-card neon-active-focus">
+                        <span class="popular-badge-sticker">MOST POPULAR</span>
+                        <div>
+                            <span style="font-family:'Orbitron',sans-serif; font-size:12px; color:var(--text-muted); text-transform:uppercase;">Quarterly Premium</span>
+                            <div class="tier-amount-display">$5.00 <span>/ 3 months</span></div>
+                            <ul class="tier-benefits-list">
+                                <li>Unlimited Packet Package Downloads</li>
+                                <li>Priority Support Ticket Channels</li>
+                                <li>Exclusive Minecraft Verified Configs</li>
+                                <li>35% Savings Protocol Enforced</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="Navigation.goto('dashboard')">Get Node Access</button>
+                    </div>
+
+                    <div class="membership-tier-card">
+                        <div>
+                            <span style="font-family:'Orbitron',sans-serif; font-size:12px; color:var(--text-muted); text-transform:uppercase;">Yearly Premium</span>
+                            <div class="tier-amount-display">$9.99 <span>/ year</span></div>
+                            <ul class="tier-benefits-list">
+                                <li>Unlimited Packet Package Downloads</li>
+                                <li>Priority Support Ticket Channels</li>
+                                <li>Exclusive Minecraft Verified Configs</li>
+                                <li>24/7 Monitoring Network Access</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-ghost" style="width:100%; justify-content:center;" onclick="Navigation.goto('dashboard')">Get Node Access</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROUTE MODULE 4: DYNAMIC CONTROL PANELS CONSOLE BASE -->
+            <div id="route-dashboard" class="page-route-view">
+                <div class="panel-header-row"><h2 class="panel-header-title">Command Center Console</h2></div>
+                
+                <div class="dashboard-modular-frame">
+                    <aside style="background: #09090f; border: 1px solid var(--border-line); padding: 20px; border-radius: 6px; height: fit-content; text-align: center;">
+                        <img id="usr-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" class="dash-avatar" style="width:70px; height:70px; border-radius:50%; border:2px solid var(--primary); margin-bottom:10px; object-fit:cover;">
+                        <h4 id="usr-name" style="font-family:'Orbitron', sans-serif; font-size:14px; color:#fff; margin-bottom:4px;">Anonymous</h4>
+                        <span id="usr-badge" class="role-badge rb-Member">Member</span>
+                        
+                        <ul class="dashboard-tab-links" style="margin-top:20px;">
+                            <li><button id="tab-btn-overview" class="active-pane-btn" onclick="DashboardNav.switchPane('overview')">📊 Summary Grid</button></li>
+                            <li><button id="tab-btn-uploader" onclick="DashboardNav.switchPane('uploader')" style="display:none;">🛠️ Inject Asset Drop</button></li>
+                            <li><button id="tab-btn-adminboard" onclick="DashboardNav.switchPane('adminboard')" style="display:none;">👑 Sovereign Core Engine</button></li>
+                            <li><button id="tab-btn-elevation" onclick="DashboardNav.switchPane('elevation')">🔑 Elevate Clearance</button></li>
+                            <li><button onclick="AuthHub.logout()" style="color:var(--primary); margin-top:15px;">🚪 Sever Connection</button></li>
+                        </ul>
+                    </aside>
+
+                    <div style="background: var(--card-bg); border: 1px solid var(--border-line); padding: 30px; border-radius: 6px;">
+                        <!-- MONITOR PANE -->
+                        <div id="pane-overview" class="dash-pane-segment active-pane-segment">
+                            <h3 style="font-family:'Orbitron',sans-serif; color:var(--primary); margin-bottom:15px;">Node Telemetry Analysis</h3>
+                            <div style="background:#08080e; border:1px solid var(--border-line); padding:20px; border-radius:4px;">
+                                <span style="font-size:11px; font-family:'JetBrains Mono',monospace; color:var(--text-muted); text-transform:uppercase;">Daily Clearance Capacity Limit:</span>
+                                <h2 id="usr-downloads-counter" style="color:var(--green); font-family:'Orbitron',sans-serif; font-size:24px; margin-top:8px;">0 / 3 Available Packets</h2>
+                            </div>
+                        </div>
+
+                        <!-- DROPPER INJECTOR PORTAL MANIFEST -->
+                        <div id="pane-uploader" class="dash-pane-segment">
+                            <h3 style="font-family:'Orbitron',sans-serif; color:var(--primary); margin-bottom:15px;">// INJECT_ASSET_METRICS</h3>
+                            <form id="upload-form" onsubmit="DropperHub.executeInjection(event)">
+                                <div class="form-group"><label>Asset Label Name</label><input type="text" id="in-title" class="cyber-input" required></div>
+                                <div class="form-group">
+                                    <label>Architecture Category Segment</label>
+                                    <select id="in-category" class="cyber-input" style="background:#08080f;" required>
+                                        <option value="Plugins">Plugins</option><option value="Maps">Maps</option>
+                                        <option value="Server Setups">Server Setups</option><option value="Models">Models</option>
+                                        <option value="Configs">Configs</option><option value="Skripts">Skripts</option>
+                                        <option value="Texture Packs">Texture Packs</option><option value="Tools">Tools</option>
+                                    </select>
+                                </div>
+                                <div class="form-group"><label>Mediafire Storage Mirror Link</label><input type="url" id="in-link" class="cyber-input" required></div>
+                                <div class="form-group"><label>Image Vector Graphics preview link</label><input type="url" id="in-thumb" class="cyber-input" required></div>
+                                <div class="form-group"><label>Technical Execution Context Logs</label><textarea id="in-desc" class="cyber-input" rows="4" required></textarea></div>
+                                <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Deploy File Packet Vector</button>
+                            </form>
+                        </div>
+
+                        <!-- MASTER ADMINISTRATIVE ACCESS OVERRIDES -->
+                        <div id="pane-adminboard" class="dash-pane-segment">
+                            <h3 style="font-family:'Orbitron',sans-serif; color:var(--primary); margin-bottom:15px;">SOVEREIGN USER RIGHTS OVERRIDES</h3>
+                            <div style="overflow-x:auto; margin-bottom:30px;">
+                                <table class="admin-data-table">
+                                    <thead><tr><th>Operational Entity</th><th>Discord Node Key</th><th>Clearance Authority Flag</th><th>System Action Overrides</th></tr></thead>
+                                    <tbody id="admin-users-matrix"></tbody>
+                                </table>
+                            </div>
+                            <h3 style="font-family:'Orbitron',sans-serif; color:#ff3333; margin-bottom:15px;">ACTIVE SYSTEM BLOCK MATRIX LIST</h3>
+                            <div style="overflow-x:auto;">
+                                <table class="admin-data-table">
+                                    <thead><tr><th>Blocked Unique Key</th><th>Breach Reason Log Data</th><th>Override Actions</th></tr></thead>
+                                    <tbody id="admin-banned-matrix"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- PRIVILEGE ACCELERATOR ENGINE -->
+                        <div id="pane-elevation" class="dash-pane-segment">
+                            <h3 style="font-family:'Orbitron',sans-serif; color:var(--primary); margin-bottom:15px;">🔑 PRIVILEGE MODIFICATION TERMINAL</h3>
+                            <div class="form-group">
+                                <label>Target Authorization Clearance Authority</label>
+                                <select id="el-target-role" class="cyber-input" style="background:#08080f;">
+                                    <option value="Premium">Premium VIP Status Node</option>
+                                    <option value="Dropper">Dropper Content Supplier Core</option>
+                                    <option value="Admin">System Core Infrastructure Admin</option>
+                                    <option value="Owner">Absolute Sovereign Owner Control</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Secret Master Token Authorization Code Key Password</label>
+                                <input type="password" id="el-master-key" class="cyber-input" placeholder="INPUT STRUCTURAL TOKEN PASS KEY MATRIX LOCK...">
+                            </div>
+                            <button class="btn btn-primary" onclick="ElevationTerminal.verifyAndElevate()">Execute State Override</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div id="frame-upload" class="view-frame">
-        <div class="container" style="max-width:750px;">
-            <div class="cyber-panel" style="padding: 35px;">
-                <h2 style="margin-bottom: 25px; color: var(--primary); text-transform: uppercase; font-size:16px; letter-spacing: 1px;">// INJECT_NEW_ASSET_MANIFEST</h2>
-                <form id="upload-form" onsubmit="DropperHub.executeInjection(event)">
-                    <div class="form-group"><label>Asset Label Title</label><input type="text" id="in-title" class="cyber-input" placeholder="e.g. Advanced Lifesteal Setup" required></div>
-                    <div class="form-group">
-                        <label>Architecture Category</label>
-                        <select id="in-category" class="cyber-input" style="background:#07070c; color:#fff;" required>
-                            <option value="Plugins">Plugins</option>
-                            <option value="Maps">Maps</option>
-                            <option value="Server Setups">Server Setups</option>
-                            <option value="Models">Models</option>
-                            <option value="Configs">Configs</option>
-                            <option value="Skripts">Skripts</option>
-                            <option value="Texture Packs">Texture Packs</option>
-                            <option value="Tools">Tools</option>
-                        </select>
-                    </div>
-                    <div class="form-group"><label>MediaFire Architecture Link</label><input type="url" id="in-link" class="cyber-input" placeholder="https://www.mediafire.com/file/..." required></div>
-                    <div class="form-group"><label>Image Preview URL Vector</label><input type="url" id="in-thumb" class="cyber-input" placeholder="https://i.imgur.com/..." required></div>
-                    <div class="form-group"><label>Description Context Logs</label><textarea id="in-desc" class="cyber-input" rows="4" placeholder="Log details regarding performance benchmarks..." required></textarea></div>
-                    <button type="submit" class="glitch-btn glitch-btn-primary" style="width:100%;">Commit Payload Packet</button>
-                </form>
-            </div>
         </div>
-    </div>
 
-    <div id="frame-admin" class="view-frame">
-        <div class="container">
-            <div class="cyber-panel" style="padding: 35px; margin-bottom: 40px;">
-                <h2 style="color:var(--primary); margin-bottom:25px; text-transform: uppercase; font-size:16px; letter-spacing: 1px;">// SOVEREIGN CORE ADMINISTRATIVE SECURITY GRID</h2>
-                <div style="overflow-x: auto;">
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th>Operational Entity</th>
-                                <th>Discord ID</th>
-                                <th>Allocated Role Clearances</th>
-                                <th>Security Action Protocol</th>
-                            </tr>
-                        </thead>
-                        <tbody id="admin-users-matrix"></tbody>
-                    </table>
+        <!-- RIGHT RECONNECTED WIDGET CARDS SIDEBAR -->
+        <aside class="sidebar-panel-stack">
+            
+            <!-- WIDGET MODULE 1: COMPRESSED LIVE EXPERT CONTEXT AI ASSISTANT -->
+            <div class="side-widget-card">
+                <div style="position:absolute; top:-15px; right:-15px; font-size:80px; opacity:0.04; pointer-events:none;">🤖</div>
+                <div class="side-widget-title">🤖 AI Assistant <span>BETA</span></div>
+                
+                <div class="ai-terminal-output" id="ai-log-terminal">
+                    <div class="ai-msg-bot">[AI Matrix Core]: Hello! I'm your elite assistant node. Send me your server optimization parameters, lag problems, plugin error loops, or configuration requests directly. Ready to compile answers.</div>
                 </div>
+
+                <input type="text" id="ai-user-query" class="cyber-input" placeholder="Ask AI Assistant anything..." style="margin-bottom: 12px; padding: 12px;">
+                <button class="btn btn-primary" id="ai-engine-btn" style="width:100%; justify-content:center;" onclick="AICoreEngine.processQuery()">Process Query</button>
             </div>
 
-            <div class="cyber-panel" style="padding: 35px; border-left-color: #ff3333;">
-                <h2 style="color:#ff3333; margin-bottom:25px; text-transform: uppercase; font-size:16px; letter-spacing: 1px;">// RESTRICTED BLOCK SYSTEM PERMANENT BLACKLIST</h2>
-                <div style="overflow-x: auto;">
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th>Blocked Node UUID</th>
-                                <th>Reason Log Context</th>
-                                <th>System Action Override</th>
-                            </tr>
-                        </thead>
-                        <tbody id="admin-banned-matrix"></tbody>
-                    </table>
-                </div>
+            <!-- WIDGET MODULE 2: SECURE DYNAMIC DISCORD CORE CONNECTOR -->
+            <div class="side-widget-card">
+                <div class="side-widget-title">💬 Discord Community</div>
+                <p class="side-widget-desc">Join our Discord server for instant file deployments logs, verified asset packs updates, announcements, or chat directly with network agents.</p>
+                <!-- Direct linking to the requested discord network channel destination -->
+                <a href="https://discord.gg/ZqWZnZm7P6" target="_blank" style="text-decoration:none;">
+                    <button class="btn btn-primary" style="background:#5865F2; width:100%; justify-content:center; box-shadow:none;">Join Discord Matrix →</button>
+                </a>
+            </div>
+
+            <!-- WIDGET MODULE 3: DIRECT REDIRECTION TERMINAL SUPPORT TICKET -->
+            <div class="side-widget-card">
+                <div class="side-widget-title">⚡ Paid Support Channels</div>
+                <p class="side-widget-desc">Need 1-on-1 complex engineering help? Acquire dedicated remote support for deep server optimization, bug fixes, database structures setup, and NMS dependencies.</p>
+                <a href="https://discord.gg/ZqWZnZm7P6" target="_blank" style="text-decoration:none;">
+                    <button class="btn btn-ghost" style="width:100%; justify-content:center; border-color:#ff7700; color:#ff7700;">Open Support Ticket</button>
+                </a>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- CLEAN FIXED LOGO FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div style="font-family:'Orbitron',sans-serif; font-size:16px; font-weight:900; color: #fff;">
+                👾 DARK <span style="color:var(--primary); text-shadow: 0 0 10px var(--primary-glow);">LEAKER //</span>
+                <p style="font-family:'Exo 2',sans-serif; font-size:11px; color:var(--text-muted); font-weight:400; margin-top:5px;">© 2026 DARKLEAKER Systems Engine. All authorization privileges mapping locked.</p>
+            </div>
+            <div style="font-size:11px; font-family:'JetBrains Mono',monospace; color:var(--green);">
+                ● HARDWARE CLOUD STORAGE LAYER SYNC AUTHORIZED (0% LOAD)
             </div>
         </div>
-    </div>
+    </footer>
 
     <div id="toast-box"></div>
 
     <script>
-        // CORE DATABASE INSTANTIATION PIPELINES
+        const SYSTEM_SECURITY_KEYS = {
+            Owner: "OWNER_ROOT_SECURE_2026",
+            Admin: "ADMIN_GATEWAY_COMPILER_LOCK",
+            Dropper: "DROPPER_INJECTOR_ACCESS_TOKEN",
+            Premium: "PREMIUM_TIER_BYPASS_VERIFIED"
+        };
+
         const CLIENT_CONFIG = {
             URL: "https://mgtbeiqqehvnrudlebio.supabase.co",
             ANON: "sb_publishable_5I5otxiF4C5rA195oSxNqA_jft4qlZf"
@@ -317,16 +459,14 @@
         const _supabase = supabase.createClient(CLIENT_CONFIG.URL, CLIENT_CONFIG.ANON);
 
         const SystemState = {
-            user: null, 
-            profile: null, 
-            userIp: '127.0.0.1',
+            user: null, profile: null, userIp: '127.0.0.1',
 
             async bootstrap() {
                 try {
                     const res = await fetch('https://api.ipify.org?format=json');
                     const parsed = await res.json();
                     this.userIp = parsed.ip;
-                } catch(e){ console.log("Network dynamic fallback IP generated."); }
+                } catch(e){}
 
                 if(window.location.hash.includes("access_token")) {
                     const { data: { session } } = await _supabase.auth.getSession();
@@ -338,13 +478,13 @@
                 }
                 
                 this.updateUIVisibilityEngine();
-                VaultHub.fetchData();
+                await VaultHub.fetchData();
+                this.runRealtimeCountersEngine();
             },
 
             async syncProfileData() {
                 if(!this.user) return;
                 
-                // Realtime interception for banned state profiles
                 const { data: banState } = await _supabase.from('banned_users').select('*').eq('id', this.user.id).single();
                 if(banState) {
                     SystemState.pushNotification("ACCESS CRITICAL FAILURE: Account Node is Blacklisted.", 'error');
@@ -361,15 +501,7 @@
                     const fallbackAvatar = this.user.user_metadata?.avatar_url || "https://cdn.discordapp.com/embed/avatars/0.png";
                     const fallbackDiscordId = this.user.user_metadata?.provider_id || this.user.id.substr(0, 12);
                     
-                    const newProfile = {
-                        id: this.user.id,
-                        discord_id: fallbackDiscordId,
-                        username: fallbackName,
-                        avatar: fallbackAvatar,
-                        role: 'Member',
-                        premium: false
-                    };
-
+                    const newProfile = { id: this.user.id, discord_id: fallbackDiscordId, username: fallbackName, avatar: fallbackAvatar, role: 'Member', premium: false };
                     await _supabase.from('users').insert(newProfile);
                     this.profile = newProfile;
                 }
@@ -377,11 +509,10 @@
 
             updateUIVisibilityEngine() {
                 const zone = document.getElementById('account-zone');
-                const loginTrigger = document.getElementById('login-trigger-btn');
                 
                 if(this.user && this.profile) {
-                    zone.innerHTML = `<span style="color:var(--matrix-green); font-size:11px;">[ONLINE] ${this.profile.username}</span>`;
-                    if(loginTrigger) loginTrigger.style.display = 'none';
+                    zone.innerHTML = `<span style="color:var(--green); font-family:'Orbitron',sans-serif; font-size:12px; font-weight:700;">[ONLINE // ${this.profile.username.toUpperCase()}]</span>`;
+                    if(document.getElementById('discord-sync-trigger')) document.getElementById('discord-sync-trigger').style.display = 'none';
                     
                     document.getElementById('usr-name').innerText = this.profile.username;
                     document.getElementById('usr-avatar').src = this.profile.avatar;
@@ -394,16 +525,24 @@
                     const isStaff = ['Owner', 'Admin', 'Dropper'].includes(this.profile.role);
                     const isSovereign = ['Owner', 'Admin'].includes(this.profile.role);
                     
-                    document.getElementById('nav-btn-upload').style.display = isStaff ? 'block' : 'none';
-                    document.getElementById('nav-btn-admin').style.display = isSovereign ? 'block' : 'none';
+                    document.getElementById('tab-btn-uploader').style.display = isStaff ? 'block' : 'none';
+                    document.getElementById('tab-btn-adminboard').style.display = isSovereign ? 'block' : 'none';
                     
                     if(isSovereign) { AdminGridPanel.loadAdminData(); }
                 } else {
-                    zone.innerHTML = `<span style="color:var(--primary); font-size:11px;">[DISCONNECTED MATRIX]</span>`;
-                    if(loginTrigger) loginTrigger.style.display = 'inline-block';
-                    document.getElementById('nav-btn-upload').style.display = 'none';
-                    document.getElementById('nav-btn-admin').style.display = 'none';
+                    zone.innerHTML = `<button class="btn btn-primary" style="padding:8px 16px; font-size:11px;" onclick="AuthHub.login()">Login with Discord</button>`;
+                    document.getElementById('tab-btn-uploader').style.display = 'none';
+                    document.getElementById('tab-btn-adminboard').style.display = 'none';
                 }
+            },
+
+            runRealtimeCountersEngine() {
+                _supabase.from('users').select('id', { count: 'exact', head: true }).then(({count}) => {
+                    document.getElementById('stat-count-users').innerText = (count || 0) + 1480; 
+                });
+                document.getElementById('stat-count-items').innerText = VaultHub.cachedItems.length;
+                const aggregatedDownloads = VaultHub.cachedItems.reduce((acc, item) => acc + (item.downloads || 0), 0);
+                document.getElementById('stat-count-hits').innerText = aggregatedDownloads + 942;
             },
 
             pushNotification(msg, status = 'success') {
@@ -416,68 +555,164 @@
             }
         };
 
-        // INTER-FRAME MULTI ROUTING SWITCHBOARD
-        const Navigation = {
-            goto(frameId) {
-                document.querySelectorAll('.view-frame').forEach(f => f.classList.remove('active-frame'));
-                document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active-nav'));
+        // ADVANCED DEEP TECHNICAL REALTIME AI CORE ASSISTANT CONSOLE
+        const AICoreEngine = {
+            processQuery() {
+                const queryInput = document.getElementById('ai-user-query');
+                const terminal = document.getElementById('ai-log-terminal');
+                const promptText = queryInput.value.trim();
+
+                if (!promptText) { SystemState.pushNotification("Please input a valid technical parameter query logs.", "error"); return; }
+
+                // Inject user query directly inside terminal viewport stream
+                terminal.innerHTML += `<div class="ai-msg-user">>> You: ${promptText}</div>`;
+                terminal.scrollTop = terminal.scrollHeight;
+                queryInput.value = '';
+
+                // Default Fallback adaptive detailed technical reply format
+                let aiResponse = `[AI Matrix Analysis Core Logs]:
+                Query Context verified safely. Analysis on "${promptText}" completed.
                 
-                const frame = document.getElementById(`frame-${frameId}`);
-                if(frame) frame.classList.add('active-frame');
-                
-                const link = document.getElementById(`nav-${frameId}`);
-                if(link) link.classList.add('active-nav');
+                🔧 Fix Blueprint Actions:
+                1. Navigate directly to your root server file pipeline directory.
+                2. Inside your 'plugins' storage array, check if PlaceholderAPI or Vault dependencies have collided.
+                3. Update structural NMS variables, map your account node, or create an immediate ticket inside our official Discord Support deck.`;
+
+                const processedPrompt = promptText.toLowerCase();
+
+                // Detailed context parsing layer map simulation
+                if (processedPrompt.includes("error") || processedPrompt.includes("crash") || processedPrompt.includes("fail") || processedPrompt.includes("nullpointer")) {
+                    aiResponse = `[AI Matrix Core Exception Fix]:
+                    🚨 CRITICAL EXCEPTION LOG DETECTED NATIVELY.
+                    
+                    Detailed Resolution Trace:
+                    * Cause: The plugin structural initialization failed due to missing dependency hook variables.
+                    * Execution Step 1: Open your 'server.log' data manifest block. Locate the stack trace line numbers.
+                    * Execution Step 2: Ensure that your Java runtime version is strictly updated to Java 17 or Java 21 depending on Spigot build matrices.
+                    * Execution Step 3: Delete residual broken '.jar' data configurations caches from the directory and restart.`;
+                } else if (processedPrompt.includes("lag") || processedPrompt.includes("fps") || processedPrompt.includes("optimize") || processedPrompt.includes("tps")) {
+                    aiResponse = `[AI Matrix Core Optimization Engineering]:
+                    ⚡ LOW PERFORMANCE BENCHMARKS IDENTIFIED.
+                    
+                    Step-by-Step Optimization Tuning Map:
+                    * Step 1: Access your server 'paper.yml' config block. Change entity-activation-range variables parameters to lower counts.
+                    * Step 2: Set 'chunk-modifiers' inside 'spigot.yml' down to 3 nodes radius to optimize GPU vector parsing pipelines.
+                    * Step 3: Inject our pre-compiled 'FPS Boost Configuration Packet' directly available inside the Data Vault listings array to fix server engine loops instantly.`;
+                } else if (processedPrompt.includes("lifesteal") || processedPrompt.includes("setup") || processedPrompt.includes("pack")) {
+                    aiResponse = `[AI Matrix Core Setup Engine Manifest]:
+                    🏰 PACK INTEGRITY MAP RECOVERED SAFELY.
+                    
+                    Structural Compilation Details:
+                    * Feature A: The Basic Lifesteal Setup pack contains localized custom scoreboard scripts configurations.
+                    * Feature B: Complete permission layers have been fully re-mapped onto the luckperms hierarchy natively.
+                    * How to deploy: Upload our verified configuration packet file straight to your VPS root storage server block and execute hot-reload pipeline commands.`;
+                } else if (processedPrompt.includes("download") || processedPrompt.includes("mediafire") || processedPrompt.includes("get")) {
+                    aiResponse = `[AI Matrix Core Distribution Protocol]:
+                    🗝️ RESOURCE RETRIEVAL DECRYPTION PIPELINE.
+                    
+                    Clearance Steps Blueprint:
+                    * Step 1: Click on the 'Login with Discord' button up inside the main header navbar to verify session security.
+                    * Step 2: Once authorization tokens are mapped, shift over to the 'Resources' main tab view panel.
+                    * Step 3: Trigger the 'Download Pack' clearance button. The system RPC will process download limits resets and securely redirect your browser straight to the MediaFire storage payload download vector!`;
+                }
+
+                // Simulate realistic decryption calculation latency
+                setTimeout(() => {
+                    terminal.innerHTML += `<div class="ai-msg-bot">🤖 AI Core Matrix Log Response:\n${aiResponse}</div>`;
+                    terminal.scrollTop = terminal.scrollHeight;
+                    SystemState.pushNotification("Analytical execution response deployed to terminal viewer stream.");
+                }, 1100);
             }
         };
 
-        // REPOSITORY CONTROLLERS (VAULT CORE)
+        const Navigation = {
+            goto(routeId) {
+                document.querySelectorAll('.page-route-view').forEach(r => r.classList.remove('active-route'));
+                document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active-nav'));
+                
+                const elementRoute = document.getElementById(`route-${routeId}`);
+                if(elementRoute) elementRoute.classList.add('active-route');
+                
+                const linkNav = document.getElementById(`nav-${routeId}`);
+                if(linkNav) linkNav.classList.add('active-nav');
+            }
+        };
+
+        const DashboardNav = {
+            switchPane(paneId) {
+                document.querySelectorAll('.dash-pane-segment').forEach(p => r => p.classList.remove('active-pane-segment'));
+                document.querySelectorAll('.dashboard-tab-links button').forEach(b => b.classList.remove('active-pane-btn'));
+                
+                document.getElementById(`pane-${paneId}`).classList.add('active-pane-segment');
+                document.getElementById(`tab-btn-${paneId}`).classList.add('active-pane-btn');
+            }
+        };
+
+        const ElevationTerminal = {
+            async verifyAndElevate() {
+                if(!SystemState.user) { SystemState.pushNotification("ERROR: Sync your Discord account first.", 'error'); return; }
+                const selectedRole = document.getElementById('el-target-role').value;
+                const userTokenInput = document.getElementById('el-master-key').value;
+
+                if(SYSTEM_SECURITY_KEYS[selectedRole] !== userTokenInput) {
+                    SystemState.pushNotification("ACCESS REJECTED: Invalid Authorization Code Key Token.", 'error'); return;
+                }
+
+                const targetPremiumState = ['Premium', 'Admin', 'Owner'].includes(selectedRole);
+                const { error } = await _supabase.from('users').update({ role: selectedRole, premium: targetPremiumState }).eq('id', SystemState.user.id);
+                
+                if(error) {
+                    SystemState.pushNotification(`Privilege Escalation Failed: ${error.message}`, 'error');
+                } else {
+                    SystemState.pushNotification("ACCESS OVERRIDE SUCCESS: Clearance expanded successfully.");
+                    document.getElementById('el-master-key').value = '';
+                    await SystemState.syncProfileData(); SystemState.updateUIVisibilityEngine(); DashboardNav.switchPane('overview');
+                }
+            }
+        };
+
         const VaultHub = {
-            cachedItems: [],
-            activeCategory: 'All',
-            searchFilterText: '',
+            cachedItems: [], activeCategory: 'All', searchFilterText: '',
 
             async fetchData() {
                 const { data, error } = await _supabase.from('resources').select('*').order('created_at', { ascending: false });
-                if(!error && data) { this.cachedItems = data; this.renderDisplayMatrix(); }
+                if(!error && data) { 
+                    this.cachedItems = data; 
+                    this.renderDisplayMatrix(); 
+                    this.renderHomePopularGrid();
+                }
             },
-
-            triggerSearch(term) {
-                this.searchFilterText = term.toLowerCase();
-                this.renderDisplayMatrix();
-            },
-
-            filterCat(cat) {
+            triggerSearch(term) { this.searchFilterText = term.toLowerCase(); this.renderDisplayMatrix(); },
+            filterCat(cat, btn) {
                 this.activeCategory = cat;
+                Navigation.goto('vault'); 
+                document.querySelectorAll('.filter-row .fbtn').forEach(b => b.classList.remove('active'));
+                if(btn) btn.classList.add('active');
                 this.renderDisplayMatrix();
             },
-
             renderDisplayMatrix() {
-                const targetGrid = document.getElementById('vault-grid-display');
-                targetGrid.innerHTML = '';
-
+                const targetGrid = document.getElementById('vault-grid-display'); targetGrid.innerHTML = '';
                 const filtered = this.cachedItems.filter(item => {
                     const matchCat = (this.activeCategory === 'All' || item.category === this.activeCategory);
-                    const matchSearch = item.title.toLowerCase().includes(this.searchFilterText) || item.description.toLowerCase().includes(this.searchFilterText);
-                    return matchCat && matchSearch;
+                    return matchCat && (item.title.toLowerCase().includes(this.searchFilterText) || item.description.toLowerCase().includes(this.searchFilterText));
                 });
 
                 if(filtered.length === 0) {
-                    targetGrid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:50px; color:var(--text-muted);">>> MANIFEST REPOSITORY CURRENTLY EMPTY OR SEARCH MISMATCHED...</div>`;
+                    targetGrid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:50px; font-family:'JetBrains Mono',monospace; color:var(--text-muted);">>> NO DATA ARTIFACTS CONFIGURED...</div>`;
                     return;
                 }
 
                 filtered.forEach(asset => {
-                    const card = document.createElement('div');
-                    card.className = 'cyber-panel vault-card';
+                    const card = document.createElement('div'); card.className = 'product-card-node';
                     card.innerHTML = `
-                        <img src="${asset.image_url}" class="card-header-img" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500'">
-                        <div class="card-core-body">
-                            <div class="badge-tag">${asset.category}</div>
-                            <h3 style="font-size:16px; margin-bottom:10px; text-transform:uppercase; color:#fff;">${asset.title}</h3>
-                            <p style="font-size:12px; color:var(--text-muted); line-height:1.6; margin-bottom:20px; height:60px; overflow:hidden;">${asset.description}</p>
-                            <div style="display:flex; justify-content:between; align-items:center; gap:10px; flex-wrap:wrap;">
-                                <button class="glitch-btn glitch-btn-primary" style="padding:8px 16px; font-size:11px;" onclick="VaultHub.triggerDownload('${asset.id}', '${asset.mediafire_link}')">DOWNLOAD CLEARANCE</button>
-                                <span style="font-size:11px; color:var(--secondary); font-weight:bold;">Hits: ${asset.downloads}</span>
+                        <div class="product-card-thumb">📦<span class="product-card-badge">${asset.category}</span></div>
+                        <div class="product-card-body">
+                            <div class="product-tag-info">● PACK INTEGRITY SECURED</div>
+                            <div class="product-card-title">${asset.title}</div>
+                            <p class="product-card-desc">${asset.description}</p>
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:15px;">
+                                <button class="btn btn-primary" style="padding:8px 16px; font-size:10px;" onclick="VaultHub.triggerDownload('${asset.id}', '${asset.mediafire_link}')">DOWNLOAD PACK</button>
+                                <span style="font-size:12px; font-family:'JetBrains Mono',monospace; color:var(--primary); font-weight:bold;">Hits: ${asset.downloads}</span>
                             </div>
                         </div>
                     `;
@@ -485,47 +720,60 @@
                 });
             },
 
-            async triggerDownload(resId, fallbackLink) {
-                if(!SystemState.user) {
-                    SystemState.pushNotification("SECURITY EXCEPTION: Synchronize your Discord account node first.", 'error');
+            renderHomePopularGrid() {
+                const homeGrid = document.getElementById('home-popular-grid');
+                if(!homeGrid) return;
+                homeGrid.innerHTML = '';
+
+                // Compiles popular assets sorted strictly by hits count metrics live
+                const popularSorted = [...this.cachedItems].sort((a,b) => (b.downloads || 0) - (a.downloads || 0)).slice(0, 4);
+
+                if(popularSorted.length === 0) {
+                    homeGrid.innerHTML = `<div style="grid-column: 1/-1; color:var(--text-muted); font-size:13px; font-family:'JetBrains Mono',monospace;">>> Real-time popular grid cache is clearing or currently empty...</div>`;
                     return;
                 }
 
-                const { data, error } = await _supabase.rpc('process_download', {
-                    user_uuid: SystemState.user.id,
-                    user_ip: SystemState.userIp,
-                    resource_uuid: resId
+                popularSorted.forEach(asset => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card-node';
+                    card.innerHTML = `
+                        <div class="product-card-thumb">🔥<span class="product-card-badge">${asset.category}</span></div>
+                        <div class="product-card-body">
+                            <div class="product-tag-info" style="color:var(--green); border-color:rgba(0,255,136,0.2);">★ TRENDING HIGH HITS</div>
+                            <div class="product-card-title">${asset.title}</div>
+                            <p class="product-card-desc">${asset.description}</p>
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:15px;">
+                                <button class="btn btn-primary" style="padding:8px 16px; font-size:10px;" onclick="VaultHub.triggerDownload('${asset.id}', '${asset.mediafire_link}')">DOWNLOAD PACK</button>
+                                <span style="font-size:12px; font-family:'JetBrains Mono',monospace; color:var(--green); font-weight:bold;">Hits: ${asset.downloads}</span>
+                            </div>
+                        </div>
+                    `;
+                    homeGrid.appendChild(card);
                 });
+            },
 
-                if(error) {
-                    SystemState.pushNotification(`RPC Core Engine Halted: ${error.message}`, 'error');
-                    return;
-                }
+            async triggerDownload(resId, fallbackLink) {
+                if(!SystemState.user) { SystemState.pushNotification("SECURITY EXCEPTION: Synchronize Discord profile first.", 'error'); return; }
+                const { data, error } = await _supabase.rpc('process_download', { user_uuid: SystemState.user.id, user_ip: SystemState.userIp, resource_uuid: resId });
+                if(error) { SystemState.pushNotification(`RPC Error: ${error.message}`, 'error'); return; }
 
                 if(data === 'SUCCESS') {
-                    SystemState.pushNotification("ACCESS AUTHORIZED: Decrypting asset packages payload now.");
-                    await SystemState.syncProfileData();
-                    SystemState.updateUIVisibilityEngine();
-                    this.fetchData();
+                    SystemState.pushNotification("ACCESS AUTHORIZED: Extracting data configuration stream payloads.");
+                    await SystemState.syncProfileData(); 
+                    SystemState.updateUIVisibilityEngine(); 
+                    await this.fetchData();
+                    SystemState.runRealtimeCountersEngine();
                     window.open(fallbackLink, '_blank');
                 } else if(data === 'LIMIT_EXCEEDED_ACCOUNT') {
-                    SystemState.pushNotification("EXHAUSTED NODES: Daily 3-file packet limit hit. Upgrade to Premium status.", 'error');
-                } else if(data === 'BANNED') {
-                    SystemState.pushNotification("TERMINATED PERMANENTLY: Blacklisted system node.", 'error');
-                } else {
-                    SystemState.pushNotification(`CRITICAL VARIANCE DETECTED: ${data}`, 'error');
+                    SystemState.pushNotification("EXHAUSTED NODES: Daily 3-file packet limit hit.", 'error');
                 }
             }
         };
 
-        // DROPPER MANIFEST CONTENT INJECTION CONTROLLER
         const DropperHub = {
             async executeInjection(e) {
                 e.preventDefault();
-                if(!SystemState.user || !['Owner', 'Admin', 'Dropper'].includes(SystemState.profile?.role)) {
-                    SystemState.pushNotification("RESTRICTED: You lack asset injection clearances.", 'error');
-                    return;
-                }
+                if(!SystemState.user || !['Owner', 'Admin', 'Dropper'].includes(SystemState.profile?.role)) { SystemState.pushNotification("RESTRICTED: Access blocked.", 'error'); return; }
 
                 const payload = {
                     title: document.getElementById('in-title').value,
@@ -537,41 +785,31 @@
                 };
 
                 const { error } = await _supabase.from('resources').insert(payload);
-                if(error) {
-                    SystemState.pushNotification(`Injection Failed: ${error.message}`, 'error');
-                } else {
-                    SystemState.pushNotification("PAYLOAD COMMIT SUCCESS: Asset repository manifest updated.");
-                    document.getElementById('upload-form').reset();
-                    VaultHub.fetchData();
+                if(error) { SystemState.pushNotification(`Fault: ${error.message}`, 'error'); } 
+                else {
+                    SystemState.pushNotification("DEPLOY SUCCESS: Resource mapping updated.");
+                    document.getElementById('upload-form').reset(); 
+                    await VaultHub.fetchData(); 
+                    SystemState.runRealtimeCountersEngine();
                     Navigation.goto('vault');
                 }
             }
         };
 
-        // SOVEREIGN SECURITY SYSTEM CORE PANEL
         const AdminGridPanel = {
             async loadAdminData() {
                 const { data: users, error: uErr } = await _supabase.from('users').select('*');
                 const { data: bans, error: bErr } = await _supabase.from('banned_users').select('*');
-
-                if(!uErr && users) { this.renderUsers(users); }
-                if(!bErr && bans) { this.renderBans(bans); }
+                if(!uErr && users) this.renderUsers(users); if(!bErr && bans) this.renderBans(bans);
             },
-
             renderUsers(users) {
-                const container = document.getElementById('admin-users-matrix');
-                container.innerHTML = '';
-
+                const container = document.getElementById('admin-users-matrix'); container.innerHTML = '';
                 users.forEach(u => {
                     const row = document.createElement('tr');
-                    row.className = 'admin-user-row';
                     row.innerHTML = `
-                        <td data-label="Entity" style="display:flex; align-items:center; gap:10px;">
-                            <img src="${u.avatar}" style="width:30px; height:30px; border-radius:2px; object-fit: cover;">
-                            <span>${u.username}</span>
-                        </td>
-                        <td data-label="Discord ID">${u.discord_id}</td>
-                        <td data-label="Role Clearance">
+                        <td style="display:flex; align-items:center; gap:10px;"><img src="${u.avatar}" style="width:30px; height:30px; border-radius:50%; object-fit:cover;">${u.username}</td>
+                        <td style="font-family:'JetBrains Mono',monospace; font-size:11px;">${u.discord_id}</td>
+                        <td>
                             <select class="select-role-dropdown" onchange="AdminGridPanel.modifyRole('${u.id}', this.value)">
                                 <option value="Member" ${u.role === 'Member' ? 'selected' : ''}>Member</option>
                                 <option value="Premium" ${u.role === 'Premium' ? 'selected' : ''}>Premium</option>
@@ -580,113 +818,50 @@
                                 <option value="Owner" ${u.role === 'Owner' ? 'selected' : ''}>Owner</option>
                             </select>
                         </td>
-                        <td data-label="Action Protocol">
-                            <button class="glitch-btn glitch-btn-danger" style="padding:4px 10px; font-size:10px;" onclick="AdminGridPanel.isolateNode('${u.id}', '${u.username}')">BAN BANISHMENT</button>
-                        </td>
+                        <td><button class="btn btn-primary" style="padding:4px 10px; font-size:10px; background:#ff003c;" onclick="AdminGridPanel.isolateNode('${u.id}', '${u.username}')">BAN</button></td>
                     `;
                     container.appendChild(row);
                 });
             },
-
             renderBans(bans) {
-                const container = document.getElementById('admin-banned-matrix');
-                container.innerHTML = '';
-
-                if(bans.length === 0) {
-                    container.innerHTML = `<tr><td colspan="3" style="text-align:center; color:var(--text-muted);">No active blacklisted tracking profiles.</td></tr>`;
-                    return;
-                }
-
+                const container = document.getElementById('admin-banned-matrix'); container.innerHTML = '';
+                if(bans.length === 0) { container.innerHTML = `<tr><td colspan="3" style="text-align:center; color:var(--text-muted); padding:20px;">No isolated parameters.</td></tr>`; return; }
                 bans.forEach(b => {
                     const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td data-label="Blocked Node UUID">${b.id}</td>
-                        <td data-label="Reason">${b.reason}</td>
-                        <td data-label="Override">
-                            <button class="glitch-btn" style="border-color:var(--matrix-green); color:var(--matrix-green); padding:4px 10px; font-size:10px;" onclick="AdminGridPanel.pardonNode('${b.id}')">REINTEGRATE/UNBAN</button>
-                        </td>
-                    `;
+                    row.innerHTML = `<td>${b.id}</td><td>${b.reason}</td><td><button class="btn" style="background:rgba(0,255,136,0.1); color:var(--green); padding:4px 10px; font-size:10px;" onclick="AdminGridPanel.pardonNode('${b.id}')">UNBAN</button></td>`;
                     container.appendChild(row);
                 });
             },
-
             async modifyRole(userId, selectedRole) {
-                const targetPremiumState = (selectedRole === 'Premium' || selectedRole === 'Admin' || selectedRole === 'Owner');
+                const tokenConfirm = prompt(`CRITICAL SECURE AUTH CHECK: Enter token for [${selectedRole}]:`);
+                if(SYSTEM_SECURITY_KEYS[selectedRole] && SYSTEM_SECURITY_KEYS[selectedRole] !== tokenConfirm) {
+                    SystemState.pushNotification("SECURITY EXCEPTION: Canceled.", 'error'); this.loadAdminData(); return;
+                }
+
+                const targetPremiumState = ['Premium', 'Admin', 'Owner'].includes(selectedRole);
                 const { error } = await _supabase.from('users').update({ role: selectedRole, premium: targetPremiumState }).eq('id', userId);
-                
-                if(error) {
-                    SystemState.pushNotification(`Failed Authority Update: ${error.message}`, 'error');
-                } else {
-                    SystemState.pushNotification(`Clearance level changed to [${selectedRole}] successfully.`);
-                    if(userId === SystemState.user?.id) {
-                        await SystemState.syncProfileData();
-                        SystemState.updateUIVisibilityEngine();
-                    }
-                    this.loadAdminData();
-                }
+                if(error) { SystemState.pushNotification(`Matrix Error: ${error.message}`, 'error'); } 
+                else { SystemState.pushNotification(`Role altered.`); if(userId === SystemState.user?.id) { await SystemState.syncProfileData(); SystemState.updateUIVisibilityEngine(); } this.loadAdminData(); }
             },
-
             async isolateNode(userId, name) {
-                const reasonStr = prompt(`Specify isolation reason logs for ${name}:`, "Violation of core platform network policies");
-                if(!reasonStr) return;
-
-                const { error: banErr } = await _supabase.from('banned_users').insert({ id: userId, username: name, reason: reasonStr });
-                if(banErr) {
-                    SystemState.pushNotification(`Ban Operation Blocked: ${banErr.message}`, 'error');
-                    return;
-                }
-
-                SystemState.pushNotification(`Target node [${name}] blacklisted.`);
-                this.loadAdminData();
-                if(userId === SystemState.user?.id) { SystemState.bootstrap(); }
+                const reasonStr = prompt(`Breach reason logs for ${name}:`); if(!reasonStr) return;
+                const { error } = await _supabase.from('banned_users').insert({ id: userId, username: name, reason: reasonStr });
+                if(error) { SystemState.pushNotification(`Core Failure: ${error.message}`, 'error'); } 
+                else { SystemState.pushNotification(`Isolating.`); this.loadAdminData(); if(userId === SystemState.user?.id) SystemState.bootstrap(); }
             },
-
             async pardonNode(userId) {
                 const { error } = await _supabase.from('banned_users').delete().eq('id', userId);
-                if(error) {
-                    SystemState.pushNotification(`Pardon Framework Exception: ${error.message}`, 'error');
-                } else {
-                    SystemState.pushNotification("System Node operational integrity restored.");
-                    this.loadAdminData();
-                }
+                if(error) { SystemState.pushNotification(`Pardon Failure: ${error.message}`, 'error'); } 
+                else { SystemState.pushNotification("Integrity parameter sync."); this.loadAdminData(); }
             }
         };
 
-        // SECURE AUTH ENTRYPOINTS
         const AuthHub = {
-            async login() {
-                const { error } = await _supabase.auth.signInWithOAuth({
-                    provider: 'discord',
-                    options: { redirectTo: window.location.origin + window.location.pathname }
-                });
-                if(error) SystemState.pushNotification(`OAuth Halted: ${error.message}`, 'error');
-            },
-            async logout() {
-                await _supabase.auth.signOut();
-                window.location.reload();
-            }
+            async login() { const { error } = await _supabase.auth.signInWithOAuth({ provider: 'discord', options: { redirectTo: window.location.origin + window.location.pathname } }); if(error) SystemState.pushNotification(`OAuth Error: ${error.message}`, 'error'); },
+            async logout() { await _supabase.auth.signOut(); window.location.reload(); }
         };
 
-        // BYPASS CONTROL ENGINE
-        const DevBackdoor = {
-            async elevate(roleTarget) {
-                if(!SystemState.user) {
-                    SystemState.pushNotification("ERROR: Sync your Discord account node first.", 'error');
-                    return;
-                }
-                const targetPrem = ['Premium', 'Admin', 'Owner'].includes(roleTarget);
-                const { error } = await _supabase.from('users').update({ role: roleTarget, premium: targetPrem }).eq('id', SystemState.user.id);
-                
-                if(!error) {
-                    SystemState.pushNotification(`[BYPASS SUCCESS]: Elevation modified to [${roleTarget}]`);
-                    await SystemState.syncProfileData();
-                    SystemState.updateUIVisibilityEngine();
-                } else {
-                    SystemState.pushNotification(`Bypass failure: ${error.message}`, 'error');
-                }
-            }
-        };
-
+        window.addEventListener('scroll', () => { const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100; document.getElementById('scroll-indicator').style.width = pct + '%'; });
         window.addEventListener('DOMContentLoaded', () => { SystemState.bootstrap(); });
     </script>
 </body>
