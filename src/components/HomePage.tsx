@@ -324,7 +324,7 @@ export function ResourceCard({ resource, onClick }: { resource: Resource; onClic
             </div>
           )}
 
-          {/* Badges container */}
+          {/* Badges wrapper */}
           <div className="absolute top-2 left-2 flex gap-1 z-10">
             <span className={`px-2 py-0.5 text-[9px] font-mono font-black border uppercase tracking-wider rounded ${getCategoryColor(resource.category)}`}>
               {resource.category}

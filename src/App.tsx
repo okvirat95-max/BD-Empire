@@ -22,6 +22,7 @@ export default function App() {
   const [currentProfile, setCurrentProfile] = useState<Profile | null>(null);
   const [selectedResourceId, setSelectedResourceId] = useState<string>('');
   const [selectedProfileId, setSelectedProfileId] = useState<string>('');
+  const [oauthError, setOauthError] = useState<string | null>(null);
 
   // Database probe indicator and SQL modal
   const [supabaseConnected, setSupabaseConnected] = useState<boolean>(true);
@@ -43,16 +44,54 @@ export default function App() {
     checkConnection();
     fetchSessionProfile();
 
-    // Set initial hash pathway
-    if (window.location.hash) {
-      setPath(window.location.hash);
-    } else {
+    // Parse initial queries and hash callbacks
+    const searchParams = new URLSearchParams(window.location.search);
+    const hashParams = new URLSearchParams(window.location.hash.substring(1));
+
+    const error = searchParams.get('error') || hashParams.get('error');
+    const errorDesc = searchParams.get('error_description') || hashParams.get('error_description') || searchParams.get('error_code') || hashParams.get('error_code');
+    const accessToken = searchParams.get('access_token') || hashParams.get('access_token');
+
+    if (error || errorDesc) {
+      const msg = errorDesc ? decodeURIComponent(errorDesc).replace(/\+/g, ' ') : error || 'Discord credentials exchange failed.';
+      setOauthError(msg);
+      // Clean query and hash to restore proper router environment
+      window.history.replaceState(null, '', window.location.pathname);
       window.location.hash = '#/';
+      setPath('#/');
+    } else if (accessToken) {
+      window.history.replaceState(null, '', window.location.pathname);
+      window.location.hash = '#/';
+      setPath('#/');
+      fetchSessionProfile();
+    } else {
+      // Set initial hash pathway
+      if (window.location.hash) {
+        setPath(window.location.hash);
+      } else {
+        window.location.hash = '#/';
+        setPath('#/');
+      }
     }
 
     // Monitor Hash shifts
     const handleHashShift = () => {
       const h = window.location.hash || '#/';
+      
+      // If of error/access_token gets appended in the active window
+      if (h.includes('error=') || h.includes('error_description=')) {
+        const hParams = new URLSearchParams(h.substring(1));
+        const errKey = hParams.get('error') || 'OAuth configuration mismatched';
+        const errDescVal = hParams.get('error_description') || '';
+        const combined = errDescVal ? decodeURIComponent(errDescVal).replace(/\+/g, ' ') : errKey;
+        
+        setOauthError(combined);
+        window.history.replaceState(null, '', window.location.pathname);
+        window.location.hash = '#/';
+        setPath('#/');
+        return;
+      }
+      
       setPath(h);
 
       // Close popup if it represents a callback success
@@ -246,6 +285,21 @@ CREATE TABLE IF NOT EXISTS public.profiles (
               className="px-3 py-1 bg-primary text-white uppercase text-[10px] font-bold hover:bg-red-700 transition-colors ml-2"
             >
               Get SQL Schema Code
+            </button>
+          </div>
+        )}
+
+        {/* OAuth Dispatch Notification banner */}
+        {oauthError && (
+          <div className="bg-[#ff0000]/15 border-[#ff0000]/30 border-b py-3 px-4 text-center font-mono text-[11px] text-[#ffdddd] flex items-center justify-center gap-2.5 relative transition-all duration-300">
+            <span className="w-1.5 h-1.5 bg-primary rounded-full animate-ping shrink-0" />
+            <span className="font-extrabold text-primary uppercase tracking-widest shrink-0">AUTH DISPATCH ERROR:</span>
+            <span className="leading-snug text-left pr-6">{oauthError}</span>
+            <button 
+              onClick={() => setOauthError(null)}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white transition-colors"
+            >
+              <X className="w-4 h-4" />
             </button>
           </div>
         )}
