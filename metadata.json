@@ -1,6 +1,0 @@
-{
-  "name": "DARKLEAKER",
-  "description": "Premium Minecraft resource marketplace for plugins, skripts, configs, maps, setups, and resource packs with Mediafire delivery, premium Discord billing, and real-time statistics.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
