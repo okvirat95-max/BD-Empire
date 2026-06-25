@@ -1,0 +1,6 @@
+{
+  "name": "DARKLEAKER",
+  "description": "The ultimate AAA-grade Minecraft premium platform, combining a premium marketplace, creator hub, community network, ticket support system, and interactive analytics dashboard into a breathtaking immersive experience.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
